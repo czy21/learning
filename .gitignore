@@ -1,0 +1,12 @@
+# Idea #
+.idea
+*.iml
+*.log
+
+# Build #
+build/
+
+# Web #
+node_modules/
+dist/
+yarn.lock
