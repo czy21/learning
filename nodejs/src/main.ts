@@ -1,3 +1,3 @@
-var add = require('./add.js');
+import owner from 'owner'
 
-console.log(add.sum(1, 2));
+console.log(owner.get("a"))
