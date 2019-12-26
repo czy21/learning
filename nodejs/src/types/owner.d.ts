@@ -3,4 +3,3 @@
 export function a(val: string): string;
 
 export function b(val: boolean): string;
-
