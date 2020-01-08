@@ -3,6 +3,10 @@
 *.iml
 *.log
 
+
+# Gradle #
+.gradle/
+
 # Build #
 build/
 

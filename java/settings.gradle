@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        maven {
+            name "ali-maven"
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+    }
+}
+
+include("spring-event")

@@ -1,0 +1,29 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.1.RELEASE'
+    id 'java'
+    id 'idea'
+    id 'java-library'
+}
+ext {
+    springBootVersion = '2.2.1.RELEASE'
+}
+version = '0.0.1-SNAPSHOT'
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'idea'
+
+    group = 'com.learning'
+    targetCompatibility = '11'
+    sourceCompatibility = '11'
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    dependencies {
+        api "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    }
+
+}
