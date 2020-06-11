@@ -3,44 +3,18 @@
 import owner from './owner'
 import * as stuInterface from './basic/StuInterface'
 
-//
-console.log(owner.a("s"));
-console.log(owner.b(true));
-//
+//js 与 ts 类型映射
+console.log("ts与js的类型映射: ", owner.a("a"), owner.b("b"));
 
-//
 let person1 = stuInterface.of({name: "张三", extra: "zhangsan"});
-console.log(person1);
-//
+console.log("对象类型: ", person1);
 
-//
 let mySum: stuInterface.SearchFunc;
 mySum = function (a, b) {
     return a + b
 };
-console.log(mySum(1, 2));
-//
+console.log("方法类型: ", mySum(1, 2));
 
-//
 let myArray: stuInterface.StringArray
 myArray = ["ni", "wo", "ta"]
-console.log(myArray)
-//
-
-
-/// <reference path="./other/stu-namespace/Validation.ts" />
-/// <reference path="./other/stu-namespace/LettersOnlyValidator.ts" />
-
-// Some samples to try
-let strs = ["Hello", "98052", "101"];
-
-// Validators to use
-let validators: { [s: string]: Validation.StringValidator; } = {};
-validators["Letters only"] = new Validation.LettersOnlyValidator();
-
-// Show whether each string passed each validator
-for (let s of strs) {
-    for (let name in validators) {
-        console.log(`"${s}" - ${validators[name].isAcceptable(s) ? "matches" : "does not match"} ${name}`);
-    }
-}
+console.log("集合类型", myArray)
