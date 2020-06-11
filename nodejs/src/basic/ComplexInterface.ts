@@ -4,7 +4,7 @@ interface ClockConstructor {
 }
 
 interface ClockInterface {
-    tick(): void;
+    sum(): void;
 }
 
 function createClock(ctor: ClockConstructor, hour: number, minute: number): ClockInterface {
@@ -12,26 +12,21 @@ function createClock(ctor: ClockConstructor, hour: number, minute: number): Cloc
 }
 
 class DigitalClock implements ClockInterface {
+    h: number;
+    m: number;
+
     constructor(h: number, m: number) {
+        this.h = h
+        this.m = m
     }
 
-    tick(): void {
-        console.log("beep beep");
-    }
-}
-
-class AnalogClock implements ClockInterface {
-    constructor(h: number, m: number) {
-    }
-
-    tick(): void {
-        console.log("tick tock");
+    sum(): void {
+        console.log(this.h + this.m);
     }
 }
 
 let digital = createClock(DigitalClock, 12, 17);
-let analog = createClock(AnalogClock, 7, 32);
-//
+digital.sum()
 
 //混合类型
 interface Counter {
@@ -57,27 +52,3 @@ let c = getCounter();
 c(10);
 c.reset();
 c.interval = 5.0;
-
-class Control {
-    private state: any;
-}
-
-interface SelectableControl extends Control {
-    select(): void;
-}
-
-class Button extends Control implements SelectableControl {
-    select() {
-    }
-}
-
-class TextBox extends Control {
-    select() {
-    }
-}
-
-// 错误：“Image”类型缺少“state”属性。
-class Imagee extends Control implements SelectableControl {
-    select() {
-    }
-}
