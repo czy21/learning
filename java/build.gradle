@@ -26,4 +26,8 @@ subprojects {
         options.encoding = 'UTF-8'
     }
 
+    dependencies {
+        testImplementation "org.springframework.boot:spring-boot-starter-test:2.3.3.RELEASE"
+    }
+
 }
