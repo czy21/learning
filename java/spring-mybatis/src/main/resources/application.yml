@@ -1,0 +1,19 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.mysql.cj.jdbc.MysqlDataSource
+    url: jdbc:mysql://127.0.0.1:3306/erp_local?user=admin&password=Czy.190815&serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false&useUnicode=true
+  data:
+    mongodb:
+      uri: mongodb://admin:Czy.190815@127.0.0.1:27017/erp_local?authSource=admin
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/**.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    org.springframework.jdbc.core: debug
