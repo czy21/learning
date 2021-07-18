@@ -1,6 +1,6 @@
 package com.learning.controller;
 
-import com.learning.entity.dto.UserDTO;
+import com.clearning.entity.dto.UserDTO;
 import com.learning.mapper.UserMapper;
 import com.learning.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

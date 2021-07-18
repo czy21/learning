@@ -1,7 +1,7 @@
 package com.learning.service.impl;
 
-import com.learning.entity.dto.UserDTO;
-import com.learning.entity.po.UserPO;
+import com.clearning.entity.dto.UserDTO;
+import com.clearning.entity.po.UserPO;
 import com.learning.mapper.UserMapper;
 import com.learning.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

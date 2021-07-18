@@ -1,6 +1,7 @@
 package com.learning.mapper;
 
-import com.learning.entity.po.UserPO;
+
+import com.clearning.entity.po.UserPO;
 
 import java.util.List;
 import java.util.Map;
