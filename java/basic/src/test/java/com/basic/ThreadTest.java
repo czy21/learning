@@ -1,10 +1,11 @@
 package com.basic;
 
+import com.basic.model.Compute;
 import org.junit.Test;
 
 import java.util.concurrent.*;
 
-public class ThreadExerciseTest {
+public class ThreadTest {
 
     class Task implements Callable<Integer> {
         private Integer taskID;
@@ -38,7 +39,6 @@ public class ThreadExerciseTest {
                 e.printStackTrace();
             }
         }
-        pools.shutdown();
         pools.shutdown();
 
     }

@@ -1,3 +1,4 @@
 dependencies {
+    api project(":common")
     api "cglib:cglib:3.3.0"
 }

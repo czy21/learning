@@ -10,4 +10,5 @@ pluginManagement {
 include("spring-mybatis")
 include("spring-event")
 include("basic")
+include("common")
 include("flink")

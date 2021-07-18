@@ -1,7 +1,7 @@
 package com.learning;
 
 
-import com.learning.mapper.Demo1Mapper;
+import com.learning.mapper.UserMapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @EnableWebMvc
 @Configuration
-@MapperScan(basePackageClasses = Demo1Mapper.class)
+@MapperScan(basePackageClasses = UserMapper.class)
 @SpringBootApplication
 public class StartupApplication {
 
