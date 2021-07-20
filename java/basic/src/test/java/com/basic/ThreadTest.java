@@ -29,16 +29,8 @@ public class ThreadTest {
 
     @Data
     static class Object1 {
-        private String name;
-        private Integer age;
         private int count;
-        public AtomicInteger atomicCount = new AtomicInteger();
-
-        public void plus() {
-            int i = 3;
-            int j = 9;
-            count = i + j;
-        }
+        private AtomicInteger atomicCount = new AtomicInteger();
 
         public synchronized void syncIncrease() {
             try {
