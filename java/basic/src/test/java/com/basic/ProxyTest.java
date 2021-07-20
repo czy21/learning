@@ -4,7 +4,7 @@ import com.basic.proxy.Car;
 import com.basic.proxy.CarImpl;
 import com.basic.proxy.CglibProxy;
 import com.basic.proxy.JdkProxy;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ProxyTest {
 

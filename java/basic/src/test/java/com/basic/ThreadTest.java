@@ -1,13 +1,14 @@
 package com.basic;
 
 import lombok.Data;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+
 
 public class ThreadTest {
 
@@ -73,7 +74,7 @@ public class ThreadTest {
                 e.printStackTrace();
             }
         });
-        Assert.assertEquals(threadCount, t.getCount());
+        Assertions.assertEquals(threadCount, t.getCount());
     }
 
     /*
@@ -95,7 +96,7 @@ public class ThreadTest {
                 e.printStackTrace();
             }
         });
-        Assert.assertEquals(threadCount, t.getAtomicCount().get());
+        Assertions.assertEquals(threadCount, t.getAtomicCount().get());
     }
 
     @Test

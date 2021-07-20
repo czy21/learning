@@ -7,10 +7,6 @@ plugins {
 dependencies {
     api project(":common")
     api ("org.springframework.boot:spring-boot-starter-web")
-//            {
-//        exclude group:"org.springframework.boot",module:"spring-boot-starter-tomcat"
-//    }
-//    api "org.springframework.boot:spring-boot-starter-jetty"
     api "mysql:mysql-connector-java:8.0.25"
     api "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0"
 
