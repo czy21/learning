@@ -10,6 +10,7 @@ public class ThreadExercise {
 
     public static void main(String[] args) {
 
+        System.out.println("s");
 //        int count = 10;
 //        for (int i = 0; i < count; i++) {
 //            int finalI = i;
