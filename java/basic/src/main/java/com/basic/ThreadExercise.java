@@ -1,27 +1,23 @@
 package com.basic;
 
-import com.clearning.entity.po.UserPO;
 import lombok.Data;
-import org.openjdk.jol.info.ClassLayout;
-import org.openjdk.jol.info.GraphLayout;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ThreadExercise {
 
 
-    @Data
-    public static class Object1 {
-        private String name;
-        private Integer age;
-        private int value;
-
-        public void plus() {
-            int i = 3;
-            int j = 9;
-            value = i + j;
-        }
-    }
 
     public static void main(String[] args) {
+
+//        int count = 10;
+//        for (int i = 0; i < count; i++) {
+//            int finalI = i;
+//            new Thread(() -> {
+//                System.out.println(Thread.currentThread() + " " + finalI);
+//            }).start();
+//        }
+
 
 //        AtomicInteger atomicInteger = new AtomicInteger();
 
@@ -30,12 +26,16 @@ public class ThreadExercise {
         Object o1 = new Object();
 //        o1.plus();
 //        o1.setName("你是谁");
-        System.out.println(ClassLayout.parseInstance(o1).toPrintable());
+//        System.out.println(ClassLayout.parseInstance(o1).toPrintable());
+//
+//        synchronized (o1) {
+//            System.out.println(ClassLayout.parseInstance(o1).toPrintable());
+//        }
 
-        synchronized (o1) {
-            System.out.println(ClassLayout.parseInstance(o1).toPrintable());
-        }
-
+//        new Thread(()->{
+//
+//            System.out.println("nishish");
+//        }).start();
 
 //        UserPO u1=new UserPO();
 //

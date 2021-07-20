@@ -1,13 +1,17 @@
 package com.basic;
 
-import com.basic.model.Compute;
+import lombok.Data;
+import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ThreadTest {
 
-    class Task implements Callable<Integer> {
+    static class Task implements Callable<Integer> {
         private Integer taskID;
 
         public Task(Integer taskID) {
@@ -20,6 +24,78 @@ public class ThreadTest {
             System.out.println("任务[" + taskID + "]开始执行");
             return taskID;
         }
+    }
+
+    @Data
+    static class Object1 {
+        private String name;
+        private Integer age;
+        private int count;
+        public AtomicInteger atomicCount = new AtomicInteger();
+
+        public void plus() {
+            int i = 3;
+            int j = 9;
+            count = i + j;
+        }
+
+        public synchronized void syncIncrease() {
+            try {
+                Thread.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            count++;
+        }
+
+        public void casIncrease() {
+            atomicCount.getAndIncrement();
+        }
+
+    }
+
+    /*
+     * 使用synchronized解决并发操作导致得线程不安全
+     */
+    @Test
+    public void test1() {
+        Object1 t = new Object1();
+        List<Thread> threads = new ArrayList<>();
+        int threadCount = 10;
+        for (int i = 0; i < threadCount; i++) {
+            threads.add(new Thread(t::syncIncrease));
+        }
+        threads.forEach(Thread::start);
+        threads.forEach(p -> {
+            try {
+                p.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        Assert.assertEquals(threadCount, t.getCount());
+    }
+
+    /*
+     * 使用cas解决并发操作导致得线程不安全
+     */
+    @Test
+    public void test2() {
+        Object1 t = new Object1();
+        List<Thread> threads = new ArrayList<>();
+        int threadCount = 10;
+        for (int i = 0; i < threadCount; i++) {
+            threads.add(new Thread(t::casIncrease));
+        }
+        threads.forEach(Thread::start);
+        threads.forEach(p -> {
+            try {
+                p.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        Assert.assertEquals(threadCount, t.getAtomicCount().get());
     }
 
     @Test
@@ -42,4 +118,6 @@ public class ThreadTest {
         pools.shutdown();
 
     }
+
+
 }
