@@ -1,13 +1,16 @@
 package com.basic;
 
 import lombok.Data;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 
 public class ThreadTest {
@@ -51,45 +54,63 @@ public class ThreadTest {
     /*
      * 使用synchronized解决并发操作导致得线程不安全
      */
+    @SneakyThrows
     @Test
     public void test1() {
-        Object1 t = new Object1();
-        List<Thread> threads = new ArrayList<>();
-        int threadCount = 10;
-        for (int i = 0; i < threadCount; i++) {
-            threads.add(new Thread(t::syncIncrease));
-        }
+        Object1 o1 = new Object1();
+        int loopSize = 1000;
+        List<Thread> threads = List.of(
+                getThread(o1, loopSize, Object1::syncIncrease),
+                getThread(o1, loopSize, Object1::syncIncrease)
+        );
+
+        LocalDateTime startTime = LocalDateTime.now();
         threads.forEach(Thread::start);
-        threads.forEach(p -> {
-            try {
-                p.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        for (var t : threads) {
+            t.join();
+        }
+        LocalDateTime endTime = LocalDateTime.now();
+        int increaseValue = o1.getCount();
+        System.out.println("loop size: " + loopSize);
+        System.out.println("increase value: " + increaseValue);
+        System.out.println("threads: " + threads.size());
+        System.out.println("timeout: " + Duration.between(startTime, endTime).toMillis() + "ms");
+        Assertions.assertEquals(loopSize * threads.size(), increaseValue);
+    }
+
+    private Thread getThread(Object1 t, int loopSize, Consumer<Object1> func) {
+        return new Thread(() -> {
+            for (int i = 0; i < loopSize; i++) {
+                func.accept(t);
             }
         });
-        Assertions.assertEquals(threadCount, t.getCount());
     }
 
     /*
      * 使用cas解决并发操作导致得线程不安全
      */
+    @SneakyThrows
     @Test
     public void test2() {
-        Object1 t = new Object1();
-        List<Thread> threads = new ArrayList<>();
-        int threadCount = 10;
-        for (int i = 0; i < threadCount; i++) {
-            threads.add(new Thread(t::casIncrease));
-        }
+        Object1 o1 = new Object1();
+        int loopSize = 1000;
+        List<Thread> threads = List.of(
+                getThread(o1, loopSize, Object1::casIncrease),
+                getThread(o1, loopSize, Object1::casIncrease)
+        );
+
+        LocalDateTime startTime = LocalDateTime.now();
         threads.forEach(Thread::start);
-        threads.forEach(p -> {
-            try {
-                p.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        Assertions.assertEquals(threadCount, t.getAtomicCount().get());
+        for (var t : threads) {
+            t.join();
+        }
+        LocalDateTime endTime = LocalDateTime.now();
+        int increaseValue = o1.getAtomicCount().get();
+        System.out.println("loop size: " + loopSize);
+        System.out.println("increase value: " + increaseValue);
+        System.out.println("threads: " + threads.size());
+        System.out.println("timeout: " + Duration.between(startTime, endTime).toMillis() + "ms");
+        Assertions.assertEquals(loopSize * threads.size(), increaseValue);
     }
 
     @Test
