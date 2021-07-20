@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ThreadTest {
 
+    @Data
     static class Task implements Callable<Integer> {
         private Integer taskID;
 
