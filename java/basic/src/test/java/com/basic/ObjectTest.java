@@ -3,6 +3,10 @@ package com.basic;
 import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.openjdk.jol.info.ClassLayout;
+import org.openjdk.jol.info.GraphLayout;
+import org.openjdk.jol.vm.VM;
+
+import java.nio.charset.StandardCharsets;
 
 
 public class ObjectTest {
@@ -21,6 +25,9 @@ public class ObjectTest {
     @Test
     public void test1() {
         Object1 o1 = new Object1();
-        System.out.println(ClassLayout.parseInstance(o1).toPrintable());
+        o1.setName("你");
+        String str1 = "o";
+        System.out.println(ClassLayout.parseInstance(str1).toPrintable());
+        System.out.println(GraphLayout.parseInstance(str1).toPrintable());
     }
 }
