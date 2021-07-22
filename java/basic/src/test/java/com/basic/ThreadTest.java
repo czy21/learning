@@ -52,7 +52,7 @@ public class ThreadTest {
     }
 
     /*
-     * 使用synchronized解决并发操作导致得线程不安全
+     * 使用synchronized解决多线程操作导致得线程不安全
      */
     @SneakyThrows
     @Test
@@ -87,7 +87,7 @@ public class ThreadTest {
     }
 
     /*
-     * 使用cas解决并发操作导致得线程不安全
+     * 使用cas解决多线程操作导致得线程不安全
      */
     @SneakyThrows
     @Test
