@@ -134,5 +134,30 @@ public class ThreadTest {
 
     }
 
+    @Test
+    public void pool1() throws InterruptedException {
+        int cores = Runtime.getRuntime().availableProcessors();
+        System.out.println("core size: " + cores);
+        ExecutorService fixedThreadPool = new ThreadPoolExecutor(3, 3,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>());
+        for (int i = 0; i < 3; i++) {
+            int finalI = i;
+            fixedThreadPool.execute(new Thread(() -> {
+                Byte[] bytes = new Byte[1024 * 1000 * 1000];
+                System.out.println(finalI);
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }));
+        }
+        // 所有任务执行完成且等待队列中也无任务关闭线程池
+        fixedThreadPool.shutdown();
+        // 阻塞主线程, 直至线程池关闭
+        fixedThreadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        Thread.sleep(200000);
+    }
 
 }
