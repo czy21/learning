@@ -9,6 +9,8 @@ public class ObjectTest {
 
     @Data
     static class Object1 {
+        private final String str1 = "ni";
+        private String str2;
         private int age;
         private String name;
         private Boolean died;
