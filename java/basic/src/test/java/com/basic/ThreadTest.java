@@ -35,7 +35,7 @@ public class ThreadTest {
 
     @Data
     static class Object1 {
-        private int count;
+        private int count= 1;
         private AtomicInteger atomicCount = new AtomicInteger();
 
         public synchronized void syncIncrease() {
