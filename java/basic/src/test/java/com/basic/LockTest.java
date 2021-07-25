@@ -40,15 +40,17 @@ public class LockTest {
         }
 
         public void syncAByReentrantLock(String value) {
+            System.out.println(StringUtils.join(List.of("1. syncA enter  ", Thread.currentThread().getName(), "value:", value), " "));
             reentrantLock.lock();
-            System.out.println(StringUtils.join(List.of("syncA ReentrantLock thread:", Thread.currentThread(), "value:", value), " "));
+            System.out.println(StringUtils.join(List.of("2. syncA lock   ", Thread.currentThread().getName(), "value:", value), " "));
             syncBByReentrantLock(value);
             reentrantLock.unlock();
+            System.out.println(StringUtils.join(List.of("3. syncA unlock ", Thread.currentThread().getName(), "value:", value), " "));
         }
 
         public void syncBByReentrantLock(String value) {
             reentrantLock.lock();
-            System.out.println(StringUtils.join(List.of("syncB ReentrantLock thread:", Thread.currentThread(), "value:", value), " "));
+            System.out.println(StringUtils.join(List.of("4. syncB lock   ", Thread.currentThread().getName(), "value:", value), " "));
             reentrantLock.unlock();
         }
 
@@ -139,8 +141,8 @@ public class LockTest {
     public void test4() {
         Object1 o1 = new Object1();
         for (int i = 0; i < 10; i++) {
-            int finalI = i;
-            new Thread(() -> o1.syncAByReentrantLock(Integer.toString(finalI))).start();
+            int finalI = i+1;
+            new Thread(() -> o1.syncAByReentrantLock(Integer.toString(finalI)), "thread-" + finalI).start();
         }
     }
 
