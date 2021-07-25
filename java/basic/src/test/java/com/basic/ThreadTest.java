@@ -1,8 +1,5 @@
 package com.basic;
 
-import lombok.Data;
-import lombok.SneakyThrows;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -10,15 +7,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 
 public class ThreadTest {
 
     @Test
-    public void pool1() throws InterruptedException, ExecutionException {
+    public void pool1() throws InterruptedException {
         int cores = Runtime.getRuntime().availableProcessors();
         System.out.println("core size: " + cores);
 
