@@ -10,7 +10,6 @@ dependencies {
     api "org.springframework.boot:spring-boot-starter-batch"
     api "mysql:mysql-connector-java:8.0.25"
     api "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0"
-    api 'org.redisson:redisson-spring-boot-starter:3.16.0'
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 }

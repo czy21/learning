@@ -30,7 +30,7 @@ def detail(x):
 
 def user_update(x):
     start_time = datetime.datetime.now()
-    r = requests.post(url="http://192.168.2.21:8076/stock/sale",
+    r = requests.post(url="http://127.0.0.1:8080/stock/sale",
                       data=json.dumps({
                           "id": "2f5aa878-352d-49a9-a18e-188449e9e649"
                       }),
@@ -53,7 +53,7 @@ if __name__ == '__main__':
     print('MainThread %s is running...' % threading.current_thread().name)
     result = []
     with ThreadPoolExecutor(16) as executor:
-        for data in executor.map(user_update, range(1000)):
+        for data in executor.map(user_update, range(10)):
             result.append(data)
     for t in result:
         print(t)
