@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping(path = "user")
@@ -45,7 +46,16 @@ public class UserController {
     public Map<String, Object> lock1() throws InterruptedException {
         RLock lock = redissonClient.getLock("lock1");
         lock.lock();
-        System.out.println("1");
+        TimeUnit.SECONDS.sleep(10);
+        lock.unlock();
+        return Map.of("status", "success");
+    }
+
+    @PostMapping(path = "lock2")
+    public Map<String, Object> lock2() throws InterruptedException {
+        RLock lock = redissonClient.getLock("lock1");
+        lock.lock();
+        TimeUnit.SECONDS.sleep(10);
         lock.unlock();
         return Map.of("status", "success");
     }
