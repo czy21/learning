@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping(path = "detail")
-    public Map<String,Object> detail(){
+    public Map<String, Object> detail() {
         return Map.of("status", "success");
     }
 
