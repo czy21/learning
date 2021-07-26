@@ -12,10 +12,14 @@ spring:
       max-lifetime: 1800000
       connection-test-query: select 1
       connection-timeout: 30000
-
   data:
     mongodb:
       uri: mongodb://admin:Czy.190815@127.0.0.1:27017/erp_local?authSource=admin
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 3600
+    password: Czy.190815
 mybatis:
   mapper-locations: classpath*:mapper/**/**.xml
   configuration:
