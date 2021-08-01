@@ -1,5 +1,6 @@
 package com.basic;
 
+import lombok.Data;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -11,6 +12,15 @@ import java.util.stream.Collectors;
 
 
 public class ThreadTest {
+    @Data
+    class Object1 {
+        ThreadLocal<Object2> tl = new ThreadLocal();
+    }
+
+    @Data
+    class Object2 {
+        private byte[] memory;
+    }
 
     @Test
     public void pool1() throws InterruptedException {
@@ -63,5 +73,15 @@ public class ThreadTest {
         LocalDateTime concurrentEndTime = LocalDateTime.now();
         System.out.println("concurrent timeout: " + Duration.between(concurrentStartTime, concurrentEndTime).toMillis());
         System.out.println(ret);
+    }
+
+    @Test
+    public void threadLocal1() {
+        Object1 o1 = new Object1();
+        Object2 o2 = new Object2();
+        o2.setMemory(new byte[1024 * 1024*1024]);
+        o1.getTl().set(o2);
+        o1.getTl().remove();
+        System.out.println("ff");
     }
 }

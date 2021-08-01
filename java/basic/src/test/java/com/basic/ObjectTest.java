@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.openjdk.jol.info.ClassLayout;
 import org.openjdk.jol.vm.VM;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 
@@ -48,5 +49,11 @@ public class ObjectTest {
             Object o = objs.get(i);
             System.out.println(StringUtils.join(List.of("o" + seq, "hashCode:", o.hashCode(), "address:", VM.current().addressOf(o)), " "));
         }
+    }
+
+    @Test
+    public void test4() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        Object o1 = Object1.class.getDeclaredConstructor().newInstance();
+        System.out.println("1");
     }
 }
