@@ -13,13 +13,13 @@ import java.util.stream.Collectors;
 
 public class ThreadTest {
     @Data
-    class Object1 {
-        ThreadLocal<Object2> tl = new ThreadLocal();
+    static class Object1 {
+        static ThreadLocal<Object2> tl = new ThreadLocal<>();
     }
 
     @Data
-    class Object2 {
-        private byte[] memory;
+    static class Object2 {
+        private String name;
     }
 
     @Test
@@ -79,9 +79,21 @@ public class ThreadTest {
     public void threadLocal1() {
         Object1 o1 = new Object1();
         Object2 o2 = new Object2();
-        o2.setMemory(new byte[1024 * 1024*1024]);
-        o1.getTl().set(o2);
-        o1.getTl().remove();
+        new Thread(() -> {
+            o2.setName("你是");
+            Object1.tl.set(o2);
+            System.out.println(Object1.tl.get().name);
+            Object1.tl.remove();
+        }).start();
+
+        new Thread(() -> {
+            o2.setName("我是");
+            Object1.tl.set(o2);
+            System.out.println( Object1.tl.get().name);
+            Object1.tl.remove();
+        }).start();
+
+//        o1.getTl().remove();
         System.out.println("ff");
     }
 }
