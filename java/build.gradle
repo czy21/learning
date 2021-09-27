@@ -1,16 +1,15 @@
-plugins{
-    id 'org.springframework.boot' version '2.5.5' apply false
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE' apply false
+plugins {
+    id 'org.springframework.boot' apply false
+    id 'io.spring.dependency-management' apply false
 }
 
 ext {
-    springBootVersion = '2.5.5'
     flinkVersion = '1.12.0'
     scalaBinaryVersion = '2.12'
     slf4jVersion = '1.7.15'
     log4jVersion = '1.2.17'
 }
-version = '0.0.1-SNAPSHOT'
+version = '0.1.0-SNAPSHOT'
 
 subprojects {
     apply plugin: 'java-library'
@@ -46,3 +45,10 @@ subprojects {
         useJUnitPlatform()
     }
 }
+
+this.getSubprojects().forEach(p -> {
+    if (p.name.startsWith("spring")) {
+        p.apply plugin: 'org.springframework.boot'
+        p.apply plugin: 'io.spring.dependency-management'
+    }
+})
