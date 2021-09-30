@@ -17,5 +17,11 @@ namespace Portal.Controllers
         {
             _logger = logger;
         }
+        [HttpGet("list")]
+        public Task<Dictionary<string,object>> List()
+        {
+            var dic = new Dictionary<string, object> {{"name", "czy"}};
+            return Task.FromResult(dic);
+        }
     }
 }
