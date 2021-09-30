@@ -1,6 +1,6 @@
 using System;
 
-namespace portal.Models
+namespace Portal.Models
 {
     public class ErrorViewModel
     {
