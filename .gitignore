@@ -3,6 +3,10 @@
 *.iml
 *.log
 
+# vs #
+bin/
+obj/
+.vs/
 
 # Gradle #
 .gradle/
