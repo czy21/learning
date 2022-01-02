@@ -16,7 +16,7 @@ void setup(void){
   Serial.begin(9600);
   Serial.println("");
  
-  pinMode(buttonPin, INPUT_PULLUP);    
+  pinMode(buttonPin, INPUT_PULLUP);
   
   wifiMulti.addAP("Bruce-Net-Side", "czy805899926.+-"); 
   Serial.println("Connecting ...");
@@ -26,11 +26,9 @@ void setup(void){
     Serial.print('.');
   }
  
-  // WiFi连接成功后将通过串口监视器输出连接成功信息 
-  Serial.println('\n');
   Serial.print("Connected to ");
   Serial.println(WiFi.SSID());
-  Serial.print("IP address:\t");
+  Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 }
  
@@ -57,9 +55,8 @@ void wifiClientRequest(){
   
   if (client.connect(host, httpPort)) {
     Serial.println(" Sucess");
-    
     client.print(httpRequest);
-    Serial.println("Sending:");
+    Serial.println("Sending request: ");
     Serial.println(httpRequest);
   } else{
     Serial.println(" Failed");
