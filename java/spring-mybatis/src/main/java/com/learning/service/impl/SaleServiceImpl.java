@@ -21,18 +21,19 @@ public class SaleServiceImpl implements SaleService {
     @Override
     public void batchTest() {
         List<SalePO> records = new ArrayList<>();
-        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+        try (SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH)) {
             Cursor<SalePO> cursor = sqlSession.selectCursor("com.learning.mapper.SaleMapper.selectByCursor");
             for (SalePO t : cursor) {
                 records.add(t);
                 if (records.size() >= 100) {
                     persist(records, sqlSession);
-//                    sqlSession.commit();
+                    sqlSession.commit();
                     records.clear();
                 }
             }
             if (records.size() > 0) {
                 persist(records, sqlSession);
+                sqlSession.commit();
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
