@@ -10,8 +10,12 @@ import org.apache.ibatis.mapping.ResultSetType;
 
 public interface SaleMapper {
 
+    /*
+     fetchSize = Integer.MIN_VALUE 调用ResultsetRowsStreaming
+     fetchSize > Integer.MIN_VALUE and useCursorFetch=true调用ResultsetRowsCursor
+    */
     @Select(value = "select * from ent_sale")
-    @Options(fetchSize = Integer.MIN_VALUE, resultSetType = ResultSetType.SCROLL_INSENSITIVE)
+    @Options(resultSetType = ResultSetType.FORWARD_ONLY, fetchSize = Integer.MIN_VALUE)
     Cursor<SalePO> selectByCursor();
 
     @Update("update ent_sale es set es.created_user = #{createdUser} where es.id = #{id}")

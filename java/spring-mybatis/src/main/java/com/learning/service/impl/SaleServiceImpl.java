@@ -1,6 +1,7 @@
 package com.learning.service.impl;
 
 import com.clearning.entity.po.SalePO;
+import com.learning.mapper.SaleMapper;
 import com.learning.service.SaleService;
 import org.apache.ibatis.cursor.Cursor;
 import org.apache.ibatis.session.ExecutorType;
@@ -22,10 +23,10 @@ public class SaleServiceImpl implements SaleService {
     public void batchTest() {
         List<SalePO> records = new ArrayList<>();
         try (SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH)) {
-            Cursor<SalePO> cursor = sqlSession.selectCursor("com.learning.mapper.SaleMapper.selectByCursor");
+            Cursor<SalePO> cursor = sqlSession.getMapper(SaleMapper.class).selectByCursor();
             for (SalePO t : cursor) {
                 records.add(t);
-                if (records.size() >= 100) {
+                if (records.size() >= 1000) {
                     persist(records, sqlSession);
                     sqlSession.commit();
                     records.clear();
