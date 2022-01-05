@@ -45,7 +45,7 @@ public class SaleServiceImpl implements SaleService {
             SalePO salePO = new SalePO();
             salePO.setId(t.getId());
             salePO.setCreatedUser("batchTest");
-            sqlSession.update("com.learning.mapper.SaleMapper.updateBy", salePO);
+            sqlSession.update("com.learning.mapper.SaleMapper.insertOne", salePO);
         });
     }
 }

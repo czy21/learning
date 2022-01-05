@@ -1,13 +1,11 @@
 package com.learning.controller;
 
-import com.clearning.entity.dto.UserDTO;
-import com.learning.mapper.UserMapper;
 import com.learning.service.SaleService;
-import com.learning.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -15,7 +13,6 @@ import java.util.Map;
 public class SaleController {
     @Autowired
     SaleService saleService;
-
 
 
     @PostMapping(path = "batchTest")

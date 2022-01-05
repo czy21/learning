@@ -5,7 +5,7 @@ dependencies {
     }
     api("org.springframework.boot:spring-boot-starter-undertow")
     api "org.springframework.boot:spring-boot-starter-batch"
-    api "mysql:mysql-connector-java:8.0.22"
+    api "mysql:mysql-connector-java:8.0.27"
     api "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.1"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
