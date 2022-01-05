@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.cursor.Cursor;
 import org.apache.ibatis.mapping.ResultSetType;
 
+import java.util.List;
+
 public interface SaleMapper {
 
     /*
@@ -17,6 +19,9 @@ public interface SaleMapper {
     @Select(value = "select * from ent_sale")
     @Options( fetchSize = 200)
     Cursor<SalePO> selectByCursor();
+
+    @Select(value = "select * from ent_sale limit 1,1000")
+    List<SalePO> selectList();
 
     @Update("update ent_sale es set es.created_user = #{createdUser} where es.id = #{id}")
     void updateBy(SalePO salePO);

@@ -1,6 +1,7 @@
 package com.learning.service.impl;
 
 import com.clearning.entity.po.SalePO;
+import com.learning.mapper.SaleMapper;
 import com.learning.service.SaleService;
 import org.apache.ibatis.cursor.Cursor;
 import org.apache.ibatis.session.ExecutorType;
@@ -17,6 +18,8 @@ public class SaleServiceImpl implements SaleService {
 
     @Autowired
     SqlSessionFactory sqlSessionFactory;
+    @Autowired
+    SaleMapper saleMapper;
 
     @Override
     public void batchTest() {
@@ -38,6 +41,11 @@ public class SaleServiceImpl implements SaleService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<SalePO> findPage() {
+        return saleMapper.selectList();
     }
 
     private void persist(List<SalePO> records, SqlSession sqlSession) {

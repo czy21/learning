@@ -1,11 +1,13 @@
 package com.learning.controller;
 
+import com.clearning.entity.po.SalePO;
 import com.learning.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,6 +21,11 @@ public class SaleController {
     public Map<String, Object> batchTest() {
         saleService.batchTest();
         return Map.of("status", "success");
+    }
+
+    @PostMapping(path = "search")
+    public List<SalePO> search(){
+        return saleService.findPage();
     }
 
 }
