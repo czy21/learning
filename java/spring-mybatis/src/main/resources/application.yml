@@ -1,5 +1,5 @@
 db:
-  host: 192.168.2.25
+  host: 192.168.2.18
 
 
 server:
@@ -32,4 +32,4 @@ mybatis:
 logging:
   level:
     org.springframework.jdbc.core: debug
-#    com.learning.mapper: debug
+    com.learning.mapper: debug
