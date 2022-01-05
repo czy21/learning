@@ -17,7 +17,7 @@ public interface SaleMapper {
      fetchSize > Integer.MIN_VALUE and useCursorFetch=true调用ResultsetRowsCursor
     */
     @Select(value = "select * from ent_sale")
-    @Options( fetchSize = 200)
+    @Options(fetchSize = 200)
     Cursor<SalePO> selectByCursor();
 
     @Select(value = "select * from ent_sale limit 1,1000")
