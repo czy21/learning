@@ -50,5 +50,14 @@ this.getSubprojects().forEach(p -> {
     if (p.name.startsWith("spring")) {
         p.apply plugin: 'org.springframework.boot'
         p.apply plugin: 'io.spring.dependency-management'
+        p.dependencyManagement {
+            imports {
+                mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+                mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            }
+            dependencies {
+
+            }
+        }
     }
 })
