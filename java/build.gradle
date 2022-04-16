@@ -8,13 +8,25 @@ ext {
     scalaBinaryVersion = '2.12'
     slf4jVersion = '1.7.15'
     log4jVersion = '1.2.17'
+
+    apacheCommonLang3Version = "3.12.0"
+    apacheCommonPool2Version = "2.11.1"
+    apacheCommonIOVersion = "2.11.0"
+    apacheCommonsCollectionVersion = "4.4"
+    mapstructVersion = "1.4.2.Final"
+    lombokMapstructBindingVersion = "0.2.0"
+    jolVersion = "0.9"
+    cglibVersion = "3.3.0"
+
+    jupiterVersion = "5.7.1"
+
 }
 version = '0.1.0-SNAPSHOT'
 
 subprojects {
+
     apply plugin: 'java-library'
-    apply plugin: 'java'
-    apply plugin: 'idea'
+    apply plugin: 'io.spring.dependency-management'
 
     group = 'com.learning'
     targetCompatibility = '11'
@@ -23,41 +35,65 @@ subprojects {
     tasks.withType(JavaCompile) {
         options.encoding = 'UTF-8'
     }
+    dependencyManagement {
+        imports {
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+        dependencies {
+            dependency "org.apache.commons:commons-pool2:${apacheCommonPool2Version}"
+            dependency "org.apache.commons:commons-lang3:${apacheCommonLang3Version}"
+            dependency "commons-io:commons-io:${apacheCommonIOVersion}"
+            dependency "org.apache.commons:commons-collections4:${apacheCommonsCollectionVersion}"
+            dependency "org.mapstruct:mapstruct:${mapstructVersion}"
+            dependency "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+            dependency "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 
+            dependency "org.openjdk.jol:jol-core:${jolVersion}"
+            dependency "cglib:cglib:${cglibVersion}"
+
+
+            dependency "org.junit.jupiter:junit-jupiter-api:${jupiterVersion}"
+
+        }
+    }
     dependencies {
-        implementation "org.apache.commons:commons-lang3:3.11"
-        implementation "org.openjdk.jol:jol-core:0.9"
-        implementation "cglib:cglib:3.3.0"
 
-        compileOnly "org.mapstruct:mapstruct:1.3.1.Final"
-        annotationProcessor "org.mapstruct:mapstruct-processor:1.3.1.Final"
-        compileOnly "org.projectlombok:lombok:1.18.10"
-        annotationProcessor "org.projectlombok:lombok:1.18.10"
-        testCompileOnly "org.mapstruct:mapstruct:1.3.1.Final"
-        testAnnotationProcessor "org.mapstruct:mapstruct-processor:1.3.1.Final"
-        testCompileOnly "org.projectlombok:lombok:1.18.10"
-        testAnnotationProcessor "org.projectlombok:lombok:1.18.10"
+        implementation "org.apache.commons:commons-pool2"
+        implementation "org.apache.commons:commons-lang3"
+        implementation "org.apache.commons:commons-collections4"
+        implementation "commons-io:commons-io"
 
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
-        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+        implementation "org.openjdk.jol:jol-core"
+        implementation "cglib:cglib"
+
+        implementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
+        annotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
+        testImplementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
+        testAnnotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
+
+
     }
     test {
         useJUnitPlatform()
     }
 }
 
-this.getSubprojects().forEach(p -> {
+
+this.subprojects.forEach(p -> {
     if (p.name.startsWith("spring")) {
         p.apply plugin: 'org.springframework.boot'
-        p.apply plugin: 'io.spring.dependency-management'
-        p.dependencyManagement {
-            imports {
-                mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
-                mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        p.dependencies {
+            implementation("org.springframework.boot:spring-boot-starter-web") {
+                exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
             }
-            dependencies {
-
-            }
+            implementation "org.springframework.boot:spring-boot-starter-undertow"
+            testImplementation "org.springframework.boot:spring-boot-starter-test"
+        }
+    } else {
+        p.dependencies {
+            testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+            testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
         }
     }
 })

@@ -3,17 +3,16 @@ pluginManagement {
         id 'org.springframework.boot' version "${springBootVersion}"
         id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
     }
-    repositories {
-        maven {
-            name "ali-maven"
-            url "http://maven.aliyun.com/nexus/content/groups/public/"
-            allowInsecureProtocol = true
-        }
-    }
 }
 
 include("spring-mybatis")
 include("spring-event")
+include("spring-redis")
+include("spring-es")
+include("spring-pulsar")
+include("spring-kafka")
+include("spring-hbase")
+include("spring-demo")
 include("basic")
 include("common")
 //include("flink")
