@@ -52,7 +52,7 @@ public class SaleServiceImpl implements SaleService {
         records.forEach(t -> {
             SalePO salePO = new SalePO();
             salePO.setId(t.getId());
-            salePO.setCreatedUser("batchTest");
+            salePO.setCreateUser("batchTest");
             sqlSession.update("com.learning.mapper.SaleMapper.insertOne", salePO);
         });
     }

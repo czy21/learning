@@ -8,10 +8,8 @@ import java.time.LocalDateTime;
 public class BaseEntity {
     private String id;
 
-    private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
-
-    private String createdUser;
-
-    private String modifiedUser;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
+    private String createUser;
+    private String updateUser;
 }
