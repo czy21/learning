@@ -80,7 +80,7 @@ subprojects {
 }
 
 
-this.subprojects.forEach(p -> {
+this.subprojects.each { p ->
     if (p.name.startsWith("spring")) {
         p.apply plugin: 'org.springframework.boot'
         p.dependencies {
@@ -96,4 +96,4 @@ this.subprojects.forEach(p -> {
             testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
         }
     }
-})
+}
