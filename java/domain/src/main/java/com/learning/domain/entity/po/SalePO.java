@@ -1,4 +1,4 @@
-package com.clearning.entity.po;
+package com.learning.domain.entity.po;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

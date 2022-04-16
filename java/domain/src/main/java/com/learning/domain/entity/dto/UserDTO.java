@@ -1,4 +1,4 @@
-package com.clearning.entity.dto;
+package com.learning.domain.entity.dto;
 
 import lombok.Data;
 

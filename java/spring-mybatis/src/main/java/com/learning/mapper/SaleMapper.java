@@ -1,12 +1,11 @@
 package com.learning.mapper;
 
-import com.clearning.entity.po.SalePO;
+import com.learning.domain.entity.po.SalePO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.cursor.Cursor;
-import org.apache.ibatis.mapping.ResultSetType;
 
 import java.util.List;
 

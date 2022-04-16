@@ -5,6 +5,13 @@ pluginManagement {
     }
 }
 
+include("basic")
+include("domain")
+include("infrastructure")
+
+include("spring-demo")
+
+include("spring-web")
 include("spring-mybatis")
 include("spring-event")
 include("spring-redis")
@@ -12,7 +19,6 @@ include("spring-es")
 include("spring-pulsar")
 include("spring-kafka")
 include("spring-hbase")
-include("spring-demo")
-include("basic")
-include("common")
+include 'spring-gateway'
 //include("flink")
+

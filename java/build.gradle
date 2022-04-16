@@ -20,15 +20,18 @@ ext {
 
     jupiterVersion = "5.7.1"
 
+    disableBootJarModules = [
+            "spring-web"
+    ]
 }
-version = '0.1.0-SNAPSHOT'
 
 subprojects {
-
     apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
     apply plugin: 'io.spring.dependency-management'
 
     group = 'com.learning'
+    version = '0.1.0-SNAPSHOT'
     targetCompatibility = '11'
     sourceCompatibility = '11'
 
@@ -77,21 +80,60 @@ subprojects {
     test {
         useJUnitPlatform()
     }
-}
 
+    jar {
+        into("META-INF/maven/${project.group}/${project.name}") {
+            from { generatePomFileForMavenJavaPublication }
+            rename ".*", "pom.xml"
+        }
 
-this.subprojects.each { p ->
-    if (p.name.startsWith("spring")) {
-        p.apply plugin: 'org.springframework.boot'
-        p.dependencies {
-            implementation("org.springframework.boot:spring-boot-starter-web") {
-                exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        afterEvaluate {
+            manifest {
+                attributes 'Implementation-Title': archiveBaseName
+                attributes 'Implementation-Version': archiveVersion
+                attributes 'Built-Gradle': gradle.gradleVersion
+                attributes 'Build-OS': System.getProperty("os.name")
+                attributes 'Built-By': System.getProperty("user.name")
+                attributes 'Build-Jdk': System.getProperty("java.version")
+                attributes 'Build-Time': LocalDateTime.now().format("yyyy-MM-dd HH:mm:ss")
             }
-            implementation "org.springframework.boot:spring-boot-starter-undertow"
+        }
+    }
+
+    java {
+        withSourcesJar()
+    }
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+                versionMapping {
+                    usage('java-api') {
+                        fromResolutionOf('runtimeClasspath')
+                    }
+                    usage('java-runtime') {
+                        fromResolutionResult()
+                    }
+                }
+            }
+        }
+    }
+
+    if ("${name}".startsWith("spring")) {
+        apply plugin: 'org.springframework.boot'
+        dependencies {
             testImplementation "org.springframework.boot:spring-boot-starter-test"
         }
+        if ("${disableBootJarModules}".contains("${name}")) {
+            bootJar {
+                enabled = false
+            }
+            jar {
+                archiveClassifier = ''
+            }
+        }
     } else {
-        p.dependencies {
+        dependencies {
             testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
             testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
         }

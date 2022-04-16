@@ -1,6 +1,6 @@
 package com.learning.service;
 
-import com.clearning.entity.po.SalePO;
+import com.learning.domain.entity.po.SalePO;
 
 import java.util.List;
 

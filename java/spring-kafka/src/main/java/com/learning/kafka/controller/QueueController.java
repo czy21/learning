@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path = "kafka")
+@RequestMapping(path = "queue")
 public class QueueController {
 
     @Autowired

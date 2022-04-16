@@ -1,6 +1,6 @@
 package com.learning.service.impl;
 
-import com.clearning.entity.po.SalePO;
+import com.learning.domain.entity.po.SalePO;
 import com.learning.mapper.SaleMapper;
 import com.learning.service.SaleService;
 import org.apache.ibatis.cursor.Cursor;

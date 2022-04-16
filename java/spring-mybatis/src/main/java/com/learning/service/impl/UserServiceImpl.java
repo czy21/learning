@@ -1,14 +1,12 @@
 package com.learning.service.impl;
 
-import com.clearning.entity.dto.UserDTO;
-import com.clearning.entity.po.SalePO;
-import com.clearning.entity.po.UserPO;
+import com.learning.domain.entity.dto.UserDTO;
+import com.learning.domain.entity.po.UserPO;
 import com.learning.mapper.UserMapper;
 import com.learning.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service

@@ -1,6 +1,6 @@
 package com.learning.controller;
 
-import com.clearning.entity.po.SalePO;
+import com.learning.domain.entity.po.SalePO;
 import com.learning.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,6 +1,6 @@
 package com.learning.service;
 
-import com.clearning.entity.dto.UserDTO;
+import com.learning.domain.entity.dto.UserDTO;
 
 public interface UserService {
     void update(UserDTO dto);
