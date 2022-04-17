@@ -20,5 +20,5 @@ include("spring-pulsar")
 include("spring-kafka")
 include("spring-hbase")
 include 'spring-gateway'
-//include("flink")
-
+include("flink-common")
+include("flink-person")
