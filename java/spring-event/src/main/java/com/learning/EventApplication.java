@@ -5,9 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StartupApplication {
+public class EventApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(StartupApplication.class, args);
+        SpringApplication.run(EventApplication.class, args);
     }
 }

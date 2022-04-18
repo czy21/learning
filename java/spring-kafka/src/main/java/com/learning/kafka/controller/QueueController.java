@@ -1,6 +1,8 @@
 package com.learning.kafka.controller;
 
-import com.learning.kafka.config.QueueConfig;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.learning.domain.entity.constant.QueueConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +18,12 @@ public class QueueController {
 
     @Autowired
     KafkaTemplate<String, Object> kafkaTemplate;
+    @Autowired
+    ObjectMapper objectMapper;
 
     @PostMapping(path = "put")
-    public Map<String, Object> put(@RequestBody Map<String, Object> param) {
-        kafkaTemplate.send(QueueConfig.LEARN_TOPIC_1, param);
+    public Map<String, Object> put(@RequestBody Map<String, Object> param) throws JsonProcessingException {
+        kafkaTemplate.send(QueueConstant.GLOBAL_QUEUE_TOPIC1, param);
         return Map.of();
     }
 

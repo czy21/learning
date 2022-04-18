@@ -7,4 +7,7 @@ dependencies {
     api "org.apache.flink:flink-java:${flinkVersion}"
     api "org.apache.flink:flink-streaming-java_${scalaBinaryVersion}:${flinkVersion}"
     api "org.apache.flink:flink-clients_${scalaBinaryVersion}:${flinkVersion}"
+    api "org.apache.flink:flink-connector-kafka_${scalaBinaryVersion}:${flinkVersion}"
+
+    api project(":domain")
 }
