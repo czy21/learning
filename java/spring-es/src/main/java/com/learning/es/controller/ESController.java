@@ -2,6 +2,7 @@ package com.learning.es.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.learning.domain.entity.constant.QueueConstant;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -27,7 +28,7 @@ public class ESController {
 
     @PostMapping(path = "add")
     public Map<String, Object> add(@RequestBody Map<String, Object> param) throws Exception {
-        IndexRequest request = new IndexRequest("learn-log1");
+        IndexRequest request = new IndexRequest(String.join("-", QueueConstant.GLOBAL_QUEUE_PREFIX, "log1"));
         param.put("time", LocalDateTime.now(ZoneOffset.UTC).toString());
         String jsonString = objectMapper.writeValueAsString(param);
         request.source(jsonString, XContentType.JSON);

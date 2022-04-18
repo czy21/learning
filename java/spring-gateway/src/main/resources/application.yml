@@ -11,6 +11,12 @@ spring:
             - Path=/kafka/**
           filters:
             - StripPrefix=1
+        - id: es
+          uri: http://127.0.0.1:9200
+          predicates:
+            - Path=/es/**
+          filters:
+            - StripPrefix=1
 logging:
   level:
-    org.springframework.cloud.gateway: debug
+    org.springframework.cloud.gateway: info

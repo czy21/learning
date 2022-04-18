@@ -11,15 +11,16 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 public class PersonStreaming {
 
     public static void main(String[] args) throws Exception {
-        Configuration conf = new Configuration();
 
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         DataStream<Person> flintstones = env.fromElements(
                 new Person("Fred", 35),
                 new Person("Wilma", 35),
-                new Person("Pebbles", 2));
+                new Person("Pebbles", 2)
+        );
 
-        DataStream<Person> adults = flintstones.filter(person -> person.age >= 18);
+        DataStream<Person> adults = flintstones
+                .filter(person -> person.age >= 18);
 
         adults.print();
         env.execute();
