@@ -19,5 +19,7 @@ include("spring-es")
 include("spring-pulsar")
 include("spring-kafka")
 include("spring-hbase")
-include 'spring-gateway'
+include("spring-gateway")
 include("flink-common")
+include("flink-task")
+

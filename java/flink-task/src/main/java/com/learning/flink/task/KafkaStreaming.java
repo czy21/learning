@@ -1,10 +1,10 @@
 
 
-package com.learning.flink.common;
+package com.learning.flink.task;
 
 
 import com.learning.domain.entity.constant.QueueConstant;
-import com.learning.flink.common.serilization.MapDeserializer;
+import com.learning.flink.common.serialization.MapDeserializer;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.connector.kafka.source.KafkaSource;
 import org.apache.flink.connector.kafka.source.enumerator.initializer.OffsetsInitializer;
@@ -20,14 +20,14 @@ public class KafkaStreaming {
 
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
-        KafkaSource<Map<String,Object>> source = KafkaSource.<Map<String,Object>>builder()
+        KafkaSource<Map<String, Object>> source = KafkaSource.<Map<String, Object>>builder()
                 .setBootstrapServers("192.168.2.18:9092,192.168.2.18:9093")
                 .setTopics(QueueConstant.GLOBAL_QUEUE_TOPIC1)
                 .setGroupId(QueueConstant.GLOBAL_QUEUE_GROUP1)
                 .setStartingOffsets(OffsetsInitializer.latest())
                 .setDeserializer(KafkaRecordDeserializationSchema.valueOnly(MapDeserializer.class))
                 .build();
-        DataStream<Map<String,Object>> stream = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
+        DataStream<Map<String, Object>> stream = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
         stream.print();
         env.execute();
     }

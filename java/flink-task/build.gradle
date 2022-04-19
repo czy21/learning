@@ -1,0 +1,5 @@
+apply from: file("../flink-common/build.gradle")
+
+dependencies {
+    flinkShadowJar project(":flink-common")
+}

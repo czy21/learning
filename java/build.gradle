@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' apply false
     id 'io.spring.dependency-management' apply false
+    id 'com.github.johnrengelman.shadow' version '7.1.2' apply false
 }
 
 ext {
@@ -133,5 +134,9 @@ subprojects {
             testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
             testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
         }
+    }
+    if ("${name}".startsWith("flink")) {
+        apply plugin: 'com.github.johnrengelman.shadow'
+        apply plugin: 'application'
     }
 }

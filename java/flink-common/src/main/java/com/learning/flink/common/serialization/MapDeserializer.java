@@ -1,7 +1,6 @@
-package com.learning.flink.common.serilization;
+package com.learning.flink.common.serialization;
 
 import lombok.SneakyThrows;
-import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.serialization.Deserializer;
 
@@ -15,7 +14,6 @@ public class MapDeserializer implements Deserializer<Map<String, Object>> {
     @SneakyThrows
     @Override
     public Map<String, Object> deserialize(String topic, byte[] data) {
-        return objectMapper.readValue(data, new TypeReference<Map<String, Object>>() {
-        });
+        return objectMapper.readValue(data, Map.class);
     }
 }
