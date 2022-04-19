@@ -1,3 +1,6 @@
 dependencies {
     api project(":domain")
+
+    implementation "org.openjdk.jol:jol-core"
+    implementation "cglib:cglib"
 }

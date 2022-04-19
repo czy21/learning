@@ -1,0 +1,16 @@
+apply plugin: 'org.springframework.boot'
+dependencies {
+
+    implementation "org.openjdk.jol:jol-core"
+    implementation "cglib:cglib"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+}
+if ("${disableBootJarModules}".contains("${name}")) {
+    bootJar {
+        enabled = false
+    }
+    jar {
+        archiveClassifier = ''
+    }
+}

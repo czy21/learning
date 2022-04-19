@@ -52,7 +52,6 @@ subprojects {
             dependency "org.openjdk.jol:jol-core:${jolVersion}"
             dependency "cglib:cglib:${cglibVersion}"
 
-
             dependency "org.junit.jupiter:junit-jupiter-api:${jupiterVersion}"
 
         }
@@ -64,14 +63,13 @@ subprojects {
         implementation "org.apache.commons:commons-collections4"
         implementation "commons-io:commons-io"
 
-        implementation "org.openjdk.jol:jol-core"
-        implementation "cglib:cglib"
-
         implementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
         annotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
         testImplementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
         testAnnotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
 
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
     }
     test {
@@ -100,6 +98,7 @@ subprojects {
     java {
         withSourcesJar()
     }
+
     publishing {
         publications {
             mavenJava(MavenPublication) {
@@ -117,26 +116,9 @@ subprojects {
     }
 
     if ("${name}".startsWith("spring")) {
-        apply plugin: 'org.springframework.boot'
-        dependencies {
-            testImplementation "org.springframework.boot:spring-boot-starter-test"
-        }
-        if ("${disableBootJarModules}".contains("${name}")) {
-            bootJar {
-                enabled = false
-            }
-            jar {
-                archiveClassifier = ''
-            }
-        }
-    } else {
-        dependencies {
-            testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
-            testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-        }
+        apply from: file("../build.spring.gradle")
     }
     if ("${name}".startsWith("flink")) {
-        apply plugin: 'com.github.johnrengelman.shadow'
-        apply plugin: 'application'
+        apply from: file("../build.flink.gradle")
     }
 }

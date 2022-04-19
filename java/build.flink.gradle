@@ -1,0 +1,45 @@
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'application'
+
+ext {
+    flinkVersion = '1.14.4'
+    scalaBinaryVersion = '2.11'
+
+    slf4jVersion = '1.7.7'
+    log4jVersion = '1.2.17'
+}
+
+application {
+    mainClass = "optional"
+}
+
+configurations {
+    flinkShadowJar
+
+    flinkShadowJar.exclude group: 'org.apache.flink', module: 'force-shading'
+    flinkShadowJar.exclude group: 'com.google.code.findbugs', module: 'jsr305'
+
+    flinkShadowJar.exclude group: 'org.slf4j'
+    flinkShadowJar.exclude group: 'log4j'
+}
+
+dependencies {
+
+    api "org.apache.flink:flink-java:${flinkVersion}"
+    api "org.apache.flink:flink-streaming-java_${scalaBinaryVersion}:${flinkVersion}"
+    api "org.apache.flink:flink-clients_${scalaBinaryVersion}:${flinkVersion}"
+
+    api "log4j:log4j:${log4jVersion}"
+    api "org.slf4j:slf4j-log4j12:${slf4jVersion}"
+}
+
+sourceSets {
+    main.compileClasspath += configurations.flinkShadowJar
+    main.runtimeClasspath += configurations.flinkShadowJar
+}
+
+run.classpath = sourceSets.main.runtimeClasspath
+
+shadowJar {
+    configurations = [project.configurations.flinkShadowJar]
+}
