@@ -13,6 +13,6 @@ public class CacheServiceImpl implements CacheService {
     @Cacheable(cacheNames = "system", cacheManager = "caffeineCacheManager")
     @Override
     public Map<String, Object> search() {
-        return Map.of("url", "hello");
+        return Map.of();
     }
 }

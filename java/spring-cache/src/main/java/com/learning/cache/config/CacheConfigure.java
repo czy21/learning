@@ -16,10 +16,13 @@ public class CacheConfigure {
     @Bean
     public CacheManager caffeineCacheManager() {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager();
-        cacheManager.setCaffeine(Caffeine.newBuilder()
-                .expireAfterAccess(30, TimeUnit.SECONDS)
-                .initialCapacity(50)
-                .maximumSize(200));
+
+        cacheManager.setCaffeine(
+                Caffeine.newBuilder()
+                        .expireAfterAccess(30, TimeUnit.SECONDS)
+                        .initialCapacity(50)
+                        .maximumSize(200)
+        );
         return cacheManager;
     }
 }
