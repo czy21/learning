@@ -45,6 +45,7 @@ subprojects {
             dependency "org.apache.commons:commons-lang3:${apacheCommonLang3Version}"
             dependency "commons-io:commons-io:${apacheCommonIOVersion}"
             dependency "org.apache.commons:commons-collections4:${apacheCommonsCollectionVersion}"
+
             dependency "org.mapstruct:mapstruct:${mapstructVersion}"
             dependency "org.mapstruct:mapstruct-processor:${mapstructVersion}"
             dependency "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"

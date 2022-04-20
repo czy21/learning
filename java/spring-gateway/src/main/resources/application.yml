@@ -17,6 +17,12 @@ spring:
             - Path=/es/**
           filters:
             - StripPrefix=1
+        - id: event
+          uri: http://127.0.0.1:8050
+          predicates:
+            - Path=/event/**
+          filters:
+            - StripPrefix=1
 logging:
   level:
     org.springframework.cloud.gateway: info

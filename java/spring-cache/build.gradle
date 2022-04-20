@@ -1,0 +1,5 @@
+dependencies {
+    api project(":spring-web")
+    api "org.springframework.boot:spring-boot-starter-cache"
+    api 'com.github.ben-manes.caffeine:caffeine'
+}
