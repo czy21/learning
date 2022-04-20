@@ -12,6 +12,7 @@ include("infrastructure")
 
 include("spring-demo")
 
+// spring
 include("spring-web")
 include("spring-mybatis")
 include("spring-event")
@@ -21,6 +22,8 @@ include("spring-pulsar")
 include("spring-kafka")
 include("spring-hbase")
 include("spring-gateway")
+
+// flink
 include("flink-common")
 include("flink-task")
 

@@ -1,5 +1,5 @@
 dependencies {
-    api project(":spring-web")
     api project(":domain")
+    api project(":spring-web")
     implementation "org.springframework.data:spring-data-elasticsearch"
 }

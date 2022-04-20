@@ -29,7 +29,7 @@ public class KafkaStreaming {
                 .build();
         DataStream<Map<String, Object>> stream = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
         stream.print();
-        env.execute();
+        env.execute("kafka source job 1");
     }
 
 }
