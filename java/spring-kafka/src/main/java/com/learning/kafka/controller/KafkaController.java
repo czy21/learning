@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path = "queue")
-public class QueueController {
+@RequestMapping(path = "kafka")
+public class KafkaController {
 
     @Autowired
     KafkaTemplate<String, Object> kafkaTemplate;
