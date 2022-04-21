@@ -5,16 +5,6 @@ plugins {
 }
 
 ext {
-    apacheCommonLang3Version = "3.12.0"
-    apacheCommonPool2Version = "2.11.1"
-    apacheCommonIOVersion = "2.11.0"
-    apacheCommonsCollectionVersion = "4.4"
-    mapstructVersion = "1.4.2.Final"
-    lombokMapstructBindingVersion = "0.2.0"
-    jolVersion = "0.9"
-    cglibVersion = "3.3.0"
-
-    jupiterVersion = "5.7.1"
 
     disableBootJarModules = [
             "spring-web"
@@ -41,38 +31,35 @@ subprojects {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         }
         dependencies {
-            dependency "org.apache.commons:commons-pool2:${apacheCommonPool2Version}"
-            dependency "org.apache.commons:commons-lang3:${apacheCommonLang3Version}"
-            dependency "commons-io:commons-io:${apacheCommonIOVersion}"
-            dependency "org.apache.commons:commons-collections4:${apacheCommonsCollectionVersion}"
+            dependency "org.apache.commons:commons-pool2:2.11.1"
+            dependency "org.apache.commons:commons-lang3:3.12.0"
+            dependency "commons-io:commons-io:2.11.0"
+            dependency "org.apache.commons:commons-collections4:4.4"
 
-            dependency "org.mapstruct:mapstruct:${mapstructVersion}"
-            dependency "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-            dependency "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+            dependency "org.mapstruct:mapstruct:1.4.2.Final"
+            dependency "org.mapstruct:mapstruct-processor:1.4.2.Final"
+            dependency "org.projectlombok:lombok-mapstruct-binding:0.2.0"
 
-            dependency "org.openjdk.jol:jol-core:${jolVersion}"
-            dependency "cglib:cglib:${cglibVersion}"
-
-            dependency "org.junit.jupiter:junit-jupiter-api:${jupiterVersion}"
+            dependency "org.openjdk.jol:jol-core:0.9"
+            dependency "cglib:cglib:3.3.0"
 
         }
     }
     dependencies {
 
-        implementation "org.apache.commons:commons-pool2"
         implementation "org.apache.commons:commons-lang3"
         implementation "org.apache.commons:commons-collections4"
-        implementation "commons-io:commons-io"
 
         implementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
         annotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
         testImplementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
         testAnnotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
 
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
     }
+
     test {
         useJUnitPlatform()
     }
