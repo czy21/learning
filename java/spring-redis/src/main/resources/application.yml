@@ -1,0 +1,8 @@
+db-pass: Czy.190815
+server:
+  port: 6379
+spring:
+  redis:
+    cluster:
+      nodes: 192.168.2.18:7000,192.168.2.18:7001,192.168.2.18:7002
+    password: ${db-pass}
