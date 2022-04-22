@@ -7,6 +7,7 @@ import net.sf.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
 
+
 public class CglibProxy implements MethodInterceptor {
 
     private static CglibProxy instance = new CglibProxy();
@@ -18,6 +19,7 @@ public class CglibProxy implements MethodInterceptor {
         return instance;
     }
 
+    @SuppressWarnings("unchecked")
     public <T> T getProxy(Class<T> cls) {
         return (T) Enhancer.create(cls, this);
     }

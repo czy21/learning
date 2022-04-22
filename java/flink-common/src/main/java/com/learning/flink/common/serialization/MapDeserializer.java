@@ -11,6 +11,7 @@ public class MapDeserializer implements Deserializer<Map<String, Object>> {
     private ObjectMapper objectMapper = new ObjectMapper();
 
 
+    @SuppressWarnings("unchecked")
     @SneakyThrows
     @Override
     public Map<String, Object> deserialize(String topic, byte[] data) {
