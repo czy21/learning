@@ -40,6 +40,8 @@ subprojects {
             dependency "org.mapstruct:mapstruct-processor:1.4.2.Final"
             dependency "org.projectlombok:lombok-mapstruct-binding:0.2.0"
 
+            dependency "com.czy:pulsar-spring-boot-starter:0.1.0-SNAPSHOT"
+
             dependency "org.openjdk.jol:jol-core:0.9"
             dependency "cglib:cglib:3.3.0"
 

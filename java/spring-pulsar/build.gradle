@@ -1,3 +1,5 @@
 dependencies {
+    api project(":domain")
     api project(":spring-web")
+    api "com.czy:pulsar-spring-boot-starter"
 }

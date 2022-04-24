@@ -3,7 +3,9 @@ package com.learning.es.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learning.domain.entity.constant.QueueConstant;
+import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -19,7 +21,7 @@ import java.time.ZoneOffset;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path = "order")
+@RequestMapping(path = "es")
 public class ESController {
 
     @Autowired
@@ -29,11 +31,21 @@ public class ESController {
 
     @PostMapping(path = "add")
     public Map<String, Object> add(@RequestBody Map<String, Object> param) throws Exception {
-        IndexRequest request = new IndexRequest(String.join("-", QueueConstant.GLOBAL_QUEUE_PREFIX, "log1"));
+        IndexRequest request = new IndexRequest(QueueConstant.GLOBAL_QUEUE_TOPIC1);
         param.put("time", LocalDateTime.now(ZoneOffset.UTC).toString());
         String jsonString = objectMapper.writeValueAsString(param);
         request.source(jsonString, XContentType.JSON);
-        esClient.index(request, RequestOptions.DEFAULT);
+        esClient.indexAsync(request, RequestOptions.DEFAULT, new ActionListener<IndexResponse>() {
+            @Override
+            public void onResponse(IndexResponse indexResponse) {
+
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
         return Map.of();
     }
 
