@@ -19,8 +19,8 @@ configurations {
     flinkShadowJar.exclude group: 'org.apache.flink', module: 'force-shading'
     flinkShadowJar.exclude group: 'com.google.code.findbugs', module: 'jsr305'
 
-    flinkShadowJar.exclude group: 'org.slf4j'
-    flinkShadowJar.exclude group: 'log4j'
+//    flinkShadowJar.exclude group: 'org.slf4j'
+//    flinkShadowJar.exclude group: 'log4j'
 }
 
 dependencies {
@@ -29,8 +29,8 @@ dependencies {
     api "org.apache.flink:flink-streaming-java_${scalaBinaryVersion}:${flinkVersion}"
     api "org.apache.flink:flink-clients_${scalaBinaryVersion}:${flinkVersion}"
 
-    api "log4j:log4j:${log4jVersion}"
-    api "org.slf4j:slf4j-log4j12:${slf4jVersion}"
+    flinkShadowJar "log4j:log4j:${log4jVersion}"
+    flinkShadowJar "org.slf4j:slf4j-log4j12:${slf4jVersion}"
 }
 
 sourceSets {

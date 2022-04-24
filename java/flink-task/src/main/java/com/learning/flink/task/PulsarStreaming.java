@@ -6,6 +6,7 @@ package com.learning.flink.task;
 import com.learning.domain.entity.constant.QueueConstant;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
+import org.apache.flink.configuration.Configuration;
 import org.apache.flink.connector.pulsar.source.PulsarSource;
 import org.apache.flink.connector.pulsar.source.enumerator.cursor.StartCursor;
 import org.apache.flink.connector.pulsar.source.reader.deserializer.PulsarDeserializationSchema;
@@ -20,7 +21,8 @@ public class PulsarStreaming {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         PulsarSource<String> pulsarSource = PulsarSource.builder()
-                .setServiceUrl("pulsar://192.168.2.25:6650")
+                .setServiceUrl("pulsar://192.168.2.25:14715")
+                .setAdminUrl("http://192.168.2.25:44501")
                 .setStartCursor(StartCursor.earliest())
                 .setTopics(QueueConstant.GLOBAL_QUEUE_TOPIC1)
                 .setDeserializationSchema(PulsarDeserializationSchema.flinkSchema(new SimpleStringSchema()))
