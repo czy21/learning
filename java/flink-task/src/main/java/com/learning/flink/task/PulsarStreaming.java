@@ -21,9 +21,9 @@ public class PulsarStreaming {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         PulsarSource<String> pulsarSource = PulsarSource.builder()
-                .setServiceUrl("pulsar://192.168.2.25:14715")
-                .setAdminUrl("http://192.168.2.25:44501")
-                .setStartCursor(StartCursor.earliest())
+                .setServiceUrl("pulsar://192.168.2.18:6650")
+                .setAdminUrl("http://192.168.2.18:8091")
+                .setStartCursor(StartCursor.latest())
                 .setTopics(QueueConstant.GLOBAL_QUEUE_TOPIC1)
                 .setDeserializationSchema(PulsarDeserializationSchema.flinkSchema(new SimpleStringSchema()))
                 .setSubscriptionName(QueueConstant.GLOBAL_QUEUE_GROUP1)
