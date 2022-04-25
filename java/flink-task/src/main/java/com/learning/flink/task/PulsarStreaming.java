@@ -12,7 +12,10 @@ import org.apache.flink.connector.pulsar.source.enumerator.cursor.StartCursor;
 import org.apache.flink.connector.pulsar.source.reader.deserializer.PulsarDeserializationSchema;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.pulsar.client.api.Schema;
 import org.apache.pulsar.client.api.SubscriptionType;
+
+import java.util.Map;
 
 public class PulsarStreaming {
 
@@ -20,16 +23,16 @@ public class PulsarStreaming {
 
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
-        PulsarSource<String> pulsarSource = PulsarSource.builder()
+        PulsarSource<Map> pulsarSource = PulsarSource.builder()
                 .setServiceUrl("pulsar://192.168.2.18:6650")
-                .setAdminUrl("http://192.168.2.18:8091")
+                .setAdminUrl("http://pulsar-proxy.cluster.com")
                 .setStartCursor(StartCursor.latest())
                 .setTopics(QueueConstant.GLOBAL_QUEUE_TOPIC1)
-                .setDeserializationSchema(PulsarDeserializationSchema.flinkSchema(new SimpleStringSchema()))
+                .setDeserializationSchema(PulsarDeserializationSchema.pulsarSchema(Schema.JSON(Map.class), Map.class))
                 .setSubscriptionName(QueueConstant.GLOBAL_QUEUE_GROUP1)
                 .setSubscriptionType(SubscriptionType.Exclusive)
                 .build();
-        DataStream<String> stream = env.fromSource(pulsarSource, WatermarkStrategy.noWatermarks(), "Pulsar Source");
+        DataStream<Map> stream = env.fromSource(pulsarSource, WatermarkStrategy.noWatermarks(), "Pulsar Source");
         stream.print();
         env.execute("pulsar source job 1");
     }

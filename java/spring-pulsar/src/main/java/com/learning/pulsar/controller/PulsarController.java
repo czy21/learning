@@ -22,7 +22,7 @@ public class PulsarController {
 
     @PostMapping(path = "put")
     public Map<String, Object> put(@RequestBody Map<String, Object> param) throws Exception {
-        pulsarTemplate.send(QueueConstant.GLOBAL_QUEUE_TOPIC1, param.toString());
+        pulsarTemplate.send(QueueConstant.GLOBAL_QUEUE_TOPIC1, param);
         return Map.of();
     }
 
