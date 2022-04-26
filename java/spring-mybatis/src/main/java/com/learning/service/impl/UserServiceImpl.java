@@ -4,6 +4,7 @@ import com.learning.domain.entity.dto.UserDTO;
 import com.learning.domain.entity.po.UserPO;
 import com.learning.mapper.UserMapper;
 import com.learning.service.UserService;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,9 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    SqlSessionFactory sqlSessionFactory;
 
 //    @Transactional
     @Override
@@ -28,6 +32,11 @@ public class UserServiceImpl implements UserService {
         updateU.setId(id);
         updateU.setEmail("update2 Email");
         userMapper.update(updateU);
+    }
+
+    @Override
+    public void batchUpdate() {
+
     }
 
 }

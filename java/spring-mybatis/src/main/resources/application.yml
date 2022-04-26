@@ -1,35 +1,30 @@
-db:
-  host: 192.168.2.18
+db-host: 192.168.2.18
+db-user: admin
+db-pass: Czy.190815
 
 
 server:
-  port: 8080
+  port: 3306
 
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${db.host}:3306/erp_local?user=admin&password=Czy.190815&serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false&useUnicode=true&useCursorFetch=true&rewriteBatchedStatements=true
+    url: jdbc:mysql://${db.host}:3306/erp_local?user=${db-user}&password=${db-pass}&serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false&useUnicode=true&useCursorFetch=true&rewriteBatchedStatements=true
     hikari:
       minimum-idle: 5
       maximum-pool-size: 20
       max-lifetime: 1800000
       connection-test-query: select 1
       connection-timeout: 30000
-
   data:
     mongodb:
-      uri: mongodb://admin:Czy.190815@${db.host}:27017/erp_local?authSource=admin
-  redis:
-    host: ${db.host}
-    port: 6379
-    timeout: 3600
-    password: Czy.190815
+      uri: mongodb://${db-user}:${db-pass}@${db.host}:27017/erp_local?authSource=admin
+
 mybatis:
   mapper-locations: classpath*:mapper/**/**.xml
   configuration:
     map-underscore-to-camel-case: true
-
 logging:
   level:
     org.springframework.jdbc.core: debug

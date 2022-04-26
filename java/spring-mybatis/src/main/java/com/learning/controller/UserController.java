@@ -36,4 +36,10 @@ public class UserController {
         return Map.of("status", "success");
     }
 
+    @GetMapping(path = "batchUpdate")
+    public Map<String, Object> batchUpdate() {
+        userService.batchUpdate();
+        return Map.of("status", "success");
+    }
+
 }
