@@ -24,7 +24,7 @@ public class PulsarStreaming {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         PulsarSource<Map> pulsarSource = PulsarSource.builder()
-                .setServiceUrl("pulsar://192.168.2.18:6650")
+                .setServiceUrl("pulsar://pulsar-proxy.cluster.com:6650")
                 .setAdminUrl("http://pulsar-proxy.cluster.com")
                 .setStartCursor(StartCursor.latest())
                 .setTopics(QueueConstant.GLOBAL_QUEUE_TOPIC1)

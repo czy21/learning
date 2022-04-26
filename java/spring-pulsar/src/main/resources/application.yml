@@ -1,4 +1,4 @@
 server:
   port: 6650
 pulsar:
-  service-url: pulsar://192.168.2.18:6650
+  service-url: pulsar://pulsar-proxy.cluster.com:6650
