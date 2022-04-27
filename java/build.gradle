@@ -40,6 +40,9 @@ subprojects {
             dependency "org.mapstruct:mapstruct-processor:1.4.2.Final"
             dependency "org.projectlombok:lombok-mapstruct-binding:0.2.0"
 
+            dependency "io.micrometer:micrometer-registry-prometheus:1.8.2"
+            dependency "io.github.mweirauch:micrometer-jvm-extras:0.2.2"
+
             dependency "com.czy:pulsar-spring-boot-starter:0.1.0-SNAPSHOT"
 
             dependency "org.openjdk.jol:jol-core:0.9"
