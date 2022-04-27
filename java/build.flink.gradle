@@ -18,9 +18,6 @@ configurations {
 
     flinkShadowJar.exclude group: 'org.apache.flink', module: 'force-shading'
     flinkShadowJar.exclude group: 'com.google.code.findbugs', module: 'jsr305'
-
-//    flinkShadowJar.exclude group: 'org.slf4j'
-//    flinkShadowJar.exclude group: 'log4j'
 }
 
 dependencies {

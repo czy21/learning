@@ -2,4 +2,6 @@ dependencies {
     flinkShadowJar project(":domain")
     flinkShadowJar "org.apache.flink:flink-connector-kafka_${scalaBinaryVersion}:${flinkVersion}"
     flinkShadowJar "org.apache.flink:flink-connector-pulsar_${scalaBinaryVersion}:${flinkVersion}"
+    flinkShadowJar "org.apache.flink:flink-connector-jdbc_${scalaBinaryVersion}:${flinkVersion}"
+    flinkShadowJar "mysql:mysql-connector-java"
 }
