@@ -10,13 +10,13 @@ import org.springframework.data.redis.stream.StreamListener;
 import java.util.Map;
 
 
-public class RedisListener1 implements StreamListener<String, MapRecord<String, String, String>> {
+public class RedisStreamListener1 implements StreamListener<String, MapRecord<String, String, String>> {
 
     StringRedisTemplate redisTemplate;
     ObjectMapper objectMapper;
 
-    public RedisListener1(StringRedisTemplate redisTemplate,
-                          ObjectMapper objectMapper) {
+    public RedisStreamListener1(StringRedisTemplate redisTemplate,
+                                ObjectMapper objectMapper) {
         this.redisTemplate = redisTemplate;
         this.objectMapper = objectMapper;
     }

@@ -2,7 +2,9 @@ package com.learning.redis.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learning.domain.entity.constant.QueueConstant;
-import com.learning.redis.listener.RedisListener1;
+import com.learning.redis.listener.RedisPubSubListener1;
+import com.learning.redis.listener.RedisStreamListener1;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +14,9 @@ import org.springframework.data.redis.connection.stream.MapRecord;
 import org.springframework.data.redis.connection.stream.ReadOffset;
 import org.springframework.data.redis.connection.stream.StreamOffset;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.stream.StreamListener;
 import org.springframework.data.redis.stream.StreamMessageListenerContainer;
 import org.springframework.data.redis.stream.Subscription;
@@ -22,13 +27,13 @@ import java.time.Duration;
 public class RedisConfigure {
 
     @Bean
-    public StreamListener<String, MapRecord<String, String, String>> redisListener1(StringRedisTemplate redisTemplate, ObjectMapper objectMapper) {
-        return new RedisListener1(redisTemplate, objectMapper);
+    public StreamListener<String, MapRecord<String, String, String>> redisStreamListener1(StringRedisTemplate redisTemplate, ObjectMapper objectMapper) {
+        return new RedisStreamListener1(redisTemplate, objectMapper);
     }
 
     @Bean
     public Subscription subscription1(RedisConnectionFactory redisConnectionFactory,
-                                      @Qualifier("redisListener1") StreamListener<String, MapRecord<String, String, String>> redisListener1) {
+                                      @Qualifier("redisStreamListener1") StreamListener<String, MapRecord<String, String, String>> redisListener1) {
         var containerOptions = StreamMessageListenerContainer.StreamMessageListenerContainerOptions
                 .builder()
                 .batchSize(100)
@@ -46,6 +51,16 @@ public class RedisConfigure {
         var subscription = container.register(listenerRequest, redisListener1);
         container.start();
         return subscription;
+    }
+
+    @Bean
+    public RedisMessageListenerContainer redisContainer(RedisConnectionFactory redisConnectionFactory,
+                                                        ObjectMapper objectMapper,
+                                                        StringRedisTemplate redisTemplate) {
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(redisConnectionFactory);
+        container.addMessageListener(new MessageListenerAdapter(new RedisPubSubListener1(objectMapper,redisTemplate)),new ChannelTopic(String.join("-",QueueConstant.GLOBAL_QUEUE_PREFIX,"pus-sub","1")));
+        return container;
     }
 
 }
