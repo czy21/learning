@@ -12,6 +12,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class RedisPubSubListener1 implements MessageListener {
@@ -34,7 +35,8 @@ public class RedisPubSubListener1 implements MessageListener {
             return;
         }
         String msgId = (String) msgObj.get("msgId");
-        if (Boolean.TRUE.equals(redisTemplate.opsForValue().setIfAbsent(String.join(":", "unique", msgId), "0", 30, TimeUnit.SECONDS))) {
+        boolean flag = Optional.ofNullable(redisTemplate.opsForValue().setIfAbsent(String.join(":", "unique", msgId), "0", 30, TimeUnit.SECONDS)).orElse(false);
+        if (flag) {
             redisTemplate.opsForValue().increment("counter");
             System.out.println(msgObj);
         }
