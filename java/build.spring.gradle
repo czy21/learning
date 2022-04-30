@@ -13,7 +13,7 @@ dependencies {
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
-if ("${disableBootJarModules}".contains("${name}")) {
+if (disableBootJarModules.contains(name)) {
     bootJar {
         enabled = false
     }

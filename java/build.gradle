@@ -5,7 +5,6 @@ plugins {
 }
 
 ext {
-
     disableBootJarModules = [
             "spring-web"
     ]
@@ -112,10 +111,10 @@ subprojects {
         }
     }
 
-    if ("${name}".startsWith("spring")) {
+    if (name.startsWith("spring")) {
         apply from: file("../build.spring.gradle")
     }
-    if ("${name}".startsWith("flink")) {
+    if (name.startsWith("flink")) {
         apply from: file("../build.flink.gradle")
     }
 }
