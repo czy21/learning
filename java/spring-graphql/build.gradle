@@ -1,0 +1,5 @@
+dependencies {
+    api project(":domain")
+    api project(":spring-web")
+    implementation 'com.graphql-java:graphql-java:18.0'
+}

@@ -23,6 +23,7 @@ include("spring-kafka")
 include("spring-hbase")
 include("spring-gateway")
 include("spring-cache")
+include("spring-graphql")
 
 // flink
 include("flink-common")
