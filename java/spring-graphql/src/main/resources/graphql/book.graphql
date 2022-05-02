@@ -1,0 +1,38 @@
+type Author {
+    firstName: String
+    id: ID
+    lastName: String
+}
+
+type Book {
+    author: Author
+    id: ID
+    name: String
+    pageCount: Int
+}
+
+type BookPageResult {
+    list: [Book]
+    page: PageResult
+}
+
+extend type Query {
+    bookById(id: ID): Book
+    books(filter: BookFilter): BookPageResult
+}
+
+type PageResult {
+    pageIndex: Int
+    pageSize: Int
+    total: Int
+}
+
+input BookFilter {
+    name: String
+    page: PageInput
+}
+
+input PageInput {
+    pageIndex: Int
+    pageSize: Int
+}
