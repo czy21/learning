@@ -1,5 +1,24 @@
+input PageFilter{
+    pageIndex:Int
+    pageSize:Int
+}
+type PageResult{
+    pageIndex:Int
+    pageSize:Int
+    total:Int
+}
+input BookFilter{
+    page:PageFilter
+    name:String
+}
+
+type BookPageResult{
+    page:PageResult
+    list:[Book]
+}
+
 type Query {
-    books:[Book]
+    books(filter:BookFilter):BookPageResult
     bookById(id: ID): Book
 }
 

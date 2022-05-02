@@ -1,5 +1,7 @@
 package com.learning.graphql.provider;
 
+import com.learning.domain.entity.model.PageModel;
+import com.learning.domain.entity.model.PageResult;
 import graphql.com.google.common.collect.ImmutableMap;
 import graphql.schema.DataFetcher;
 import org.springframework.stereotype.Component;
@@ -43,9 +45,12 @@ public class GraphQLDataFetcher {
                     "lastName", "Rice")
     );
 
-    public DataFetcher<List<Map<String, Object>>> findAllBook() {
+    public DataFetcher<PageResult<Map<String, Object>>> findAllBook() {
         return dataFetchingEnvironment -> {
-            return new ArrayList<>(books);
+            PageResult<Map<String, Object>> pageResult = new PageResult<>();
+            pageResult.setPage(new PageModel());
+            pageResult.setList(books);
+            return pageResult;
         };
     }
 
