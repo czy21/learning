@@ -8,6 +8,7 @@ import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
@@ -32,28 +33,26 @@ public class GraphQLProvider {
 
     @Bean
     public GraphQL graphQL() {
+        TypeDefinitionRegistry typeRegistry = new TypeDefinitionRegistry();
+        SchemaParser schemaParser = new SchemaParser();
+        SchemaGenerator schemaGenerator = new SchemaGenerator();
         try {
             Resource[] resources = applicationContext.getResources("classpath*:" + "graphql/**.graphql");
             List<TypeDefinitionRegistry> typeDefinitionRegistries = Arrays.stream(resources)
                     .map(t -> {
                         try {
-                            return new SchemaParser().parse(t.getInputStream());
+                            return schemaParser.parse(t.getInputStream());
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
                     }).collect(Collectors.toList());
-            GraphQLSchema graphQLSchema = buildSchema(typeDefinitionRegistries);
+            typeDefinitionRegistries.forEach(typeRegistry::merge);
+            RuntimeWiring runtimeWiring = buildWiring();
+            GraphQLSchema graphQLSchema = schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
             return GraphQL.newGraphQL(graphQLSchema).build();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private GraphQLSchema buildSchema(List<TypeDefinitionRegistry> typeDefinitionRegistries) {
-        TypeDefinitionRegistry typeRegistry = new TypeDefinitionRegistry();
-        typeDefinitionRegistries.forEach(typeRegistry::merge);
-        RuntimeWiring runtimeWiring = buildWiring();
-        return new SchemaGenerator().makeExecutableSchema(typeRegistry, runtimeWiring);
     }
 
     private RuntimeWiring buildWiring() {
