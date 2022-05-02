@@ -1,4 +1,4 @@
-package com.learning.redis.listener;
+package com.learning.cache.listener;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learning.domain.entity.constant.QueueConstant;

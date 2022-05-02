@@ -1,6 +1,0 @@
-
-dependencies {
-    api project(":domain")
-    api project(":spring-web")
-    api "org.redisson:redisson-spring-boot-starter"
-}

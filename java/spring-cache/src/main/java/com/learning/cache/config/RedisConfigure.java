@@ -1,10 +1,9 @@
-package com.learning.redis.config;
+package com.learning.cache.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.learning.cache.listener.RedisPubSubListener1;
+import com.learning.cache.listener.RedisStreamListener1;
 import com.learning.domain.entity.constant.QueueConstant;
-import com.learning.redis.listener.RedisPubSubListener1;
-import com.learning.redis.listener.RedisStreamListener1;
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -59,7 +58,7 @@ public class RedisConfigure {
                                                         StringRedisTemplate redisTemplate) {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(redisConnectionFactory);
-        container.addMessageListener(new MessageListenerAdapter(new RedisPubSubListener1(objectMapper,redisTemplate)),new ChannelTopic(String.join("-",QueueConstant.GLOBAL_QUEUE_PREFIX,"pus-sub","1")));
+        container.addMessageListener(new MessageListenerAdapter(new RedisPubSubListener1(objectMapper, redisTemplate)), new ChannelTopic(String.join("-", QueueConstant.GLOBAL_QUEUE_PREFIX, "pus-sub", "1")));
         return container;
     }
 

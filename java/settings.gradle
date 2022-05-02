@@ -14,15 +14,14 @@ include("spring-demo")
 
 // spring
 include("spring-web")
-include("spring-mybatis")
 include("spring-event")
-include("spring-redis")
+include("spring-cache")
+include("spring-db")
 include("spring-es")
 include("spring-pulsar")
 include("spring-kafka")
 include("spring-hbase")
 include("spring-gateway")
-include("spring-cache")
 include("spring-graphql")
 
 // flink

@@ -1,4 +1,4 @@
-package com.learning.redis.controller;
+package com.learning.cache.controller;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -10,7 +10,6 @@ import org.springframework.data.redis.connection.stream.ReadOffset;
 import org.springframework.data.redis.connection.stream.StreamInfo;
 import org.springframework.data.redis.connection.stream.StreamRecords;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -46,7 +45,7 @@ public class RedisController {
     @PostMapping(path = "pubsub/push1")
     public Map<String, Object> redisPubSubQueuePush(@RequestBody MessageDTO<Map<String, Object>> param) throws JsonProcessingException {
         param.getPayload().put("msgId", UUID.randomUUID().toString());
-        redisTemplate.convertAndSend(String.join("-",QueueConstant.GLOBAL_QUEUE_PREFIX,"pus-sub","1"),objectMapper.writeValueAsString(param.getPayload()));
+        redisTemplate.convertAndSend(String.join("-", QueueConstant.GLOBAL_QUEUE_PREFIX, "pus-sub", "1"), objectMapper.writeValueAsString(param.getPayload()));
         return Map.of();
     }
 
