@@ -30,13 +30,13 @@ public class GraphQLConfig {
 
     @Bean
     public GraphQL graphQL(GraphQLDataFetcher graphQLDataFetcher) {
-        TypeDefinitionRegistry typeDefinitionRegistry = new TypeDefinitionRegistry();
+        TypeDefinitionRegistry typeRegistry = new TypeDefinitionRegistry();
         SchemaParser schemaParser = new SchemaParser();
         SchemaGenerator schemaGenerator = new SchemaGenerator();
         Resource[] schemaResources = graphQLProperties.resolveSchemaLocations();
-        parseSchemaResources(typeDefinitionRegistry, schemaParser, schemaResources);
+        parseSchemaResources(typeRegistry, schemaParser, schemaResources);
         RuntimeWiring runtimeWiring = buildWiring(graphQLDataFetcher);
-        GraphQLSchema graphQLSchema = schemaGenerator.makeExecutableSchema(typeDefinitionRegistry, runtimeWiring);
+        GraphQLSchema graphQLSchema = schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
         return GraphQL.newGraphQL(graphQLSchema).build();
     }
 

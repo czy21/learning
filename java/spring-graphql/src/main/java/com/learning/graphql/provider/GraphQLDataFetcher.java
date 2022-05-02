@@ -46,7 +46,7 @@ public class GraphQLDataFetcher {
     );
 
     public DataFetcher<PageResult<Map<String, Object>>> findAllBook() {
-        return dataFetchingEnvironment -> {
+        return env -> {
             PageResult<Map<String, Object>> pageResult = new PageResult<>();
             pageResult.setPage(new PageModel());
             pageResult.setList(books);
@@ -55,8 +55,8 @@ public class GraphQLDataFetcher {
     }
 
     public DataFetcher<Map<String, Object>> findBookById() {
-        return dataFetchingEnvironment -> {
-            String bookId = dataFetchingEnvironment.getArgument("id");
+        return env -> {
+            String bookId = env.getArgument("id");
             return books
                     .stream()
                     .filter(book -> book.get("id").equals(bookId))
@@ -66,8 +66,8 @@ public class GraphQLDataFetcher {
     }
 
     public DataFetcher<Map<String, Object>> findAuthorById() {
-        return dataFetchingEnvironment -> {
-            Map<String, String> book = dataFetchingEnvironment.getSource();
+        return env -> {
+            Map<String, String> book = env.getSource();
             String authorId = book.get("authorId");
             return authors
                     .stream()
