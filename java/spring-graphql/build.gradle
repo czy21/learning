@@ -2,4 +2,5 @@ dependencies {
     api project(":domain")
     api project(":spring-web")
     implementation 'com.graphql-java:graphql-java:18.0'
+    implementation 'com.graphql-java:graphql-java-spring-boot-starter-webmvc:2.0'
 }
