@@ -1,8 +1,8 @@
-package com.learning.service.impl;
+package com.learning.db.service.impl;
 
 import com.learning.domain.entity.po.SalePO;
-import com.learning.mapper.SaleMapper;
-import com.learning.service.SaleService;
+import com.learning.db.mapper.SaleMapper;
+import com.learning.db.service.SaleService;
 import org.apache.ibatis.cursor.Cursor;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;

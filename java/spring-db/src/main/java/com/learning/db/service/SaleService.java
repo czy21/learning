@@ -1,4 +1,4 @@
-package com.learning.service;
+package com.learning.db.service;
 
 import com.learning.domain.entity.po.SalePO;
 

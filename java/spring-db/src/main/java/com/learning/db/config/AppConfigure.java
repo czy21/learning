@@ -1,4 +1,4 @@
-package com.learning.config;
+package com.learning.db.config;
 
 import com.learning.domain.entity.po.UserPO;
 import org.springframework.context.annotation.Bean;

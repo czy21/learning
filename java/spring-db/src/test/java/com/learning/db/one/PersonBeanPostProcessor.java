@@ -1,4 +1,4 @@
-package com.learning.lifecycle.one;
+package com.learning.db.one;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

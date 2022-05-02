@@ -1,8 +1,8 @@
-package com.learning.controller;
+package com.learning.db.controller;
 
 import com.learning.domain.entity.dto.UserDTO;
-import com.learning.mapper.UserMapper;
-import com.learning.service.UserService;
+import com.learning.db.mapper.UserMapper;
+import com.learning.db.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

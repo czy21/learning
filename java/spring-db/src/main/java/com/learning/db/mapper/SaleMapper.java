@@ -1,4 +1,4 @@
-package com.learning.mapper;
+package com.learning.db.mapper;
 
 import com.learning.domain.entity.po.SalePO;
 import org.apache.ibatis.annotations.Insert;

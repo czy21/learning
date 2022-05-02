@@ -1,7 +1,8 @@
-package com.learning;
+package com.learning.db;
 
 
-import com.learning.mapper.UserMapper;
+import com.learning.db.MybatisApplication;
+import com.learning.db.mapper.UserMapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

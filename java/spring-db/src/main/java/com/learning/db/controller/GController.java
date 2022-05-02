@@ -1,6 +1,5 @@
-package com.learning.controller;
+package com.learning.db.controller;
 
-import org.openjdk.jol.info.ClassLayout;
 import org.openjdk.jol.info.GraphLayout;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

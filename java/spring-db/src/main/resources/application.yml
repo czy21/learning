@@ -28,4 +28,4 @@ mybatis:
 logging:
   level:
     org.springframework.jdbc.core: debug
-    com.learning.mapper: debug
+    com.learning.db.mapper: debug

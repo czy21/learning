@@ -1,7 +1,7 @@
-package com.learning.controller;
+package com.learning.db.controller;
 
 import com.learning.domain.entity.po.SalePO;
-import com.learning.service.SaleService;
+import com.learning.db.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

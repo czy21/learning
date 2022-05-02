@@ -1,4 +1,4 @@
-package com.learning;
+package com.learning.db;
 
 import org.junit.jupiter.api.Test;
 
