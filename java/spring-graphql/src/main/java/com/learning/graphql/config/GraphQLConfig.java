@@ -2,11 +2,13 @@ package com.learning.graphql.config;
 
 import com.learning.graphql.provider.GraphQLDataFetcher;
 import graphql.GraphQL;
+import graphql.schema.DataFetcher;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +17,7 @@ import org.springframework.core.io.Resource;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
@@ -23,9 +26,12 @@ import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
 @Configuration
 public class GraphQLConfig {
     GraphQLProperties graphQLProperties;
+    Map<String,DataFetcher<?>> dataFetcherMap;
 
-    public GraphQLConfig(GraphQLProperties graphQLProperties) {
+    public GraphQLConfig(GraphQLProperties graphQLProperties,
+                         ObjectProvider<List<DataFetcher<?>>> dataFetchers) {
         this.graphQLProperties = graphQLProperties;
+
     }
 
     @Bean

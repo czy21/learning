@@ -10,9 +10,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @MapperScan(basePackageClasses = UserMapper.class)
 @SpringBootApplication
-public class MybatisApplication {
+public class DBApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MybatisApplication.class, args);
+        SpringApplication.run(DBApplication.class, args);
     }
 }

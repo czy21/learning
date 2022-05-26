@@ -1,7 +1,6 @@
 package com.learning.db;
 
 
-import com.learning.db.MybatisApplication;
 import com.learning.db.mapper.UserMapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +14,6 @@ import org.springframework.context.annotation.Configuration;
 public class StartupApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MybatisApplication.class, args);
+        SpringApplication.run(DBApplication.class, args);
     }
 }

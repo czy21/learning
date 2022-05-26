@@ -3,4 +3,5 @@ dependencies {
     api project(":spring-web")
     api "mysql:mysql-connector-java"
     api "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.1"
+    api 'com.github.pagehelper:pagehelper-spring-boot-starter'
 }

@@ -1,16 +1,21 @@
-db-host: 192.168.2.18
-db-user: admin
-db-pass: Czy.190815
-
-
 server:
   port: 3306
 
 spring:
+  application:
+    name: learning-spring-db
+  config:
+    import: optional:consul:consul.cluster.com:80
+  cloud:
+    consul:
+      config:
+        format: YAML
+        prefixes:
+          - "dev-learning-spring-common"
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${db.host}:3306/erp_local?user=${db-user}&password=${db-pass}&serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false&useUnicode=true&useCursorFetch=true&rewriteBatchedStatements=true
+    url: jdbc:mysql://${db-host}:3306/erp_local?user=${db-user}&password=${db-pass}&serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false&useUnicode=true&useCursorFetch=true&rewriteBatchedStatements=true
     hikari:
       minimum-idle: 5
       maximum-pool-size: 20
@@ -19,7 +24,7 @@ spring:
       connection-timeout: 30000
   data:
     mongodb:
-      uri: mongodb://${db-user}:${db-pass}@${db.host}:27017/erp_local?authSource=admin
+      uri: mongodb://${db-user}:${db-pass}@${db-host}:27017/erp_local?authSource=admin
 
 mybatis:
   mapper-locations: classpath*:mapper/**/**.xml
