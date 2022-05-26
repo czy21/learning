@@ -33,12 +33,11 @@ public class SaleController {
 
     @GetMapping(path = "testPageNext")
     public Map<String, Object> testPageNext(@RequestParam String pageSize) {
-        new PageIterator<>(1, Integer.parseInt(pageSize), (s, e) -> {
-            PageHelper.startPage(s, e);
-            return userMapper.selectAll();
-        }).forEachRemaining(t -> {
-            System.out.println(t.get("user_name"));
-        });
+        new PageIterator<>(1,
+                Integer.parseInt(pageSize),
+                (s, e) -> userMapper.selectAll((s - 1) * e, e)
+//                (s, e) -> PageHelper.<Map<String, Object>>startPage(s, e).<Map<String, Object>>doSelectPage(() -> userMapper.selectAll())
+        ).forEachRemaining(t -> System.out.println(t.get("user_name")));
         return Map.of();
     }
 

@@ -8,7 +8,6 @@ public class PageIterator<T> implements Iterator<T> {
 
     private Integer pageIndex;
     private Integer pageSize;
-
     private int currentIndex;
     private boolean hasMore = true;
     private List<T> list;

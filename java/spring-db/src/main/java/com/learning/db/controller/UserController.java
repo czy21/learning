@@ -20,7 +20,7 @@ public class UserController {
 
     @GetMapping(path = "list")
     public List<Map<String, Object>> demo() {
-        return userMapper.selectAll();
+        return userMapper.selectAll(1,10);
     }
 
     @PostMapping(path = "update")

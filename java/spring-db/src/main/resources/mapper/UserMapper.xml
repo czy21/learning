@@ -6,6 +6,7 @@
 
     <select id="selectAll" resultType="map">
         select * from ent_sys_user
+        limit #{pageIndex},#{pageSize}
     </select>
     <select id="insert">
         INSERT INTO ent_sys_user(id, account, password, user_name, email, department_id)
