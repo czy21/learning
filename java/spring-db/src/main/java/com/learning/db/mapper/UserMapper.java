@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserMapper {
-    List<Map<String, Object>> selectAll(Integer pageIndex,Integer pageSize);
+    List<Map<String, Object>> selectAll(Integer skipRows,Integer pageSize);
 
     void insert(UserPO userPO);
 
