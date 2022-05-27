@@ -23,8 +23,11 @@ include("spring-kafka")
 include("spring-hbase")
 include("spring-gateway")
 include("spring-graphql")
+include("spring-quartz")
+
 
 // flink
 include("flink-common")
 include("flink-task")
+include 'spring-quartz'
 
