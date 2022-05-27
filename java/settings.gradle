@@ -30,4 +30,5 @@ include("spring-quartz")
 include("flink-common")
 include("flink-task")
 include 'spring-quartz'
+include 'spring-xxl-job'
 

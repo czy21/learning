@@ -40,6 +40,7 @@ subprojects {
                 exclude "org.springframework.boot:spring-boot-starter-web"
             }
 
+            dependency "com.xuxueli:xxl-job:2.3.1"
             dependency "org.mapstruct:mapstruct:1.4.2.Final"
             dependency "org.mapstruct:mapstruct-processor:1.4.2.Final"
             dependency "org.projectlombok:lombok-mapstruct-binding:0.2.0"

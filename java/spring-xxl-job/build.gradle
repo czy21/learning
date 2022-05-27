@@ -1,0 +1,5 @@
+dependencies {
+    api project(":domain")
+    api project(":spring-web")
+    api 'com.xuxueli:xxl-job'
+}
