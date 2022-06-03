@@ -36,7 +36,8 @@ public class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime> imple
     public void serialize(LocalDateTime value, JsonGenerator gen, SerializerProvider provider) throws IOException {
         if (useTimeStamp) {
             gen.writeNumber(DateUtil.toTimeStamp(value));
-        } else {
+        }
+        else {
             gen.writeString(value.format(formatter));
         }
     }

@@ -5,7 +5,7 @@ import com.learning.domain.entity.po.UserPO;
 import com.learning.mybatis.mapper.UserMapper;
 import com.learning.mybatis.service.UserService;
 import com.learning.web.annotation.Option;
-import com.learning.web.model.SimpleItemModel;
+import com.learning.infranstructure.model.SimpleItemModel;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

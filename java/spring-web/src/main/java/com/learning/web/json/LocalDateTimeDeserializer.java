@@ -41,7 +41,7 @@ public class LocalDateTimeDeserializer extends JsonDeserializer<LocalDateTime> i
             c.setTimeInMillis(p.getLongValue());
             return DateUtil.toLocalDateTime(p.getLongValue());
         }
-        String value = p.getValueAsString();
+        String value = StringUtils.trimToEmpty(p.getValueAsString());
         return StringUtils.isEmpty(value) ? null : LocalDateTime.parse(value, formatter);
     }
 
