@@ -5,7 +5,6 @@ import com.learning.domain.entity.po.UserPO;
 import com.learning.db.mapper.UserMapper;
 import com.learning.db.service.UserService;
 import com.learning.web.annotation.Option;
-import com.learning.web.annotation.OptionProvider;
 import com.learning.web.model.SimpleItemModel;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-@OptionProvider
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
@@ -49,7 +47,7 @@ public class UserServiceImpl implements UserService {
         return List.of(SimpleItemModel.of("a", "bbb"));
     }
 
-    @Option("option1")
+    @Option("option2")
     public List<SimpleItemModel<String>> option2() {
         return List.of(SimpleItemModel.of("a", "bbb"));
     }
