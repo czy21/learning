@@ -1,5 +1,6 @@
 package com.learning.db;
 
+import com.learning.db.aspect.RoutingDataSourceAspect;
 import com.learning.db.datasource.DynamicDataSourceConfigure;
 import com.learning.db.datasource.DynamicDataSourceProperties;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -11,6 +12,6 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @AutoConfigureBefore(value = DataSourceAutoConfiguration.class)
 @EnableConfigurationProperties(value = {DynamicDataSourceProperties.class})
-@Import({DynamicDataSourceConfigure.class})
+@Import({DynamicDataSourceConfigure.class, RoutingDataSourceAspect.class})
 public class DBConfigure {
 }
