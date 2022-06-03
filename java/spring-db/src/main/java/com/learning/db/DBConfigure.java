@@ -1,6 +1,5 @@
 package com.learning.db;
 
-import com.learning.db.aspect.RoutingDataSourceAspect;
 import com.learning.db.datasource.DynamicDataSourceConfigure;
 import com.learning.db.datasource.DynamicDataSourceProperties;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
