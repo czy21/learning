@@ -56,11 +56,6 @@ public class WebConfigure implements WebMvcConfigurer {
                 .ifPresent(httpMessageConverter -> ((MappingJackson2HttpMessageConverter) httpMessageConverter).setObjectMapper(objectMapper.copy()));
     }
 
-    /**
-     * 配置忽略路径大小写
-     *
-     * @author bruce
-     */
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
         AntPathMatcher matcher = new AntPathMatcher();
