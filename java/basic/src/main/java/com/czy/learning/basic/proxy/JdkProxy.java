@@ -1,4 +1,4 @@
-package com.basic.proxy;
+package com.czy.learning.basic.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

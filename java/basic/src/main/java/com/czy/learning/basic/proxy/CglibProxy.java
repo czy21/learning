@@ -1,4 +1,4 @@
-package com.basic.proxy;
+package com.czy.learning.basic.proxy;
 
 
 import net.sf.cglib.proxy.Enhancer;
