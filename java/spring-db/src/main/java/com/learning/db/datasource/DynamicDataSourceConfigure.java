@@ -2,6 +2,7 @@ package com.learning.db.datasource;
 
 
 import com.learning.db.annotation.DS;
+import com.learning.db.aspect.RoutingDataSourceAspect;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -41,6 +42,11 @@ public class DynamicDataSourceConfigure {
         }
         rds.setDefaultTargetDataSource(dataSourceMap.get(master));
         return rds;
+    }
+
+    @Bean
+    public RoutingDataSourceAspect routingDataSourceAspect() {
+        return new RoutingDataSourceAspect();
     }
 
 }
