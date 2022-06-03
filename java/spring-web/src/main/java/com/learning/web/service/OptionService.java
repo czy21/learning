@@ -1,6 +1,6 @@
 package com.learning.web.service;
 
-import com.learning.web.model.SimpleItemModel;
+import com.learning.infranstructure.model.SimpleItemModel;
 
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package com.learning.web.service;
 
 import com.learning.web.annotation.Option;
-import com.learning.web.model.SimpleItemModel;
+import com.learning.infranstructure.model.SimpleItemModel;
 import org.graalvm.collections.Pair;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
