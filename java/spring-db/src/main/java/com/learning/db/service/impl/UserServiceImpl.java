@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
         return List.of(SimpleItemModel.of("a", "bbb"));
     }
 
-    @Option("option2")
+    @Option("option1")
     public List<SimpleItemModel<String>> option2() {
         return List.of(SimpleItemModel.of("a", "bbb"));
     }
