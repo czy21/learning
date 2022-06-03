@@ -1,9 +1,9 @@
-package com.learning.db.service.impl;
+package com.learning.mybatis.service.impl;
 
 import com.learning.domain.entity.dto.UserDTO;
 import com.learning.domain.entity.po.UserPO;
-import com.learning.db.mapper.UserMapper;
-import com.learning.db.service.UserService;
+import com.learning.mybatis.mapper.UserMapper;
+import com.learning.mybatis.service.UserService;
 import com.learning.web.annotation.Option;
 import com.learning.web.model.SimpleItemModel;
 import org.apache.ibatis.session.SqlSessionFactory;

@@ -1,4 +1,4 @@
-package com.learning.db.controller;
+package com.learning.mybatis.controller;
 
 import org.openjdk.jol.info.GraphLayout;
 import org.springframework.web.bind.annotation.PostMapping;

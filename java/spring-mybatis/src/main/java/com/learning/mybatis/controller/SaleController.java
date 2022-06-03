@@ -1,9 +1,9 @@
-package com.learning.db.controller;
+package com.learning.mybatis.controller;
 
 import com.github.pagehelper.PageHelper;
-import com.learning.db.mapper.UserMapper;
+import com.learning.mybatis.mapper.UserMapper;
 import com.learning.domain.entity.po.SalePO;
-import com.learning.db.service.SaleService;
+import com.learning.mybatis.service.SaleService;
 import com.learning.domain.util.PageIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

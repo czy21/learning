@@ -1,4 +1,4 @@
-package com.learning.db.config;
+package com.learning.mybatis.config;
 
 import com.learning.domain.entity.po.UserPO;
 import org.springframework.context.annotation.Bean;

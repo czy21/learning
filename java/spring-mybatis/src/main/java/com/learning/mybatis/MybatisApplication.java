@@ -1,7 +1,7 @@
-package com.learning.db;
+package com.learning.mybatis;
 
 
-import com.learning.db.mapper.UserMapper;
+import com.learning.mybatis.mapper.UserMapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,9 +10,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @MapperScan(basePackageClasses = UserMapper.class)
 @SpringBootApplication
-public class DBApplication {
+public class MybatisApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DBApplication.class, args);
+        SpringApplication.run(MybatisApplication.class, args);
     }
 }

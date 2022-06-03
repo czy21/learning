@@ -1,0 +1,7 @@
+dependencies {
+    api project(":domain")
+    api project(":spring-web")
+    api "mysql:mysql-connector-java"
+    api "org.mybatis.spring.boot:mybatis-spring-boot-starter"
+    api 'com.github.pagehelper:pagehelper-spring-boot-starter'
+}

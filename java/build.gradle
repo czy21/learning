@@ -40,6 +40,8 @@ subprojects {
             dependency "org.apache.commons:commons-lang3:3.12.0"
             dependency "commons-io:commons-io:2.11.0"
             dependency "org.apache.commons:commons-collections4:4.4"
+
+            dependency "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2"
             dependency 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.2'
 
             dependency("org.redisson:redisson-spring-boot-starter:3.16.4") {

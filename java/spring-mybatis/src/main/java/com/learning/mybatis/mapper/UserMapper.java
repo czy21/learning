@@ -1,4 +1,4 @@
-package com.learning.db.mapper;
+package com.learning.mybatis.mapper;
 
 
 import com.learning.domain.entity.po.UserPO;

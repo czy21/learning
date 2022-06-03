@@ -1,4 +1,4 @@
-package com.learning.db.controller;
+package com.learning.mybatis.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;

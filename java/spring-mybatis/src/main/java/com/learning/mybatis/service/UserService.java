@@ -1,4 +1,4 @@
-package com.learning.db.service;
+package com.learning.mybatis.service;
 
 import com.learning.domain.entity.dto.UserDTO;
 
