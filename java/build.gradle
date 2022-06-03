@@ -111,6 +111,7 @@ subprojects {
     publishing {
         publications {
             mavenJava(MavenPublication) {
+                artifactId "learning-${project.name}"
                 from components.java
                 versionMapping {
                     usage('java-api') {
