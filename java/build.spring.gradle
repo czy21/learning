@@ -1,22 +1,24 @@
 apply plugin: 'org.springframework.boot'
-dependencies {
-    implementation "org.springframework.cloud:spring-cloud-starter-consul-config"
+if (!componentModules.contains(name)) {
+    dependencies {
+        implementation "org.springframework.cloud:spring-cloud-starter-consul-config"
 
-    implementation "org.apache.commons:commons-pool2"
-    implementation "commons-io:commons-io"
+        implementation "org.apache.commons:commons-pool2"
+        implementation "commons-io:commons-io"
 
-    implementation "org.springframework.boot:spring-boot-starter-actuator"
-    implementation "io.micrometer:micrometer-registry-prometheus"
-    implementation "io.github.mweirauch:micrometer-jvm-extras"
+        implementation "org.springframework.boot:spring-boot-starter-actuator"
+        implementation "io.micrometer:micrometer-registry-prometheus"
+        implementation "io.github.mweirauch:micrometer-jvm-extras"
 
-    implementation "org.openjdk.jol:jol-core"
-    implementation "cglib:cglib"
+        implementation "org.openjdk.jol:jol-core"
+        implementation "cglib:cglib"
 
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
+        testImplementation "org.springframework.boot:spring-boot-starter-test"
+    }
 }
-if (disableBootJarModules.contains(name)) {
+if (componentModules.contains(name) | disableBootJarModules.contains(name)) {
     bootJar {
         enabled = false
     }
