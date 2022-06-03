@@ -16,4 +16,9 @@ public class PulsarConfigure {
     ProducerBuilderWrapper pulsarTopic1() {
         return client -> client.newProducer(Schema.JSON(Map.class)).topic(QueueConstant.GLOBAL_QUEUE_TOPIC1);
     }
+
+    @Bean
+    ProducerBuilderWrapper pulsarTopic2() {
+        return client -> client.newProducer(Schema.JSON(Map.class)).topic("tenant1/default/topic1");
+    }
 }
