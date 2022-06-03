@@ -4,4 +4,11 @@ dependencies {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }
     api "org.springframework.boot:spring-boot-starter-undertow"
+    api "org.springframework.cloud:spring-cloud-starter-openfeign"
+    api "io.github.openfeign:feign-jackson"
+    api "org.springframework.boot:spring-boot-starter-actuator"
+    api "io.micrometer:micrometer-registry-prometheus"
+    api "io.github.mweirauch:micrometer-jvm-extras"
+
+    api "com.alibaba:easyexcel"
 }

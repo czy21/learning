@@ -1,0 +1,10 @@
+dependencyManagement {
+    generatedPomCustomization {
+        enabled = true
+    }
+    dependencies {
+        dependency "com.learning:infrastructure:${project.version}"
+        dependency "com.learning:spring-db:${project.version}"
+        dependency "com.learning:spring-web:${project.version}"
+    }
+}

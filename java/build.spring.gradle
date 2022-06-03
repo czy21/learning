@@ -1,28 +1,27 @@
 apply plugin: 'org.springframework.boot'
-if (!componentModules.contains(name)) {
+
+dependencies {
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+}
+
+if (springComponentModules.contains(name)) {
+    dependencies {
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    }
+    bootJar {
+        enabled = false
+    }
+    jar {
+        archiveClassifier = ''
+    }
+} else {
     dependencies {
         implementation "org.springframework.cloud:spring-cloud-starter-consul-config"
 
         implementation "org.apache.commons:commons-pool2"
         implementation "commons-io:commons-io"
 
-        implementation "org.springframework.boot:spring-boot-starter-actuator"
-        implementation "io.micrometer:micrometer-registry-prometheus"
-        implementation "io.github.mweirauch:micrometer-jvm-extras"
-
         implementation "org.openjdk.jol:jol-core"
         implementation "cglib:cglib"
-
-        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-
-        testImplementation "org.springframework.boot:spring-boot-starter-test"
-    }
-}
-if (componentModules.contains(name) | disableBootJarModules.contains(name)) {
-    bootJar {
-        enabled = false
-    }
-    jar {
-        archiveClassifier = ''
     }
 }
