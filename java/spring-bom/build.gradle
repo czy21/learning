@@ -3,8 +3,8 @@ dependencyManagement {
         enabled = true
     }
     dependencies {
-        dependency "com.learning:learning-infrastructure:${project.version}"
-        dependency "com.learning:learning-spring-db:${project.version}"
-        dependency "com.learning:learning-spring-web:${project.version}"
+        dependency "com.czy:learning-infrastructure:${project.version}"
+        dependency "com.czy:learning-spring-db:${project.version}"
+        dependency "com.czy:learning-spring-web:${project.version}"
     }
 }

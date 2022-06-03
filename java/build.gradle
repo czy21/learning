@@ -17,7 +17,8 @@ subprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'io.spring.dependency-management'
 
-    group = 'com.learning'
+    group = 'com.czy'
+    archivesBaseName = "learning-${project.name}"
     version = '0.1.0-SNAPSHOT'
     targetCompatibility = '11'
     sourceCompatibility = '11'
@@ -111,7 +112,7 @@ subprojects {
     publishing {
         publications {
             mavenJava(MavenPublication) {
-                artifactId "learning-${project.name}"
+                artifactId = archivesBaseName
                 from components.java
                 versionMapping {
                     usage('java-api') {
