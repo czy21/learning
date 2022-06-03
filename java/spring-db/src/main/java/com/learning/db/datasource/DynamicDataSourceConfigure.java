@@ -4,6 +4,7 @@ package com.learning.db.datasource;
 import com.learning.db.annotation.DS;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 
@@ -30,8 +31,8 @@ public class DynamicDataSourceConfigure {
     }
 
     @Bean
-    @Primary
-    public DataSource primaryDataSource() throws NoSuchMethodException {
+    @ConditionalOnMissingBean
+    public DataSource dataSource() throws NoSuchMethodException {
         RoutingDataSource rds = new RoutingDataSource();
         rds.setTargetDataSources(dataSourceMap);
         String master = (String) DS.class.getDeclaredMethod("value").getDefaultValue();
