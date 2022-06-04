@@ -1,7 +1,6 @@
 package com.czy.learning.pulsar;
 
 import com.czy.learning.pulsar.core.ProducerBuilderWrapper;
-import com.czy.learning.pulsar.core.PulsarFactory;
 import com.czy.learning.pulsar.core.PulsarListenerScanner;
 import com.czy.learning.pulsar.core.PulsarTemplate;
 import org.apache.pulsar.client.api.ClientBuilder;
@@ -23,8 +22,6 @@ public class PulsarAutoConfigure {
 
     PulsarProperties pulsarProperties;
     List<ProducerBuilderWrapper> producerBuilderWrappers;
-
-    PulsarFactory pulsarFactory = new PulsarFactory();
 
     public PulsarAutoConfigure(PulsarProperties pulsarProperties,
                                ObjectProvider<List<ProducerBuilderWrapper>> producerWrappers) {
@@ -50,7 +47,7 @@ public class PulsarAutoConfigure {
 
     @Bean
     public PulsarListenerScanner pulsarListenerScanner(PulsarClient pulsarClient) {
-        return new PulsarListenerScanner(pulsarClient, pulsarFactory);
+        return new PulsarListenerScanner(pulsarClient);
     }
 
     @Bean
@@ -64,9 +61,7 @@ public class PulsarAutoConfigure {
                     }
                 })
                 .collect(HashMap::new, (m, n) -> m.put(n.getTopic(), n), Map::putAll);
-        pulsarFactory.setPulsarClient(client);
-        pulsarFactory.setProducerMap(producerMap);
-        return new PulsarTemplate(pulsarFactory);
+        return new PulsarTemplate(producerMap);
     }
 
 }

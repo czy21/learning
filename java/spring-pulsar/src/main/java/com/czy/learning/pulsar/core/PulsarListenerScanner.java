@@ -22,12 +22,10 @@ import java.util.concurrent.TimeUnit;
 public class PulsarListenerScanner implements BeanPostProcessor {
     Map<String, Consumer<?>> consumerMap = new ConcurrentHashMap<>();
     PulsarClient pulsarClient;
-    PulsarFactory pulsarFactory;
     ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 2000, 60L, TimeUnit.SECONDS, new LinkedBlockingDeque<>());
 
-    public PulsarListenerScanner(PulsarClient pulsarClient, PulsarFactory pulsarFactory) {
+    public PulsarListenerScanner(PulsarClient pulsarClient) {
         this.pulsarClient = pulsarClient;
-        this.pulsarFactory = pulsarFactory;
     }
 
     @Override
@@ -42,9 +40,6 @@ public class PulsarListenerScanner implements BeanPostProcessor {
         }, ReflectionUtils.USER_DECLARED_METHODS);
         for (ListenerMethod lm : methods) {
             processListener(lm.annotation, lm.method, bean, beanName);
-        }
-        if (methods.size() > 0) {
-            pulsarFactory.setConsumerMap(consumerMap);
         }
         return bean;
     }
