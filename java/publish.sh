@@ -2,7 +2,7 @@
 
 modules=("infrastructure" "spring-bom" "spring-db" "spring-web" "spring-pulsar")
 
-tasks=("clean" "publishAllPublicationsToHomeSnapshotsRepository")
+tasks=("clean" "publishToMavenLocal")
 
 modules_cmd=""
 for p in ${modules[@]}; do

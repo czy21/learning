@@ -16,8 +16,8 @@ subprojects {
     group = 'com.czy'
     archivesBaseName = "learning-${project.name}"
     version = '0.1.0-SNAPSHOT'
-    targetCompatibility = '11'
-    sourceCompatibility = '11'
+    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_8
 
     tasks.withType(JavaCompile) {
         options.encoding = 'UTF-8'

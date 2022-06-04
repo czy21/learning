@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 
 import javax.sql.DataSource;
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,12 +23,13 @@ public class DynamicDataSourceConfigure {
         dataSourceMap = dynamicDataSourceProperties.getDatasource()
                 .entrySet()
                 .stream()
-                .map(t -> {
-                    t.getValue().setPoolName(String.join(" ", new String[]{"datasource", "=>", t.getKey()}));
-                    var ds = new HikariDataSource(t.getValue());
-                    return Map.of(t.getKey(), ds);
-                })
-                .collect(HashMap::new, Map::putAll, Map::putAll);
+                .collect(HashMap::new,
+                        (m, n) -> {
+                            n.getValue().setPoolName(MessageFormat.format("datasource => {0}", n.getKey()));
+                            HikariDataSource ds = new HikariDataSource(n.getValue());
+                            m.put(n.getKey(), ds);
+                        },
+                        Map::putAll);
     }
 
     @Bean
@@ -36,9 +38,6 @@ public class DynamicDataSourceConfigure {
         RoutingDataSource rds = new RoutingDataSource();
         rds.setTargetDataSources(dataSourceMap);
         String master = (String) DS.class.getDeclaredMethod("value").getDefaultValue();
-        if (!dataSourceMap.containsKey(master)) {
-            log.warn("master datasource is null");
-        }
         rds.setDefaultTargetDataSource(dataSourceMap.get(master));
         return rds;
     }
