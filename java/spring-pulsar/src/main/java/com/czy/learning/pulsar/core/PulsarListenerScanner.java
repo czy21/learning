@@ -8,7 +8,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.ReflectionUtils;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -39,19 +38,18 @@ public class PulsarListenerScanner implements BeanPostProcessor {
             }
         }, ReflectionUtils.USER_DECLARED_METHODS);
         for (ListenerMethod lm : methods) {
-            processListener(lm.annotation, lm.method, bean, beanName);
+            processListener(lm.annotation, lm.method, bean);
         }
         return bean;
     }
 
-    public void processListener(PulsarListener pl, Method method, Object bean, String beanName) {
+    public void processListener(PulsarListener pl, Method method, Object bean) {
         Schema<?> schema = Schema.JSON(pl.clazz());
         try {
-            ConsumerBuilder<?> consumerBuilder = pulsarClient.newConsumer(schema).topic(pl.topic())
-                    .subscriptionName(StringUtils.hasLength(pl.subscriptionName())
-                            ? pl.subscriptionName()
-                            : String.join(".", beanName, method.getName()) + "-" + pl.clazz().getName()
-                    )
+            ConsumerBuilder<?> consumerBuilder = pulsarClient
+                    .newConsumer(schema)
+                    .topic(pl.topic())
+                    .subscriptionName(pl.subscriptionName())
                     .subscriptionType(pl.subscriptionType());
             Consumer<?> consumer;
             if (pl.batch()) {

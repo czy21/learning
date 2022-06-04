@@ -19,9 +19,7 @@ public @interface PulsarListener {
 
     SubscriptionType subscriptionType() default SubscriptionType.Exclusive;
 
-    String consumerName() default "";
-
-    String subscriptionName() default "";
+    String subscriptionName();
 
     boolean batch() default false;
 
