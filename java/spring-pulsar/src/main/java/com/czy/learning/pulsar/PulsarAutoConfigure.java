@@ -52,16 +52,21 @@ public class PulsarAutoConfigure {
 
     @Bean
     public PulsarTemplate pulsarTemplate(PulsarClient client) {
-        Map<String, Producer<?>> producerMap = producerBuilderWrappers.stream()
-                .map(t -> {
-                    try {
-                        return t.apply(client).create();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .collect(HashMap::new, (m, n) -> m.put(n.getTopic(), n), Map::putAll);
+        Map<String, Producer<?>> producerMap = getProducerMap(client);
         return new PulsarTemplate(producerMap);
+    }
+
+    private Map<String, Producer<?>> getProducerMap(PulsarClient client) {
+        Map<String, Producer<?>> ps = new HashMap<>();
+        try {
+            for (ProducerBuilderWrapper t : producerBuilderWrappers) {
+                Producer<?> p = t.apply(client).create();
+                ps.put(p.getTopic(), p);
+            }
+            return ps;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

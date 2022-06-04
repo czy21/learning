@@ -10,5 +10,4 @@ for p in ${modules[@]}; do
     modules_cmd+="${p}:${t} "
   done
 done
-echo ${modules_cmd}
 ./gradlew ${modules_cmd} -x test
