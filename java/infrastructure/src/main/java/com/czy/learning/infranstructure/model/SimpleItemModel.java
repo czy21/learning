@@ -16,23 +16,23 @@ import java.util.Map;
 public class SimpleItemModel<T> implements TreeNode<T> {
     private String label;
     private T value;
-    private T parentValue;
     private String parentLabel;
+    private T parentValue;
+    private int sort;
     private Map<String, Object> extra;
     private List<SimpleItemModel<T>> children;
 
-    private int sort;
-
-    public static <T> SimpleItemModel<T> of(String label, T value, T parentValue) {
+    public static <T> SimpleItemModel<T> of(String label, T value, String parentLabel, T parentValue) {
         return SimpleItemModel.<T>builder()
                 .label(label)
                 .value(value)
+                .parentLabel(parentLabel)
                 .parentValue(parentValue)
                 .build();
     }
 
     public static <T> SimpleItemModel<T> of(String label, T value) {
-        return of(label, value, null);
+        return of(label, value, null, null);
     }
 
     @JsonIgnore
