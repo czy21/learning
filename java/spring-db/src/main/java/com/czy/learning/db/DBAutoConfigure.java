@@ -12,5 +12,5 @@ import org.springframework.context.annotation.Import;
 @AutoConfigureBefore(value = DataSourceAutoConfiguration.class)
 @EnableConfigurationProperties(value = {DynamicDataSourceProperties.class})
 @Import({DynamicDataSourceConfigure.class})
-public class DBConfigure {
+public class DBAutoConfigure {
 }

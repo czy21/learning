@@ -26,7 +26,7 @@ import java.util.List;
 @EnableWebMvc
 @Configuration
 @Import({OptionServiceImpl.class})
-public class WebConfigure implements WebMvcConfigurer {
+public class WebAutoConfigure implements WebMvcConfigurer {
 
     @Autowired
     private ObjectMapper objectMapper;

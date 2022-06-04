@@ -1,6 +1,6 @@
 #!/bin/sh
 
-modules=("infrastructure" "spring-bom" "spring-db" "spring-web")
+modules=("infrastructure" "spring-bom" "spring-db" "spring-web" "spring-pulsar")
 
 tasks=("clean" "publishAllPublicationsToHomeSnapshotsRepository")
 

@@ -5,11 +5,7 @@ plugins {
 }
 
 ext {
-    springComponentModules = [
-            "spring-bom",
-            "spring-db",
-            "spring-web"
-    ]
+
 }
 
 subprojects {
@@ -36,8 +32,6 @@ subprojects {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         }
         dependencies {
-            dependency "org.apache.commons:commons-pool2:2.11.1"
-            dependency "org.apache.commons:commons-lang3:3.12.0"
             dependency "commons-io:commons-io:2.11.0"
             dependency "org.apache.commons:commons-collections4:4.4"
             dependency "commons-validator:commons-validator:1.7"
@@ -60,26 +54,19 @@ subprojects {
             dependency "io.github.mweirauch:micrometer-jvm-extras:0.2.2"
 
             dependency "com.alibaba:easyexcel:3.1.0"
-            dependency "com.czy:pulsar-spring-boot-starter:0.1.0-SNAPSHOT"
+            dependency "org.apache.pulsar:pulsar-client:2.10.0"
 
             dependency "org.openjdk.jol:jol-core:0.9"
             dependency "cglib:cglib:3.3.0"
 
         }
     }
+
     dependencies {
-
-        implementation "org.apache.commons:commons-lang3"
-        implementation "org.apache.commons:commons-collections4"
-
         implementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
         annotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
         testImplementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
         testAnnotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
-
-        testImplementation 'org.junit.jupiter:junit-jupiter-api'
-        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-
     }
 
     test {
