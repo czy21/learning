@@ -12,14 +12,11 @@ import org.springframework.util.ReflectionUtils;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class PulsarListenerScanner implements BeanPostProcessor {
-    Map<String, Consumer<?>> consumerMap = new ConcurrentHashMap<>();
     PulsarClient pulsarClient;
     ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 2000, 60L, TimeUnit.SECONDS, new LinkedBlockingDeque<>());
 
@@ -48,7 +45,7 @@ public class PulsarListenerScanner implements BeanPostProcessor {
         try {
             ConsumerBuilder<?> consumerBuilder = pulsarClient
                     .newConsumer(schema)
-                    .topic(pl.topic())
+                    .topic(pl.topics())
                     .subscriptionName(pl.subscriptionName())
                     .subscriptionType(pl.subscriptionType());
             Consumer<?> consumer;
@@ -76,7 +73,7 @@ public class PulsarListenerScanner implements BeanPostProcessor {
                     }
                 });
             } else {
-                consumer = consumerBuilder.messageListener((consumer1, msg) -> {
+                consumerBuilder.messageListener((consumer1, msg) -> {
                     try {
                         method.invoke(bean, msg.getValue());
                         consumer1.acknowledge(msg);
@@ -86,7 +83,6 @@ public class PulsarListenerScanner implements BeanPostProcessor {
                     }
                 }).subscribe();
             }
-            consumerMap.put(pl.topic(), consumer);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -1,6 +1,5 @@
 package com.czy.learning.pulsar.annotation;
 
-import org.apache.pulsar.client.api.SubscriptionInitialPosition;
 import org.apache.pulsar.client.api.SubscriptionType;
 
 import java.lang.annotation.ElementType;
@@ -11,7 +10,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PulsarListener {
-    String topic();
+    String[] topics() default {};
 
     Class<?> clazz() default byte[].class;
 
