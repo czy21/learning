@@ -1,8 +1,8 @@
 package com.czy.learning.web.service;
 
-import com.czy.learning.web.annotation.Option;
 import com.czy.learning.infranstructure.model.SimpleItemModel;
-import org.graalvm.collections.Pair;
+import com.czy.learning.web.annotation.Option;
+import org.apache.commons.lang3.tuple.MutablePair;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class OptionServiceImpl implements BeanPostProcessor, OptionService {
 
-    Map<String, Pair<Object, Method>> optionMap = new ConcurrentHashMap<>();
+    Map<String, MutablePair<Object, Method>> optionMap = new ConcurrentHashMap<>();
 
     @SuppressWarnings("unchecked")
     @Override
@@ -23,7 +23,7 @@ public class OptionServiceImpl implements BeanPostProcessor, OptionService {
         return keys.stream().collect(HashMap::new, (m, t) -> {
             List<? extends SimpleItemModel<?>> v = new ArrayList<>();
             try {
-                Pair<Object, Method> optionPair = optionMap.get(t);
+                MutablePair<Object, Method> optionPair = optionMap.get(t);
                 if (optionPair != null) {
                     v = (List<? extends SimpleItemModel<?>>) optionPair.getRight().invoke(optionPair.getLeft());
                 }
@@ -47,8 +47,8 @@ public class OptionServiceImpl implements BeanPostProcessor, OptionService {
             Option option = AnnotationUtils.findAnnotation(method, Option.class);
             if (option != null) {
                 String k = option.value();
-                Pair<Object, Method> v = Pair.create(bean, method);
-                Pair<Object, Method> u = optionMap.putIfAbsent(k, v);
+                MutablePair<Object, Method> v = MutablePair.of(bean, method);
+                MutablePair<Object, Method> u = optionMap.putIfAbsent(k, v);
                 if (u != null) {
                     throw new IllegalStateException(String.format(
                             "Duplicate key %s (attempted merging values %s and %s)",
