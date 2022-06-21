@@ -33,12 +33,12 @@ public class RedisConfigure {
     @Bean
     public Subscription subscription1(RedisConnectionFactory redisConnectionFactory,
                                       @Qualifier("redisStreamListener1") StreamListener<String, MapRecord<String, String, String>> redisListener1) {
-        var containerOptions = StreamMessageListenerContainer.StreamMessageListenerContainerOptions
+        StreamMessageListenerContainer.StreamMessageListenerContainerOptions<String, MapRecord<String, String, String>> containerOptions = StreamMessageListenerContainer.StreamMessageListenerContainerOptions
                 .builder()
                 .batchSize(100)
                 .pollTimeout(Duration.ZERO)
                 .build();
-        var container = StreamMessageListenerContainer
+        StreamMessageListenerContainer<String, MapRecord<String, String, String>> container = StreamMessageListenerContainer
                 .create(redisConnectionFactory, containerOptions);
         StreamMessageListenerContainer.ConsumerStreamReadRequest<String> listenerRequest = StreamMessageListenerContainer.StreamReadRequest
                 .builder(StreamOffset.create(QueueConstant.GLOBAL_QUEUE_TOPIC1, ReadOffset.lastConsumed()))
@@ -47,7 +47,7 @@ public class RedisConfigure {
                 .errorHandler(t -> {
                 })
                 .build();
-        var subscription = container.register(listenerRequest, redisListener1);
+        Subscription subscription = container.register(listenerRequest, redisListener1);
         container.start();
         return subscription;
     }
