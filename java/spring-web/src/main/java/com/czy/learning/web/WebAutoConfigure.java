@@ -1,7 +1,7 @@
 package com.czy.learning.web;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.czy.learning.web.service.OptionServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.mweirauch.micrometer.jvm.extras.ProcessMemoryMetrics;
 import io.github.mweirauch.micrometer.jvm.extras.ProcessThreadMetrics;
 import io.micrometer.core.instrument.MeterRegistry;
@@ -33,6 +33,7 @@ public class WebAutoConfigure implements WebMvcConfigurer {
 
     @Bean
     public CorsFilter corsFilter() {
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("*");
