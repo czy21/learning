@@ -17,7 +17,15 @@ public class HomeController : Controller
     public Task<List<Dictionary<string, object>>> List()
     {
         var dic = new Dictionary<string, object> { { "name", "czy" } };
-        var list = new List<Dictionary<string, object>> { new Dictionary<string, object>() { { "name", "czy" }, { "age", "26" } } };
+        var list = new List<Dictionary<string, object>> { dic };
         return Task.FromResult(list);
+    }
+
+    [HttpGet(template:"list2")]
+    public Task<List<Dictionary<string, object>>> List2()
+    {
+        var dic = new Dictionary<string, object>() { { "name", "ha" } };
+        _logger.LogInformation("hahaha");
+        return Task.FromResult(new List<Dictionary<string, object>> {dic});
     }
 }
