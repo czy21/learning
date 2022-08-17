@@ -1,5 +1,7 @@
-apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'application'
+plugins {
+    id 'com.github.johnrengelman.shadow'
+    id 'application'
+}
 
 ext {
     flinkVersion = '1.14.4'

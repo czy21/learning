@@ -4,10 +4,6 @@ plugins {
     id 'com.github.johnrengelman.shadow' apply false
 }
 
-ext {
-
-}
-
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
@@ -114,9 +110,9 @@ subprojects {
     }
 
     if (name.startsWith("spring")) {
-        apply from: file("../build.spring.gradle")
+        apply plugin: "spring.build"
     }
     if (name.startsWith("flink")) {
-        apply from: file("../build.flink.gradle")
+        apply plugin: "flink.build"
     }
 }

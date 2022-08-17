@@ -31,6 +31,5 @@ include("spring-quartz")
 // flink
 include("flink-common")
 include("flink-task")
-include 'spring-quartz'
-include 'spring-xxl-job'
+include('spring-xxl-job')
 
