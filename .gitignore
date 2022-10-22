@@ -12,6 +12,7 @@ obj/
 .gradle/
 
 # Build #
+target/
 build/
 
 # Web #
