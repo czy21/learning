@@ -33,6 +33,7 @@ subprojects {
             dependency "org.apache.commons:commons-collections4:4.4"
             dependency "commons-validator:commons-validator:1.7"
 
+            dependency 'com.clickhouse:clickhouse-jdbc:0.3.2'
             dependency "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2"
             dependency 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.2'
             dependency "com.baomidou:mybatis-plus-boot-starter:3.5.0"

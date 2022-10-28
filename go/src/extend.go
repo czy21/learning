@@ -23,7 +23,7 @@ type B struct {
 //	return "B"
 //}
 
-func main() {
-	b := B{}
-	b.Name()
-}
+//func main() {
+//	b := B{}
+//	b.Name()
+//}
