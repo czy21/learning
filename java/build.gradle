@@ -81,7 +81,7 @@ subprojects {
             manifest {
                 attributes 'Implementation-Title': archiveBaseName
                 attributes 'Implementation-Version': archiveVersion
-                attributes 'Built-Gradle': gradle.gradleVersion
+                attributes 'Built-Tool': "gradle-"+gradle.gradleVersion
                 attributes 'Build-OS': System.getProperty("os.name")
                 attributes 'Built-By': System.getProperty("user.name")
                 attributes 'Build-Jdk': System.getProperty("java.version")
