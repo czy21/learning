@@ -1,5 +1,16 @@
-fn main() {
-    let s1 = String::from("hello");
-    let s2 = &s1;
-    println!("s1 is {}, s2 is {}", s1, s2);
+use actix_web::{get, web, App, HttpServer, Responder};
+
+#[get("/hello/{name}")]
+async fn greet(name: web::Path<String>) -> impl Responder {
+    format!("Hello {name}!")
+}
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    HttpServer::new(|| {
+        App::new().service(greet)
+    })
+        .bind(("127.0.0.1", 8080))?
+        .run()
+        .await
 }
