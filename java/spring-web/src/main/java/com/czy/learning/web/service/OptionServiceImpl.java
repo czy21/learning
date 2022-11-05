@@ -20,17 +20,17 @@ public class OptionServiceImpl implements BeanPostProcessor, OptionService {
     @SuppressWarnings("unchecked")
     @Override
     public Map<String, List<? extends SimpleItemModel<?>>> findByKeys(Set<String> keys) {
-        return keys.stream().collect(HashMap::new, (m, t) -> {
+        return keys.stream().collect(HashMap::new, (m, n) -> {
             List<? extends SimpleItemModel<?>> v = new ArrayList<>();
             try {
-                MutablePair<Object, Method> optionPair = optionMap.get(t);
+                MutablePair<Object, Method> optionPair = optionMap.get(n);
                 if (optionPair != null) {
                     v = (List<? extends SimpleItemModel<?>>) optionPair.getRight().invoke(optionPair.getLeft());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            m.put(t, Optional.ofNullable(v).orElse(new ArrayList<>()));
+            m.put(n, Optional.ofNullable(v).orElse(new ArrayList<>()));
         }, Map::putAll);
     }
 

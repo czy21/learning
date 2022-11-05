@@ -7,8 +7,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-@Data
 @ConfigurationProperties(prefix = "spring.datasource.dynamic")
 public class DynamicDataSourceProperties {
     private Map<String, HikariConfig> datasource;
+
+    public Map<String, HikariConfig> getDatasource() {
+        return datasource;
+    }
+
+    public void setDatasource(Map<String, HikariConfig> datasource) {
+        this.datasource = datasource;
+    }
 }

@@ -5,6 +5,8 @@ import com.czy.learning.db.annotation.DS;
 import com.czy.learning.db.aspect.RoutingDataSourceAspect;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 
@@ -13,8 +15,9 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-@Slf4j
 public class DynamicDataSourceConfigure {
+
+    private static final Logger logger = LoggerFactory.getLogger(DynamicDataSourceConfigure.class);
     DynamicDataSourceProperties dynamicDataSourceProperties;
     Map<Object, Object> dataSourceMap;
 
