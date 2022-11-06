@@ -1,8 +1,7 @@
+pub mod controller;
+
 use actix_web::{App, HttpServer};
-use crate::home::greet;
-
-mod home;
-
+use crate::controller::home::greet;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
