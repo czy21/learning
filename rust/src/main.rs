@@ -1,9 +1,8 @@
-use actix_web::{get, web, App, HttpServer, Responder};
+use actix_web::{App, HttpServer};
+use crate::home::greet;
 
-#[get("/hello/{name}")]
-async fn greet(name: web::Path<String>) -> impl Responder {
-    format!("Hello {name}!")
-}
+mod home;
+
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
