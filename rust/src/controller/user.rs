@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-use std::iter::Map;
 use actix_web::{get, web, Responder, Result, post};
 use serde::{Deserialize, Serialize};
 
