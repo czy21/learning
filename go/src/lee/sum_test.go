@@ -24,6 +24,17 @@ type ListNode struct {
 }
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	l := l1
+	var k []int
+	for {
+		k = append(k, l.Val)
+		if l.Next != nil {
+			l = l.Next
+		} else {
+			break
+		}
+	}
+	fmt.Println(k)
 	return &ListNode{}
 }
 
