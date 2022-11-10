@@ -26,30 +26,61 @@ type ListNode struct {
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	var prep1 *ListNode
+	var prep2 *ListNode
 	for {
 		if l1 != nil {
 			next := l1.Next
 			l1.Next = prep1
 			prep1 = l1
 			l1 = next
-		} else {
+		}
+		if l2 != nil {
+			next := l2.Next
+			l2.Next = prep2
+			prep2 = l2
+			l2 = next
+		}
+		if l1 == nil && l2 == nil {
 			break
 		}
 	}
 	a1 := ""
+	a2 := ""
 	for {
 		if prep1 != nil {
 			a1 += strconv.Itoa(prep1.Val)
 			prep1 = prep1.Next
-		} else {
+		}
+		if prep2 != nil {
+			a2 += strconv.Itoa(prep2.Val)
+			prep2 = prep2.Next
+		}
+		if prep1 == nil && prep2 == nil {
 			break
 		}
 	}
-	return &ListNode{}
+	ai1, _ := strconv.Atoi(a1)
+	ai2, _ := strconv.Atoi(a2)
+	sumChars := []rune(strconv.FormatInt(int64(ai1+ai2), 10))
+	var head *ListNode
+	for i := len(sumChars) - 1; i >= 0; i-- {
+		m, _ := strconv.Atoi(string(sumChars[i]))
+		if head == nil {
+			head = &ListNode{Val: m}
+			continue
+		}
+		for node := head; node != nil; node = node.Next {
+			if node.Next == nil {
+				node.Next = &ListNode{m, nil}
+				break
+			}
+		}
+	}
+	return head
 }
 
 func TestSum2(t *testing.T) {
-	l1 := ListNode{Val: 1, Next: &ListNode{Val: 2, Next: &ListNode{Val: 3, Next: &ListNode{Val: 4}}}}
+	l1 := ListNode{Val: 2, Next: &ListNode{Val: 4, Next: &ListNode{Val: 3}}}
 	l2 := ListNode{Val: 5, Next: &ListNode{Val: 6, Next: &ListNode{Val: 4}}}
 	addTwoNumbers(&l1, &l2)
 }
