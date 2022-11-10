@@ -2,6 +2,7 @@ package lee
 
 import (
 	"fmt"
+	"strconv"
 	"testing"
 )
 
@@ -24,14 +25,22 @@ type ListNode struct {
 }
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	var prep *ListNode
-	var next *ListNode
+	var prep1 *ListNode
 	for {
 		if l1 != nil {
-			next = l1.Next
-			l1.Next = prep
-			prep = l1
+			next := l1.Next
+			l1.Next = prep1
+			prep1 = l1
 			l1 = next
+		} else {
+			break
+		}
+	}
+	a1 := ""
+	for {
+		if prep1 != nil {
+			a1 += strconv.Itoa(prep1.Val)
+			prep1 = prep1.Next
 		} else {
 			break
 		}
