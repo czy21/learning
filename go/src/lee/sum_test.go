@@ -28,6 +28,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	var prep1 *ListNode
 	var prep2 *ListNode
 	for {
+		// 反转
 		if l1 != nil {
 			next := l1.Next
 			l1.Next = prep1
@@ -95,6 +96,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	return head
 }
 
+// 链表反转并相加
 func TestSum2(t *testing.T) {
 	l1 := ListNode{Val: 2, Next: &ListNode{Val: 4, Next: &ListNode{Val: 3}}}
 	l2 := ListNode{Val: 5, Next: &ListNode{Val: 6, Next: &ListNode{Val: 4}}}
