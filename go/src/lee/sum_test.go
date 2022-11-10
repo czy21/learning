@@ -69,17 +69,21 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 			head = &ListNode{Val: m}
 			continue
 		}
+		// 头插法
+		node := &ListNode{m, nil}
+		node.Next = head
+		head = node
 		// 尾插法1
-		node := head
-		for {
-			if node != nil {
-				if node.Next == nil {
-					node.Next = &ListNode{m, nil}
-					break
-				}
-			}
-			node = node.Next
-		}
+		//node := head
+		//for {
+		//	if node != nil {
+		//		if node.Next == nil {
+		//			node.Next = &ListNode{m, nil}
+		//			break
+		//		}
+		//	}
+		//	node = node.Next
+		//}
 		// 尾插法2
 		//for node := head; node != nil; node = node.Next {
 		//	if node.Next == nil {
