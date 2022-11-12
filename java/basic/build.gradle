@@ -4,4 +4,5 @@ dependencies {
     implementation "org.openjdk.jol:jol-core"
     implementation "cglib:cglib"
     testImplementation "org.apache.commons:commons-lang3"
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }

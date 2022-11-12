@@ -25,12 +25,42 @@ public class ObjectTest {
 
     /*
      * jol 分析对象布局
-     * markword 锁信息 00000101(偏向锁) 可通过 -XX:-UseBiasedLocking 关闭默认开启偏向锁
+     * java.lang.Object object internals:
+     *  OFFSET  SIZE   TYPE DESCRIPTION
+     *       0     4        (object header)                            |  markword
+     *       4     4        (object header)                            |  markword
+     *       8     4        (object header)                            |  classPointer
+     *      12     4        (loss due to the next object alignment)    |  padding 对齐
+     * classPointer 压缩: 4b(padding对齐),未压缩: 8b(无需padding对齐)
+     * Instance size: 16 bytes
      */
     @Test
     public void test1() {
-        Object1 o1 = new Object1();
-        System.out.println(ClassLayout.parseInstance(o1).toPrintable());
+        Object o1 = new Object();
+        Object1 o2 = new Object1();
+        System.out.println("o1: " + ClassLayout.parseInstance(o1).toPrintable());
+        System.out.println("o2: " + ClassLayout.parseInstance(o2).toPrintable());
+    }
+
+    /*
+     * 锁信息在markword
+     * 默认为: 01010011
+     * 偏向锁: 00000101 参数: -XX:-UseBiasedLocking
+     * 锁升级状态: new -> 偏向锁 -> 轻量级锁(无锁|自旋锁|自适应锁) -> 重量级锁
+     * 锁状态     1bit(偏向锁位)     2bit(锁标志)
+     *  new      0                 01
+     *  偏向锁    1                 01
+     *  自旋锁                      00
+     *  重量级                      10
+     *  GC标记                      11
+     */
+    @Test
+    public void test11() {
+        Object o1 = new Object();
+        System.out.println("original: " + ClassLayout.parseInstance(o1).toPrintable());
+        synchronized (o1) {
+            System.out.println("synchronized: " + ClassLayout.parseInstance(o1).toPrintable());
+        }
     }
 
     @Test
