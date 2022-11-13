@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
@@ -22,11 +23,11 @@ public class LockTest {
         private ReentrantLock reentrantLock = new ReentrantLock(true);
 
         public synchronized void syncIncrease() {
-            try {
-                Thread.sleep(3);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(5);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
             count++;
         }
 
@@ -68,11 +69,10 @@ public class LockTest {
     public void test1() {
         Object1 o1 = new Object1();
         int loopSize = 1000;
-        List<Thread> threads = List.of(
-                getThread(o1, loopSize, Object1::syncIncrease),
-                getThread(o1, loopSize, Object1::syncIncrease)
-        );
-
+        List<Thread> threads = new ArrayList<>();
+        for (int i = 0; i < loopSize; i++) {
+            threads.add(new Thread(o1::syncIncrease));
+        }
         LocalDateTime startTime = LocalDateTime.now();
         threads.forEach(Thread::start);
         for (var t : threads) {
@@ -84,7 +84,7 @@ public class LockTest {
         System.out.println("increase value: " + increaseValue);
         System.out.println("threads: " + threads.size());
         System.out.println("timeout: " + Duration.between(startTime, endTime).toMillis() + "ms");
-        Assertions.assertEquals(loopSize * threads.size(), increaseValue);
+        Assertions.assertEquals(loopSize, increaseValue);
     }
 
     private Thread getThread(Object1 t, int loopSize, Consumer<Object1> func) {
@@ -141,7 +141,7 @@ public class LockTest {
     public void test4() {
         Object1 o1 = new Object1();
         for (int i = 0; i < 10; i++) {
-            int finalI = i+1;
+            int finalI = i + 1;
             new Thread(() -> o1.syncAByReentrantLock(Integer.toString(finalI)), "thread-" + finalI).start();
         }
     }
