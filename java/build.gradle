@@ -1,6 +1,5 @@
 plugins {
     id 'org.springframework.boot' apply false
-    id 'io.spring.dependency-management' apply false
     id 'com.github.johnrengelman.shadow' apply false
 //    id 'com.learning.gradle.springboot' version "3.0.0" apply false
 }
