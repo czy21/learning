@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' apply false
     id 'io.spring.dependency-management' apply false
     id 'com.github.johnrengelman.shadow' apply false
+//    id 'com.learning.gradle.springboot' version "3.0.0" apply false
 }
 
 subprojects {
@@ -80,7 +81,7 @@ subprojects {
             manifest {
                 attributes 'Implementation-Title': archiveBaseName
                 attributes 'Implementation-Version': archiveVersion
-                attributes 'Built-Tool': "gradle-"+gradle.gradleVersion
+                attributes 'Built-Tool': "gradle-" + gradle.gradleVersion
                 attributes 'Build-OS': System.getProperty("os.name")
                 attributes 'Built-By': System.getProperty("user.name")
                 attributes 'Build-Jdk': System.getProperty("java.version")

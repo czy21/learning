@@ -33,3 +33,4 @@ include("flink-common")
 include("flink-task")
 include('spring-xxl-job')
 
+include("gradle-plugin")
