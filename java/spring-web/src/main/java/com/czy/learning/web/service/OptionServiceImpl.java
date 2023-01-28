@@ -34,12 +34,14 @@ public class OptionServiceImpl implements BeanPostProcessor, OptionService {
         }, Map::putAll);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public <T> List<SimpleItemModel<T>> findByKey(String key) {
-        return null;
+        Set<String> keys = new HashSet<>();
+        keys.add(key);
+        return (List)this.findByKeys(keys).entrySet().stream().findFirst().map(Map.Entry::getValue).orElse(new ArrayList<>());
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         Class<?> targetClass = AopUtils.getTargetClass(bean);
@@ -50,9 +52,7 @@ public class OptionServiceImpl implements BeanPostProcessor, OptionService {
                 MutablePair<Object, Method> v = MutablePair.of(bean, method);
                 MutablePair<Object, Method> u = optionMap.putIfAbsent(k, v);
                 if (u != null) {
-                    throw new IllegalStateException(String.format(
-                            "Duplicate key %s (attempted merging values %s and %s)",
-                            k, u, v));
+                    throw new IllegalStateException(String.format("Duplicate key %s (attempted merging values %s and %s)", k, u, v));
                 }
             }
         }, ReflectionUtils.USER_DECLARED_METHODS);

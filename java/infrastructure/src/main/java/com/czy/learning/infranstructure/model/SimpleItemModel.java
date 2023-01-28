@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 @EqualsAndHashCode
@@ -18,9 +19,11 @@ public class SimpleItemModel<T> implements TreeNode<T> {
     private T value;
     private String parentLabel;
     private T parentValue;
-    private int sort;
     private Map<String, Object> extra;
     private List<SimpleItemModel<T>> children;
+
+    @Builder.Default
+    private Integer sort = 0;
 
     public static <T> SimpleItemModel<T> of(String label, T value, String parentLabel, T parentValue) {
         return SimpleItemModel.<T>builder()
@@ -60,5 +63,13 @@ public class SimpleItemModel<T> implements TreeNode<T> {
     @Override
     public void setChildren(List children) {
         this.children = children;
+    }
+
+    public static <T> String translateByValue(List<SimpleItemModel<T>> list, T value) {
+        return list.stream().filter(t -> t.getValue().equals(value)).map(SimpleItemModel::getLabel).findFirst().orElse(null);
+    }
+
+    public static <T> List<String> translateByValues(List<SimpleItemModel<T>> list, List<T> values) {
+        return list.stream().filter(t -> values.contains(t.getValue())).map(SimpleItemModel::getLabel).collect(Collectors.toList());
     }
 }

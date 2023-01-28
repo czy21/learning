@@ -16,5 +16,7 @@ public interface TreeNode<T> {
 
     void setChildren(List<? extends TreeNode<T>> children);
 
-    int getSort();
+    default Integer getSort() {
+        return 0;
+    }
 }
