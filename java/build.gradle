@@ -37,23 +37,23 @@ subprojects {
             dependency 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.6'
             dependency "com.baomidou:mybatis-plus-boot-starter:3.5.3.1"
 
-            dependency("org.redisson:redisson-spring-boot-starter:3.19.1") {
+            dependency("org.redisson:redisson-spring-boot-starter:3.19.2") {
                 exclude "org.springframework.boot:spring-boot-starter-web"
             }
 
-            dependency "io.minio:minio:8.5.0"
+            dependency "io.minio:minio:8.5.1"
             dependency "com.xuxueli:xxl-job:2.3.1"
             dependency "org.mapstruct:mapstruct:1.4.2.Final"
             dependency "org.mapstruct:mapstruct-processor:1.4.2.Final"
             dependency "org.projectlombok:lombok-mapstruct-binding:0.2.0"
 
-            dependency "io.micrometer:micrometer-registry-prometheus:1.10.2"
+            dependency "io.micrometer:micrometer-registry-prometheus:1.10.3"
             dependency "io.github.mweirauch:micrometer-jvm-extras:0.2.2"
 
-            dependency "com.alibaba:easyexcel:3.1.5"
-            dependency "org.apache.pulsar:pulsar-client:2.10.3"
+            dependency "com.alibaba:easyexcel:3.2.0"
+            dependency "org.apache.pulsar:pulsar-client:2.11.0"
 
-            dependency "org.openjdk.jol:jol-core:0.9"
+            dependency "org.openjdk.jol:jol-core:0.16"
             dependency "cglib:cglib:3.3.0"
 
         }
