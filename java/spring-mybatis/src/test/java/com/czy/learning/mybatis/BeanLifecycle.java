@@ -1,4 +1,4 @@
-package com.czy.learning.db;
+package com.czy.learning.mybatis;
 
 import org.junit.jupiter.api.Test;
 

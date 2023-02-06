@@ -1,7 +1,6 @@
-package com.czy.learning.db;
+package com.czy.learning.mybatis;
 
 
-import com.czy.learning.mybatis.MybatisApplication;
 import com.czy.learning.mybatis.mapper.UserMapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

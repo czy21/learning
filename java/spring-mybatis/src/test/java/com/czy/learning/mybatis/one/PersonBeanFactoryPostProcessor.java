@@ -1,4 +1,4 @@
-package com.czy.learning.db.one;
+package com.czy.learning.mybatis.one;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;

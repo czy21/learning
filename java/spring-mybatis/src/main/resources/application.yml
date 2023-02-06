@@ -1,21 +1,16 @@
+db-host:
+db-user:
+db-pass: 
 server:
   port: 3306
 
 spring:
   application:
-    name: learning-spring-db
-  config:
-    import: optional:consul:consul.cluster.com:80
-  cloud:
-    consul:
-      config:
-        format: YAML
-        prefixes:
-          - "dev-learning-spring-common"
+    name: learning-mybatis
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${db-host}:3306/erp_local?user=${db-user}&password=${db-pass}&serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false&useUnicode=true&useCursorFetch=true&rewriteBatchedStatements=true
+    url: jdbc:mysql://${db-host}:3306/demo?user=${db-user}&password=${db-pass}&serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false&useUnicode=true&useCursorFetch=true&rewriteBatchedStatements=true
     hikari:
       minimum-idle: 5
       maximum-pool-size: 20
