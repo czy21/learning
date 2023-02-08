@@ -43,8 +43,8 @@ subprojects {
 
             dependency "io.minio:minio:8.5.1"
             dependency "com.xuxueli:xxl-job:2.3.1"
-            dependency "org.mapstruct:mapstruct:1.4.2.Final"
-            dependency "org.mapstruct:mapstruct-processor:1.4.2.Final"
+            dependency "org.mapstruct:mapstruct:1.5.3.Final"
+            dependency "org.mapstruct:mapstruct-processor:1.5.3.Final"
             dependency "org.projectlombok:lombok-mapstruct-binding:0.2.0"
 
             dependency "io.micrometer:micrometer-registry-prometheus:1.10.3"
