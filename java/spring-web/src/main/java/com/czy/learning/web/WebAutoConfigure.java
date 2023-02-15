@@ -1,7 +1,5 @@
 package com.czy.learning.web;
 
-import com.czy.learning.web.advice.ExceptionAdvice;
-import com.czy.learning.web.advice.ResponseAdvice;
 import com.czy.learning.web.feign.FeignConfigure;
 import com.czy.learning.web.json.JacksonConfigure;
 import com.czy.learning.web.service.OptionServiceImpl;
@@ -11,6 +9,7 @@ import io.github.mweirauch.micrometer.jvm.extras.ProcessThreadMetrics;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -31,10 +30,9 @@ import java.util.List;
 @Import({
         OptionServiceImpl.class,
         JacksonConfigure.class,
-        FeignConfigure.class,
-        ExceptionAdvice.class,
-        ResponseAdvice.class
+        FeignConfigure.class
 })
+@ComponentScan(basePackageClasses = WebAutoConfigure.class)
 public class WebAutoConfigure implements WebMvcConfigurer {
 
     private final ObjectMapper objectMapper;
