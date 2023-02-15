@@ -1,5 +1,9 @@
 package com.czy.learning.web;
 
+import com.czy.learning.web.advice.ExceptionAdvice;
+import com.czy.learning.web.advice.ResponseAdvice;
+import com.czy.learning.web.feign.FeignConfigure;
+import com.czy.learning.web.json.JacksonConfigure;
 import com.czy.learning.web.service.OptionServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.mweirauch.micrometer.jvm.extras.ProcessMemoryMetrics;
@@ -24,7 +28,13 @@ import java.util.List;
 
 @EnableWebMvc
 @Configuration
-@Import({OptionServiceImpl.class})
+@Import({
+        OptionServiceImpl.class,
+        JacksonConfigure.class,
+        FeignConfigure.class,
+        ExceptionAdvice.class,
+        ResponseAdvice.class
+})
 public class WebAutoConfigure implements WebMvcConfigurer {
 
     private final ObjectMapper objectMapper;
