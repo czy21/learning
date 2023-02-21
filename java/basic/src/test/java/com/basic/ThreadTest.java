@@ -1,14 +1,18 @@
 package com.basic;
 
 import lombok.Data;
+import org.apache.commons.lang3.time.StopWatch;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 public class ThreadTest {
@@ -89,11 +93,38 @@ public class ThreadTest {
         new Thread(() -> {
             o2.setName("我是");
             Object1.tl.set(o2);
-            System.out.println( Object1.tl.get().name);
+            System.out.println(Object1.tl.get().name);
             Object1.tl.remove();
         }).start();
 
 //        o1.getTl().remove();
         System.out.println("ff");
+    }
+
+    // get async task all result
+    @Test
+    public void getAsyncTaskAllResult() {
+        Map<String, Object> ret = new HashMap<>();
+        List<CompletableFuture<Map<String, Object>>> futures = IntStream.range(0, 50)
+                .mapToObj(t -> {
+                    return CompletableFuture.<Map<String, Object>>supplyAsync(() -> {
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        System.out.println(Thread.currentThread());
+                        return Map.of("name" + t, t);
+                    });
+                }).toList();
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[]{}))
+                .thenApply(v -> futures.stream().map(CompletableFuture::join).collect(Collectors.toList())).join()
+                .forEach(ret::putAll);
+        stopWatch.stop();
+        System.out.println(stopWatch.getTime(TimeUnit.SECONDS));
+        System.out.println(ret);
+        System.out.println(ret.size());
     }
 }
