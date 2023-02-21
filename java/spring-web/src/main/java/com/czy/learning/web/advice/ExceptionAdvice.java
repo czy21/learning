@@ -3,18 +3,20 @@ package com.czy.learning.web.advice;
 
 import com.czy.learning.infranstructure.exception.BusinessException;
 import com.czy.learning.web.controller.BaseController;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestControllerAdvice
+@ControllerAdvice(assignableTypes = BaseController.class)
 public class ExceptionAdvice {
 
     public static final String UN_KNOW_SERVER_ERROR = "UN_KNOW_SERVER_ERROR";
 
+    @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public Map<String, Object> exceptionHandler(Exception e) {
         Map<String, Object> result = new HashMap<>();
