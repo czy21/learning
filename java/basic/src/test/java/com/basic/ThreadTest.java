@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,20 +49,15 @@ public class ThreadTest {
 
     @Test
     public void pool2() throws InterruptedException {
-        List<String> strs = new ArrayList<>();
-        LocalDateTime loopStartTime = LocalDateTime.now();
-        for (int i = 0; i < 10; i++) {
-            strs.add(Integer.toString(i + 1));
-            Thread.sleep(100);
-        }
-        LocalDateTime loopEndTime = LocalDateTime.now();
-        System.out.println("loop timeout: " + Duration.between(loopStartTime, loopEndTime).toMillis());
-        ExecutorService pool = new ThreadPoolExecutor(12, 12,
-                0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<>());
-
+        List<String> strs = IntStream.range(0, 20).mapToObj(Integer::toString).toList();
+        ExecutorService pool = new ThreadPoolExecutor(
+                12,
+                12,
+                0L,
+                TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>()
+        );
         LocalDateTime concurrentStartTime = LocalDateTime.now();
-
         List<CompletableFuture<String>> ps = strs.stream().map(t -> CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(300);
@@ -72,15 +66,15 @@ public class ThreadTest {
             }
             System.out.println(Thread.currentThread());
             return t;
-        }, pool)).collect(Collectors.toList());
-        var ret = ps.stream().map(CompletableFuture::join).collect(Collectors.toList());
+        }, pool)).toList();
+        var ret = ps.stream().map(CompletableFuture::join).toList();
         LocalDateTime concurrentEndTime = LocalDateTime.now();
         System.out.println("concurrent timeout: " + Duration.between(concurrentStartTime, concurrentEndTime).toMillis());
         System.out.println(ret);
     }
 
     @Test
-    public void threadLocal1() {
+    public void testThreadLocal1() {
         Object1 o1 = new Object1();
         Object2 o2 = new Object2();
         new Thread(() -> {
