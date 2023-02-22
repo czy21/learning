@@ -34,6 +34,7 @@ subprojects {
             dependency "commons-validator:commons-validator:1.7"
 
             dependency 'com.clickhouse:clickhouse-jdbc:0.3.2'
+            dependency "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2"
             dependency "org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1"
             dependency 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.6'
             dependency "com.baomidou:mybatis-plus-boot-starter:3.5.3.1"
@@ -72,7 +73,7 @@ subprojects {
     }
 
     jar {
-        into("META-INF/maven/${project.group}/${project.name}") {
+        into("META-INF/maven/${project.group}/${archivesBaseName}") {
             from { generatePomFileForMavenJavaPublication }
             rename ".*", "pom.xml"
         }
@@ -81,10 +82,8 @@ subprojects {
             manifest {
                 attributes 'Implementation-Title': archiveBaseName
                 attributes 'Implementation-Version': archiveVersion
-                attributes 'Built-Tool': "gradle-" + gradle.gradleVersion
-                attributes 'Build-OS': System.getProperty("os.name")
                 attributes 'Built-By': System.getProperty("user.name")
-                attributes 'Build-Jdk': System.getProperty("java.version")
+                attributes 'Build-Jdk-Spec': System.getProperty("java.version")
                 attributes 'Build-Time': LocalDateTime.now().format("yyyy-MM-dd HH:mm:ss")
             }
         }
