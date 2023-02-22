@@ -23,7 +23,6 @@ include("spring-pulsar")
 include("spring-mybatis")
 include("spring-kafka")
 include("spring-hbase")
-include("spring-gateway")
 include("spring-graphql")
 include("spring-quartz")
 
