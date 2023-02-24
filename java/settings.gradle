@@ -5,11 +5,11 @@ pluginManagement {
     }
 }
 
+include("gradle-plugin")
+
 include("basic")
 include("domain")
 include("infrastructure")
-
-include("spring-demo")
 
 // spring
 include("spring-bom")
@@ -25,12 +25,9 @@ include("spring-kafka")
 include("spring-hbase")
 include("spring-graphql")
 include("spring-quartz")
-
+include('spring-xxl-job')
 
 // flink
 include("flink-common")
 include("flink-task")
-include('spring-xxl-job')
-
-include("gradle-plugin")
 
