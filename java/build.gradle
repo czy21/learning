@@ -107,24 +107,13 @@ subprojects {
         }
     }
 
-    if (name.startsWith("spring") && name != bomName) {
-        apply plugin: "spring.build"
-    }
-    if (name.startsWith("flink")) {
-        apply plugin: "flink.build"
-    }
     if (name != bomName) {
-        apply plugin: CommonDep
-    }
-}
-
-class CommonDep implements Plugin<Project> {
-    void apply(Project p) {
-        p.dependencies {
-            implementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
-            annotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
-            testImplementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
-            testAnnotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
+        apply plugin: "common.build"
+        if (name.startsWith("spring")) {
+            apply plugin: "spring.build"
+        }
+        if (name.startsWith("flink")) {
+            apply plugin: "flink.build"
         }
     }
 }
