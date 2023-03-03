@@ -23,31 +23,54 @@ public class ExceptionAdvice {
     private static final Logger logger = LoggerFactory.getLogger(ExceptionAdvice.class);
 
     public static final String UN_KNOW_SERVER_ERROR = "UN_KNOW_SERVER_ERROR";
-
     public static final String METHOD_ARGUMENT_ERROR = "METHOD_ARGUMENT_ERROR";
 
-    @ResponseBody
-    @ExceptionHandler(value = Exception.class)
-    public Map<String, Object> exceptionHandler(Exception e) {
+    private Map<String, Object> createErrorResponse(ErrorModel errorObj) {
         Map<String, Object> result = new HashMap<>();
         result.put(BaseController.RESPONSE_TIMESTAMP_KEY, LocalDateTime.now());
-        Map<String, Object> error = new HashMap<>();
-        error.put("code", e instanceof BusinessException ? ((BusinessException) e).getCode() : UN_KNOW_SERVER_ERROR);
-        error.put("message", e.getMessage());
-        result.put(BaseController.RESPONSE_ERROR_KEY, error);
-        logger.error("", e);
+        result.put(BaseController.RESPONSE_ERROR_KEY, errorObj);
         return result;
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
+    @ExceptionHandler(value = Exception.class)
+    public Map<String, Object> handleException(Exception e) {
+        logger.error(e.getMessage(), e);
+        ErrorModel em = new ErrorModel();
+        em.setCode(e instanceof BusinessException ? ((BusinessException) e).getCode() : UN_KNOW_SERVER_ERROR);
+        em.setMessage(e.getMessage());
+        return createErrorResponse(em);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         List<ObjectError> objectErrors = e.getBindingResult().getAllErrors();
-        String errorStr = objectErrors.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(";"));
-        Map<String, Object> ret = new HashMap<>();
-        ret.put("code", METHOD_ARGUMENT_ERROR);
-        ret.put("message", errorStr);
-        return ret;
+        String message = objectErrors.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(";"));
+        ErrorModel em = new ErrorModel();
+        em.setCode(METHOD_ARGUMENT_ERROR);
+        em.setMessage(message);
+        return createErrorResponse(em);
+    }
 
+    private static class ErrorModel {
+        private String code;
+        private String message;
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
     }
 }
