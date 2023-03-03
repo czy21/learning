@@ -3,7 +3,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' apply false
 //    id 'com.learning.gradle.springboot' version "3.0.0" apply false
 }
-
+def bomName = "spring-bom"
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
@@ -36,7 +36,7 @@ subprojects {
             dependency 'com.clickhouse:clickhouse-jdbc:0.3.2'
             dependency "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2"
             dependency "org.springdoc:springdoc-openapi-starter-webflux-ui:2.0.2"
-            dependency ("com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:4.0.0"){
+            dependency("com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:4.0.0") {
                 exclude 'org.webjars:swagger-ui'
             }
             dependency "org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1"
@@ -63,13 +63,6 @@ subprojects {
             dependency "cglib:cglib:3.3.0"
 
         }
-    }
-
-    dependencies {
-        implementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
-        annotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
-        testImplementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
-        testAnnotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
     }
 
     test {
@@ -114,10 +107,24 @@ subprojects {
         }
     }
 
-    if (name.startsWith("spring")) {
+    if (name.startsWith("spring") && name != bomName) {
         apply plugin: "spring.build"
     }
     if (name.startsWith("flink")) {
         apply plugin: "flink.build"
+    }
+    if (name != bomName) {
+        apply plugin: CommonDep
+    }
+}
+
+class CommonDep implements Plugin<Project> {
+    void apply(Project p) {
+        p.dependencies {
+            implementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
+            annotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
+            testImplementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
+            testAnnotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
+        }
     }
 }
