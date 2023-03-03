@@ -106,14 +106,16 @@ subprojects {
             }
         }
     }
-
+    List<String> applyPlugins = []
     if (name != bomName) {
-        apply plugin: "common.build"
+        applyPlugins.add("common.build")
         if (name.startsWith("spring")) {
-            apply plugin: "spring.build"
+            applyPlugins.add("spring.build")
         }
         if (name.startsWith("flink")) {
-            apply plugin: "flink.build"
+            applyPlugins.add("flink.build")
         }
     }
+    logger.info("${project.name} apply plugins: ${applyPlugins}")
+    applyPlugins.forEach { t -> project.plugins.apply(t) }
 }
