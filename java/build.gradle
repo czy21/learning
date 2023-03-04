@@ -108,7 +108,6 @@ subprojects {
     }
     List<String> applyPlugins = []
     if (name != bomName) {
-        applyPlugins.add("common.build")
         if (name.startsWith("spring")) {
             applyPlugins.add("spring.build")
         }
