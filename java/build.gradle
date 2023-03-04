@@ -43,17 +43,15 @@ subprojects {
             dependency 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.6'
             dependency "com.baomidou:mybatis-plus-boot-starter:3.5.3.1"
 
-            dependency("org.redisson:redisson-spring-boot-starter:3.19.2") {
-                exclude "org.springframework.boot:spring-boot-starter-web"
-            }
+            dependency "org.redisson:redisson-spring-boot-starter:3.20.0"
 
-            dependency "io.minio:minio:8.5.1"
+            dependency "io.minio:minio:8.5.2"
             dependency "com.xuxueli:xxl-job:2.3.1"
             dependency "org.mapstruct:mapstruct:1.5.3.Final"
             dependency "org.mapstruct:mapstruct-processor:1.5.3.Final"
             dependency "org.projectlombok:lombok-mapstruct-binding:0.2.0"
 
-            dependency "io.micrometer:micrometer-registry-prometheus:1.10.3"
+            dependency "io.micrometer:micrometer-registry-prometheus:1.10.4"
             dependency "io.github.mweirauch:micrometer-jvm-extras:0.2.2"
 
             dependency "com.alibaba:easyexcel:3.2.0"
