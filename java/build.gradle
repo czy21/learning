@@ -70,7 +70,7 @@ subprojects {
     jar {
         into("META-INF/maven/${project.group}/${archivesBaseName}") {
             from { generatePomFileForMavenJavaPublication }
-            rename ".*", "pom.xml"
+            rename "pom-default.xml", "pom.xml"
         }
 
         afterEvaluate {
@@ -91,7 +91,6 @@ subprojects {
     publishing {
         publications {
             mavenJava(MavenPublication) {
-                artifactId = archivesBaseName
                 from components.java
                 versionMapping {
                     usage('java-api') {
@@ -100,6 +99,12 @@ subprojects {
                     usage('java-runtime') {
                         fromResolutionResult()
                     }
+                }
+                afterEvaluate {
+                    artifactId = archivesBaseName
+                }
+                pom {
+
                 }
             }
         }
