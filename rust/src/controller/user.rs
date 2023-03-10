@@ -1,8 +1,8 @@
-use actix_web::{get, post, web, Responder, Result, Scope};
-use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
 use std::collections::HashMap;
-use std::iter::Map;
+
+use actix_web::{get, post, Responder, Result, Scope, web};
+use serde::{Deserialize, Serialize};
+use serde_json::Value;
 
 pub fn controller() -> Scope {
     return web::scope("user")

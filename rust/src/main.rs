@@ -1,6 +1,6 @@
-pub mod controller;
+use actix_web::{App, HttpServer};
 
-use actix_web::{App, HttpServer, web};
+pub mod controller;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
