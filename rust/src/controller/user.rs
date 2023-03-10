@@ -19,7 +19,7 @@ struct User {
 }
 
 #[post("/post1")]
-pub async fn post1(param: web::Json<HashMap<String, Value>>) -> Result<impl Responder> {
+async fn post1(param: web::Json<HashMap<String, Value>>) -> Result<impl Responder> {
     let _name = param.get("name").unwrap().as_str().unwrap().to_string();
     let _age = param.get("age").unwrap().as_u64().unwrap();
     let _extra = param.get("extra").unwrap().as_object().unwrap();
