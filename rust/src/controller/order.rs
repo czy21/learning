@@ -1,15 +1,8 @@
-use actix_web::{get, post, web, Responder, Result, Scope};
+use actix_web::{get, post, web, Responder, Result};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::collections::HashMap;
 use std::iter::Map;
-
-pub fn controller() -> Scope {
-    return web::scope("user")
-        .service(post1)
-        .service(get1)
-        .service(detail);
-}
 
 #[derive(Serialize, Deserialize)]
 struct User {
@@ -18,7 +11,7 @@ struct User {
     extra: HashMap<String, Value>,
 }
 
-#[post("/post1")]
+#[post("/user/post1")]
 pub async fn post1(param: web::Json<HashMap<String, Value>>) -> Result<impl Responder> {
     let _name = param.get("name").unwrap().as_str().unwrap().to_string();
     let _age = param.get("age").unwrap().as_u64().unwrap();
@@ -34,7 +27,7 @@ pub async fn post1(param: web::Json<HashMap<String, Value>>) -> Result<impl Resp
     }))
 }
 
-#[get("/get1")]
+#[get("/user/get1")]
 pub async fn get1(query: web::Query<HashMap<String, Value>>) -> Result<impl Responder> {
     let _name: String = query.get("name").unwrap().as_str().unwrap().to_string();
     let _age: u64 = query.get("age").unwrap().as_str().unwrap().parse::<u64>().unwrap();
@@ -45,7 +38,7 @@ pub async fn get1(query: web::Query<HashMap<String, Value>>) -> Result<impl Resp
     }))
 }
 
-#[get("/{name}")]
+#[get("/user/{name}")]
 pub async fn detail(name: web::Path<String>) -> Result<impl Responder> {
     Ok(web::Json(User {
         name: name.to_string(),
