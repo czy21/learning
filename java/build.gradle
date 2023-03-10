@@ -8,16 +8,11 @@ subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'compile.build'
 
     group = 'com.czy'
     archivesBaseName = "learning-${project.name}"
     version = '3.0.0-SNAPSHOT'
-    targetCompatibility = JavaVersion.VERSION_17
-    sourceCompatibility = JavaVersion.VERSION_17
-
-    tasks.withType(JavaCompile) {
-        options.encoding = 'UTF-8'
-    }
 
     dependencyManagement {
         generatedPomCustomization {

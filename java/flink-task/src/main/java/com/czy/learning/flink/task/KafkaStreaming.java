@@ -22,7 +22,7 @@ public class KafkaStreaming {
 
         KafkaSource<Map<String, Object>> source = KafkaSource.<Map<String, Object>>builder()
                 .setBootstrapServers("192.168.2.18:9092,192.168.2.18:9093")
-                .setTopics(QueueConstant.GLOBAL_QUEUE_TOPIC1)
+                .setTopics("input5Topic")
                 .setGroupId(QueueConstant.GLOBAL_QUEUE_GROUP1)
                 .setStartingOffsets(OffsetsInitializer.latest())
                 .setDeserializer(KafkaRecordDeserializationSchema.valueOnly(MapDeserializer.class))
