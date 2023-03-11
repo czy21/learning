@@ -1,6 +1,3 @@
-use std::fs;
-use std::net::SocketAddr;
-
 use actix_web::{App, HttpServer};
 
 pub mod controller;
