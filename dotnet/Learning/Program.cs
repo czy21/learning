@@ -9,6 +9,7 @@ builder.Services.AddSwaggerGen();
 if (!builder.Environment.IsDevelopment())
 {
     var configBasePath = Environment.GetEnvironmentVariable("APP_CONF");
+    Console.WriteLine(configBasePath);
     if (configBasePath != null)
     {
         builder.Configuration.SetBasePath(configBasePath);
