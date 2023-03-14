@@ -6,16 +6,6 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-if (!builder.Environment.IsDevelopment())
-{
-    var configBasePath = Environment.GetEnvironmentVariable("APP_CONF");
-    Console.WriteLine(configBasePath);
-    if (configBasePath != null)
-    {
-        builder.Configuration.SetBasePath(configBasePath);
-        builder.Configuration.AddJsonFile("appsettings.json",false);
-    }
-}
 
 var app = builder.Build();
 var swaggerEnable = app.Configuration.GetValue<bool>("swagger:enable");
