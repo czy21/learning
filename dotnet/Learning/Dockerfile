@@ -1,2 +1,2 @@
 FROM registry.cluster.com/library/aspnet7
-COPY ./build /app
+COPY ./build/Learning ${API_FILE}
