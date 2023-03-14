@@ -13,6 +13,7 @@ if (!builder.Environment.IsDevelopment())
     if (configBasePath != null)
     {
         builder.Configuration.SetBasePath(configBasePath);
+        builder.Configuration.AddJsonFile("appsettings.json",false);
     }
 }
 
