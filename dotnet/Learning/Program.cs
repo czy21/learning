@@ -8,10 +8,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-var configuration = app.Configuration;
-var swaggerEnable = Convert.ToBoolean(configuration["swagger:enable"]);
 
-// Configure the HTTP request pipeline.
+var swaggerEnable = app.Configuration.GetValue<bool>("swagger:enable");
 if (swaggerEnable)
 {
     app.UseSwagger();
