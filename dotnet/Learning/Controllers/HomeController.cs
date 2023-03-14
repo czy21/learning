@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Learning.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Learning.Controllers;
 
