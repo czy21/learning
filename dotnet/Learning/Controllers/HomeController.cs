@@ -1,7 +1,6 @@
 ﻿using Consul;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
+using YamlDotNet.Serialization;
 
 namespace Learning.Controllers;
 
@@ -21,8 +20,10 @@ public class HomeController : Controller
     {
         var dic = new Dictionary<string, object> { { "name", "czy" } };
         var list = new List<Dictionary<string, object>> { dic };
-        var kvPair = _consulClient.KV.Get("demo-common/application/data").Result.Response;
-        var p=kvPair.Value.GetValue(0);
+        var kvBytes = _consulClient.KV.Get("demo-common/application/data").Result.Response.Value;
+        var kvStr = System.Text.Encoding.UTF8.GetString(kvBytes);
+        var kvObj = new Deserializer().Deserialize<Dictionary<object, object>>(new StringReader(kvStr));
+        // var serverPort = ((Dictionary<object, object>)kvObj["server"])["port"];
         return Task.FromResult(list);
     }
 
