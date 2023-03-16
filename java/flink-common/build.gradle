@@ -1,5 +1,6 @@
 dependencies {
     flinkShadowJar project(":domain")
+    flinkShadowJar "org.apache.flink:flink-json:${flinkVersion}"
     flinkShadowJar "org.apache.flink:flink-connector-kafka:${flinkVersion}"
     flinkShadowJar "org.apache.flink:flink-connector-pulsar:${flinkVersion}"
     flinkShadowJar "org.apache.flink:flink-connector-jdbc:${flinkVersion}"
