@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using YamlDotNet.Serialization;
 
-namespace Learning.Controllers;
+namespace Demo.Portal.Controllers;
 
 public class HomeController : Controller
 {
