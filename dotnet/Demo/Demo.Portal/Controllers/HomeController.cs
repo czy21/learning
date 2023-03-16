@@ -1,4 +1,6 @@
 ﻿using Consul;
+using Demo.Application.Service;
+using Demo.Domain;
 using Microsoft.AspNetCore.Mvc;
 using YamlDotNet.Serialization;
 
@@ -8,11 +10,13 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IConsulClient _consulClient;
+    private readonly IUserService _userService;
 
-    public HomeController(ILogger<HomeController> logger, IConsulClient consulClient)
+    public HomeController(ILogger<HomeController> logger, IConsulClient consulClient, IUserService userService)
     {
         _logger = logger;
         _consulClient = consulClient;
+        _userService = userService;
     }
 
     [HttpGet("list")]
@@ -33,5 +37,11 @@ public class HomeController : Controller
         var dic = new Dictionary<string, object>() { { "name", "ha" } };
         _logger.LogInformation("hahaha");
         return Task.FromResult(new List<Dictionary<string, object>> { dic });
+    }
+
+    [HttpGet(template: "detail1")]
+    public Task<UserPO> Detail1()
+    {
+        return Task.FromResult(_userService.FindById(1));
     }
 }
