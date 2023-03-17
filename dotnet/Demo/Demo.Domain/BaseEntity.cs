@@ -4,7 +4,7 @@ namespace Demo.Domain
 {
     public class BaseEntity<TId, TUser>
     {
-        [Column(name: "id")] public TId Id { get; set; }
+        [Column(name: "id")] public TId? Id { get; set; }
         [Column(name: "create_time")] public DateTime CreateTime { get; set; }
         [Column(name: "update_time")] public DateTime UpdateTime { get; set; }
         [Column(name: "create_user")] public TUser? CreateUser { get; set; }
