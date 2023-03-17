@@ -2,7 +2,7 @@ using Demo.Domain;
 
 namespace Demo.Repository;
 
-public interface IUserRepository:IRepositoryBase
+public interface IUserRepository
 {
     UserPO SelectById(long id);
 }

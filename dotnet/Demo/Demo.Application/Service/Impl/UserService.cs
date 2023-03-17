@@ -3,6 +3,7 @@ using Demo.Repository;
 
 namespace Demo.Application.Service.Impl;
 
+[Framework.Service]
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
