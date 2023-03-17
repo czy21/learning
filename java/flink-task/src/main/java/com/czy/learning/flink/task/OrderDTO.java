@@ -1,16 +1,18 @@
 package com.czy.learning.flink.task;
 
 public class OrderDTO {
-    private Long orderNo;
+
+
+    private Long productId;
     private Integer count;
     private Long time;
 
-    public Long getOrderNo() {
-        return orderNo;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setOrderNo(Long orderNo) {
-        this.orderNo = orderNo;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public Integer getCount() {
