@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Consul;
@@ -15,7 +16,10 @@ builder.Host.ConfigureContainer<ContainerBuilder>(b =>
 builder.Services.AddSingleton<IConsulClient>(consul =>
     new ConsulClient(consulConfig => { consulConfig.Address = new Uri("http://consul.cluster.com"); })
 );
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
