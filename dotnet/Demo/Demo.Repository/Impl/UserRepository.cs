@@ -1,12 +1,19 @@
 using Demo.Domain;
 
+
 namespace Demo.Repository.Impl;
 
-[Framework.Repository]
 public class UserRepository : IUserRepository
 {
-    public UserPO SelectById(long id)
+    private readonly DbMasterContext _dbContext;
+
+    public UserRepository(DbMasterContext dbContext)
     {
-        return new UserPO();
+        _dbContext = dbContext;
+    }
+
+    public UserPO? SelectById(string id)
+    {
+        return _dbContext.Users.FirstOrDefault(t => t!.Id == id);
     }
 }

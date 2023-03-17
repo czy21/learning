@@ -40,8 +40,8 @@ public class UserController : Controller
     }
 
     [HttpGet(template: "detail1")]
-    public Task<UserPO> Detail1()
+    public Task<UserPO?> Detail1()
     {
-        return Task.FromResult(_userService.FindById(1));
+        return Task.FromResult(_userService.FindById("8d9ab777-568c-11ed-8985-0242ac120010"));
     }
 }

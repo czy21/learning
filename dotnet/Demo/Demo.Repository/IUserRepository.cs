@@ -4,5 +4,5 @@ namespace Demo.Repository;
 
 public interface IUserRepository:IRepositoryBase
 {
-    UserPO SelectById(long id);
+    UserPO? SelectById(string id);
 }

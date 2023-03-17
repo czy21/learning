@@ -13,7 +13,7 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public UserPO FindById(long id)
+    public UserPO? FindById(string id)
     {
         return _userRepository.SelectById(id);
     }

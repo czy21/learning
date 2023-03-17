@@ -4,6 +4,7 @@ using Autofac.Extensions.DependencyInjection;
 using Consul;
 using Demo.Application;
 using Demo.Repository;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -11,6 +12,10 @@ builder.Host.ConfigureContainer<ContainerBuilder>(b =>
 {
     b.RegisterModule<RepositoryRegister>();
     b.RegisterModule<ServiceRegister>();
+});
+builder.Services.AddDbContext<DbMasterContext>(opt =>
+{
+    opt.UseMySQL(builder.Configuration.GetConnectionString("Master") ?? string.Empty);
 });
 // Add services to the container.
 builder.Services.AddSingleton<IConsulClient>(consul =>
