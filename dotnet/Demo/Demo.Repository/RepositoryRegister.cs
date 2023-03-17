@@ -1,4 +1,3 @@
-using System.Reflection;
 using Autofac;
 using Module = Autofac.Module;
 
@@ -9,7 +8,7 @@ public class RepositoryRegister : Module
     protected override void Load(ContainerBuilder builder)
     {
         builder.RegisterAssemblyTypes(ThisAssembly)
-            .Where(t => t.GetCustomAttribute<Framework.Repository>() != null)
+            .Where(t => t.IsAssignableTo<IRepositoryBase>())
             .AsImplementedInterfaces()
             .InstancePerLifetimeScope();
     }

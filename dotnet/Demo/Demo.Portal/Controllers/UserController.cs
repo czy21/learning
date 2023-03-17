@@ -6,13 +6,13 @@ using YamlDotNet.Serialization;
 
 namespace Demo.Portal.Controllers;
 
-public class HomeController : Controller
+public class UserController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<UserController> _logger;
     private readonly IConsulClient _consulClient;
     private readonly IUserService _userService;
 
-    public HomeController(ILogger<HomeController> logger, IConsulClient consulClient, IUserService userService)
+    public UserController(ILogger<UserController> logger, IConsulClient consulClient, IUserService userService)
     {
         _logger = logger;
         _consulClient = consulClient;
