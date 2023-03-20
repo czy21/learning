@@ -1,5 +1,4 @@
 using Autofac;
-using Module = Autofac.Module;
 
 namespace Demo.Repository;
 
