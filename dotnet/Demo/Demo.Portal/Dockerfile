@@ -1,3 +1,3 @@
 FROM registry.cluster.com/library/aspnet7
 COPY ./build/ /app/
-RUN mv /app/Demo.Portal.dll /app/api.dll
+ENTRYPOINT ["dotnet","/app/Demo.Portal.dll"]
