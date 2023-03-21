@@ -1,3 +1,3 @@
 FROM registry.cluster.com/library/aspnet7
 COPY ./build/ /app/
-RUN mv /app/Demo.Portal ${API_FILE}
+ENV API_FILE=/app/Demo.Portal.dll
