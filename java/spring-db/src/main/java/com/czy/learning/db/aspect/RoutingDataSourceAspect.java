@@ -1,10 +1,8 @@
 package com.czy.learning.db.aspect;
 
 
-import com.czy.learning.db.datasource.DynamicDataSourceContext;
 import com.czy.learning.db.annotation.DS;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.logging.LogFactory;
+import com.czy.learning.db.datasource.DynamicDataSourceContext;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;

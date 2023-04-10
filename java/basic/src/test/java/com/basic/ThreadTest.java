@@ -1,14 +1,17 @@
 package com.basic;
 
 import lombok.Data;
+import org.apache.commons.lang3.time.StopWatch;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 public class ThreadTest {
@@ -46,20 +49,15 @@ public class ThreadTest {
 
     @Test
     public void pool2() throws InterruptedException {
-        List<String> strs = new ArrayList<>();
-        LocalDateTime loopStartTime = LocalDateTime.now();
-        for (int i = 0; i < 10; i++) {
-            strs.add(Integer.toString(i + 1));
-            Thread.sleep(100);
-        }
-        LocalDateTime loopEndTime = LocalDateTime.now();
-        System.out.println("loop timeout: " + Duration.between(loopStartTime, loopEndTime).toMillis());
-        ExecutorService pool = new ThreadPoolExecutor(12, 12,
-                0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<>());
-
+        List<String> strs = IntStream.range(0, 20).mapToObj(Integer::toString).toList();
+        ExecutorService pool = new ThreadPoolExecutor(
+                12,
+                12,
+                0L,
+                TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>()
+        );
         LocalDateTime concurrentStartTime = LocalDateTime.now();
-
         List<CompletableFuture<String>> ps = strs.stream().map(t -> CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(300);
@@ -68,15 +66,15 @@ public class ThreadTest {
             }
             System.out.println(Thread.currentThread());
             return t;
-        }, pool)).collect(Collectors.toList());
-        var ret = ps.stream().map(CompletableFuture::join).collect(Collectors.toList());
+        }, pool)).toList();
+        var ret = ps.stream().map(CompletableFuture::join).toList();
         LocalDateTime concurrentEndTime = LocalDateTime.now();
         System.out.println("concurrent timeout: " + Duration.between(concurrentStartTime, concurrentEndTime).toMillis());
         System.out.println(ret);
     }
 
     @Test
-    public void threadLocal1() {
+    public void testThreadLocal1() {
         Object1 o1 = new Object1();
         Object2 o2 = new Object2();
         new Thread(() -> {
@@ -89,11 +87,38 @@ public class ThreadTest {
         new Thread(() -> {
             o2.setName("我是");
             Object1.tl.set(o2);
-            System.out.println( Object1.tl.get().name);
+            System.out.println(Object1.tl.get().name);
             Object1.tl.remove();
         }).start();
 
 //        o1.getTl().remove();
         System.out.println("ff");
+    }
+
+    // get async task all result
+    @Test
+    public void getAsyncTaskAllResult() {
+        Map<String, Object> ret = new HashMap<>();
+        List<CompletableFuture<Map<String, Object>>> futures = IntStream.range(0, 50)
+                .mapToObj(t -> {
+                    return CompletableFuture.<Map<String, Object>>supplyAsync(() -> {
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        System.out.println(Thread.currentThread());
+                        return Map.of("name" + t, t);
+                    });
+                }).toList();
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[]{}))
+                .thenApply(v -> futures.stream().map(CompletableFuture::join).collect(Collectors.toList())).join()
+                .forEach(ret::putAll);
+        stopWatch.stop();
+        System.out.println(stopWatch.getTime(TimeUnit.SECONDS));
+        System.out.println(ret);
+        System.out.println(ret.size());
     }
 }

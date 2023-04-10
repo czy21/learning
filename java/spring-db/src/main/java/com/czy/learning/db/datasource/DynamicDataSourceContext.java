@@ -2,15 +2,17 @@ package com.czy.learning.db.datasource;
 
 
 import com.czy.learning.db.annotation.DS;
-import lombok.SneakyThrows;
 
 public class DynamicDataSourceContext implements AutoCloseable {
     private static final ThreadLocal<String> key = new ThreadLocal<>();
 
-    @SneakyThrows
     public static String get() {
         String key = DynamicDataSourceContext.key.get();
-        return key == null ? (String) DS.class.getMethod("value").getDefaultValue() : key;
+        try {
+            return key == null ? (String) DS.class.getMethod("value").getDefaultValue() : key;
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void put(String key) {

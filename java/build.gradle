@@ -1,9 +1,9 @@
 plugins {
     id 'org.springframework.boot' apply false
-    id 'io.spring.dependency-management' apply false
     id 'com.github.johnrengelman.shadow' apply false
+//    id 'com.learning.gradle.springboot' version "3.0.0" apply false
 }
-
+def bomName = "spring-bom"
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
@@ -12,6 +12,7 @@ subprojects {
     group = 'com.czy'
     archivesBaseName = "learning-${project.name}"
     version = '3.0.0-SNAPSHOT'
+
     targetCompatibility = JavaVersion.VERSION_17
     sourceCompatibility = JavaVersion.VERSION_17
 
@@ -26,6 +27,7 @@ subprojects {
         imports {
             mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAliVersion}"
         }
         dependencies {
             dependency "commons-io:commons-io:2.11.0"
@@ -33,37 +35,35 @@ subprojects {
             dependency "commons-validator:commons-validator:1.7"
 
             dependency 'com.clickhouse:clickhouse-jdbc:0.3.2'
+            dependency "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2"
+            dependency "org.springdoc:springdoc-openapi-starter-webflux-ui:2.0.2"
+            dependency("com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:4.0.0") {
+                exclude 'org.webjars:swagger-ui'
+            }
             dependency "org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1"
             dependency 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.6'
             dependency "com.baomidou:mybatis-plus-boot-starter:3.5.3.1"
 
-            dependency("org.redisson:redisson-spring-boot-starter:3.19.1") {
-                exclude "org.springframework.boot:spring-boot-starter-web"
-            }
+            dependency "org.redisson:redisson-spring-boot-starter:3.20.0"
 
-            dependency "io.minio:minio:8.5.0"
+            dependency "io.minio:minio:8.5.2"
             dependency "com.xuxueli:xxl-job:2.3.1"
-            dependency "org.mapstruct:mapstruct:1.4.2.Final"
-            dependency "org.mapstruct:mapstruct-processor:1.4.2.Final"
+            dependency "org.mapstruct:mapstruct:1.5.3.Final"
+            dependency "org.mapstruct:mapstruct-processor:1.5.3.Final"
             dependency "org.projectlombok:lombok-mapstruct-binding:0.2.0"
 
-            dependency "io.micrometer:micrometer-registry-prometheus:1.10.2"
+            dependency "com.squareup.okhttp3:okhttp:4.10.0"
+
+            dependency "io.micrometer:micrometer-registry-prometheus:1.10.4"
             dependency "io.github.mweirauch:micrometer-jvm-extras:0.2.2"
 
-            dependency "com.alibaba:easyexcel:3.1.5"
-            dependency "org.apache.pulsar:pulsar-client:2.10.3"
+            dependency "com.alibaba:easyexcel:3.2.0"
+            dependency "org.apache.pulsar:pulsar-client:2.11.0"
 
-            dependency "org.openjdk.jol:jol-core:0.9"
+            dependency "org.openjdk.jol:jol-core:0.16"
             dependency "cglib:cglib:3.3.0"
 
         }
-    }
-
-    dependencies {
-        implementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
-        annotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
-        testImplementation "org.mapstruct:mapstruct", "org.projectlombok:lombok"
-        testAnnotationProcessor "org.mapstruct:mapstruct-processor", "org.projectlombok:lombok", "org.projectlombok:lombok-mapstruct-binding"
     }
 
     test {
@@ -71,19 +71,17 @@ subprojects {
     }
 
     jar {
-        into("META-INF/maven/${project.group}/${project.name}") {
+        into("META-INF/maven/${project.group}/${archivesBaseName}") {
             from { generatePomFileForMavenJavaPublication }
-            rename ".*", "pom.xml"
+            rename "pom-default.xml", "pom.xml"
         }
 
         afterEvaluate {
             manifest {
                 attributes 'Implementation-Title': archiveBaseName
                 attributes 'Implementation-Version': archiveVersion
-                attributes 'Built-Tool': "gradle-"+gradle.gradleVersion
-                attributes 'Build-OS': System.getProperty("os.name")
                 attributes 'Built-By': System.getProperty("user.name")
-                attributes 'Build-Jdk': System.getProperty("java.version")
+                attributes 'Build-Jdk-Spec': System.getProperty("java.version")
                 attributes 'Build-Time': LocalDateTime.now().format("yyyy-MM-dd HH:mm:ss")
             }
         }
@@ -96,7 +94,6 @@ subprojects {
     publishing {
         publications {
             mavenJava(MavenPublication) {
-                artifactId = archivesBaseName
                 from components.java
                 versionMapping {
                     usage('java-api') {
@@ -106,14 +103,24 @@ subprojects {
                         fromResolutionResult()
                     }
                 }
+                afterEvaluate {
+                    artifactId = archivesBaseName
+                }
+                pom {
+
+                }
             }
         }
     }
-
-    if (name.startsWith("spring")) {
-        apply plugin: "spring.build"
+    List<String> applyPlugins = []
+    if (name != bomName) {
+        if (name.startsWith("spring")) {
+            applyPlugins.add("spring.build")
+        }
+        if (name.startsWith("flink")) {
+            applyPlugins.add("flink.build")
+        }
     }
-    if (name.startsWith("flink")) {
-        apply plugin: "flink.build"
-    }
+    logger.info("${project.name} apply plugins: ${applyPlugins}")
+    applyPlugins.forEach { t -> project.plugins.apply(t) }
 }

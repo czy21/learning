@@ -1,5 +1,6 @@
 package com.czy.learning.mybatis.controller;
 
+import lombok.Data;
 import org.openjdk.jol.info.GraphLayout;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,5 +27,24 @@ public class GController {
         maps.add(map3);
         System.out.println(GraphLayout.parseInstance(maps).toPrintable());
         return maps;
+    }
+
+    @Data
+    public class Order {
+        private String orderNo;
+        private String status;
+    }
+
+    public static void main(String[] args) {
+
+        List<Order> orders1 = new ArrayList<>();
+        List<Order> orders2 = new ArrayList<>();
+        orders1.forEach(t -> {
+            if (orders2.stream().anyMatch(s -> s.getOrderNo().equals(t))) {
+                t.setStatus("y");
+            }
+        });
+
+
     }
 }

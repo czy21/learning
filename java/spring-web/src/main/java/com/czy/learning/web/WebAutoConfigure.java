@@ -1,13 +1,15 @@
 package com.czy.learning.web;
 
+import com.czy.learning.web.feign.FeignConfigure;
+import com.czy.learning.web.json.JacksonConfigure;
 import com.czy.learning.web.service.OptionServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.mweirauch.micrometer.jvm.extras.ProcessMemoryMetrics;
 import io.github.mweirauch.micrometer.jvm.extras.ProcessThreadMetrics;
 import io.micrometer.core.instrument.MeterRegistry;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -25,15 +27,22 @@ import java.util.List;
 
 @EnableWebMvc
 @Configuration
-@Import({OptionServiceImpl.class})
+@Import({
+        OptionServiceImpl.class,
+        JacksonConfigure.class,
+        FeignConfigure.class
+})
+@ComponentScan(basePackageClasses = WebAutoConfigure.class)
 public class WebAutoConfigure implements WebMvcConfigurer {
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
+
+    public WebAutoConfigure(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
 
     @Bean
     public CorsFilter corsFilter() {
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("*");
@@ -46,7 +55,9 @@ public class WebAutoConfigure implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/vendor/**", "/subscriptions/**").addResourceLocations("classpath:/static/vendor/");
+//        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+//        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+//        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
     @Override

@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class TreeUtil {
 
-    public static enum SortKind {
+    public enum SortKind {
         ASC,
         DESC
     }
@@ -40,9 +40,10 @@ public class TreeUtil {
         }
         List<T> tree = all.stream().filter(rootPredicate).map(t -> buildChildren(all, t)).collect(Collectors.toList());
         if (sortFunc != null) {
-            tree.stream()
+            tree.forEach(t -> sortBy(t, sortFunc, sortKind));
+            tree = tree.stream()
                     .sorted(sortKind == SortKind.ASC ? Comparator.comparing(sortFunc) : Comparator.comparing(sortFunc).reversed())
-                    .forEach(t -> sortBy(t, sortFunc, sortKind));
+                    .collect(Collectors.toList());
         }
         return tree;
     }

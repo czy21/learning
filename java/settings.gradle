@@ -1,20 +1,20 @@
 pluginManagement {
     plugins {
         id 'org.springframework.boot' version "${springBootVersion}"
-        id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
         id 'com.github.johnrengelman.shadow' version "${shadowVersion}"
     }
 }
+
+include("gradle-plugin")
 
 include("basic")
 include("domain")
 include("infrastructure")
 
-include("spring-demo")
-
 // spring
 include("spring-bom")
 include("spring-web")
+include('spring-doc')
 include("spring-event")
 include("spring-cache")
 include("spring-db")
@@ -23,13 +23,11 @@ include("spring-pulsar")
 include("spring-mybatis")
 include("spring-kafka")
 include("spring-hbase")
-include("spring-gateway")
 include("spring-graphql")
 include("spring-quartz")
-
+include('spring-xxl-job')
 
 // flink
 include("flink-common")
 include("flink-task")
-include('spring-xxl-job')
 

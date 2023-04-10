@@ -26,7 +26,7 @@ public class JacksonConfigure {
     }
 
     public JsonDeserializer<String> stringStdScalarDeserializer() {
-        return new JsonDeserializer<String>() {
+        return new JsonDeserializer<>() {
             @Override
             public String deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
                 return StringUtils.trim(p.getValueAsString());
