@@ -29,7 +29,6 @@ public class ThreadTest {
     public void pool1() throws InterruptedException {
         int cores = Runtime.getRuntime().availableProcessors();
         System.out.println("core size: " + cores);
-
         ExecutorService fixedThreadPool = new ThreadPoolExecutor(3, 5,
                 0L, TimeUnit.MILLISECONDS,
                 new ArrayBlockingQueue<>(5));

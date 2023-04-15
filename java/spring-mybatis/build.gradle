@@ -1,3 +1,6 @@
+plugins{
+    id 'common.build'
+}
 dependencies {
     api project(":domain")
     api project(":spring-web")
