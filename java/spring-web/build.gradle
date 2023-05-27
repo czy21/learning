@@ -12,4 +12,5 @@ dependencies {
             "io.github.openfeign:feign-jackson"
 
     api "com.alibaba:easyexcel"
+    api 'net.logstash.logback:logstash-logback-encoder'
 }
