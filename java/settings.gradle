@@ -9,15 +9,11 @@ include("gradle-plugin")
 
 include("basic")
 include("domain")
-include("infrastructure")
 
 // spring
 include("spring-bom")
-include("spring-web")
-include('spring-doc')
 include("spring-event")
 include("spring-cache")
-include("spring-db")
 include("spring-es")
 include("spring-pulsar")
 include("spring-mybatis")
@@ -25,7 +21,6 @@ include("spring-kafka")
 include("spring-hbase")
 include("spring-graphql")
 include("spring-quartz")
-include('spring-xxl-job')
 
 // flink
 include("flink-common")

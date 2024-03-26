@@ -1,5 +1,5 @@
 dependencies {
     api project(":domain")
-    api project(":spring-web")
+    api "com.sunny:sunny-framework-web"
     api "org.springframework.boot:spring-boot-starter-quartz"
 }

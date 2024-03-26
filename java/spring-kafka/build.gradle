@@ -1,5 +1,5 @@
 dependencies {
-    api project(":spring-web")
+    api "com.sunny:sunny-framework-web"
     api project(":domain")
     implementation "org.springframework.kafka:spring-kafka"
 }

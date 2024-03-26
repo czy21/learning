@@ -1,9 +1,9 @@
 package com.basic;
 
-import com.czy.learning.basic.proxy.Car;
-import com.czy.learning.basic.proxy.CarImpl;
-import com.czy.learning.basic.proxy.CglibProxy;
-import com.czy.learning.basic.proxy.JdkProxy;
+import com.learning.basic.proxy.Car;
+import com.learning.basic.proxy.CarImpl;
+import com.learning.basic.proxy.CglibProxy;
+import com.learning.basic.proxy.JdkProxy;
 import org.junit.jupiter.api.Test;
 
 public class ProxyTest {
