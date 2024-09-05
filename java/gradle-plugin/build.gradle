@@ -1,0 +1,17 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'groovy'
+    id 'maven-publish'
+}
+
+group = 'com.learning'
+version = '3.0.0'
+
+gradlePlugin {
+    plugins {
+        springboot {
+            id = 'com.learning.gradle.springboot'
+            implementationClass = 'com.learning.gradle.SpringBootPlugin'
+        }
+    }
+}

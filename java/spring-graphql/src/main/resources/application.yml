@@ -1,0 +1,16 @@
+server:
+  port: 8096
+
+spring:
+  application:
+    name: learning-spring-graphql
+  config:
+    import: optional:consul:consul.cluster.com:80
+  cloud:
+    consul:
+      config:
+        format: YAML
+        prefixes:
+          - "dev-learning-spring-common"
+graphql:
+  schema-locations: classpath*:graphql/**/**.graphql

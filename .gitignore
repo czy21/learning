@@ -1,0 +1,27 @@
+# Idea #
+.idea
+*.iml
+*.log
+
+# vs #
+bin/
+obj/
+.vs/
+
+# Gradle #
+.gradle/
+
+# Build #
+target/
+build/
+
+# Web #
+node_modules/
+dist/
+yarn.lock
+
+# cmake
+cmake-build-debug
+
+# crates.io
+Cargo.lock

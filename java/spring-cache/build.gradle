@@ -1,0 +1,11 @@
+plugins{
+    id "common.build"
+}
+
+dependencies {
+    api project(":domain")
+    api "com.sunny:sunny-framework-web"
+    api "org.redisson:redisson-spring-boot-starter"
+    api "org.springframework.boot:spring-boot-starter-cache"
+    api 'com.github.ben-manes.caffeine:caffeine'
+}

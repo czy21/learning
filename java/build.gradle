@@ -1,0 +1,48 @@
+plugins {
+    id 'org.springframework.boot' apply false
+    id 'com.github.johnrengelman.shadow' apply false
+//    id 'com.learning.gradle.springboot' version "3.0.0" apply false
+}
+def bomName = "spring-bom"
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'io.spring.dependency-management'
+
+    group = 'com.learning'
+    archivesBaseName = "learning-${project.name}"
+    version = '3.0.0-SNAPSHOT'
+
+    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "com.sunny:sunny-framework-bom:3.0.0-SNAPSHOT"
+        }
+        dependencies {
+            dependency "org.openjdk.jol:jol-core:0.16"
+            dependency "cglib:cglib:3.3.0"
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    List<String> applyPlugins = []
+    if (name != bomName) {
+        if (name.startsWith("spring")) {
+            applyPlugins.add("spring.build")
+        }
+        if (name.startsWith("flink")) {
+            applyPlugins.add("flink.build")
+        }
+    }
+    logger.info("${project.name} apply plugins: ${applyPlugins}")
+    applyPlugins.forEach { t -> project.plugins.apply(t) }
+}

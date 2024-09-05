@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.learning.mybatis.mapper.UserMapper">
+
+    <select id="selectAll" resultType="map">
+        select * from ent_sys_user
+        limit #{skipRows},#{pageSize}
+    </select>
+    <select id="insert">
+        INSERT INTO ent_sys_user(id, account, password, user_name, email, department_id)
+        VALUES (#{id}, #{account}, #{password}, #{userName}, #{email}, #{departmentId});
+    </select>
+
+    <select id="update">
+        update ent_sys_user u
+        set u.email = #{email},
+            u.modified_date = now()
+        where u.id = #{id}
+    </select>
+</mapper>

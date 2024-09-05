@@ -1,0 +1,13 @@
+server:
+  port: 9092
+
+spring:
+  kafka:
+    bootstrap-servers:
+      - 192.168.2.18:9092
+      - 192.168.2.18:9093
+    consumer:
+      group-id: "learn-group1"
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

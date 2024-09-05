@@ -1,0 +1,3 @@
+dependencies {
+    api "com.sunny:sunny-framework-web"
+}

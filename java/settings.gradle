@@ -1,0 +1,28 @@
+pluginManagement {
+    plugins {
+        id 'org.springframework.boot' version "${springBootVersion}"
+        id 'com.github.johnrengelman.shadow' version "${shadowVersion}"
+    }
+}
+
+include("gradle-plugin")
+
+include("basic")
+include("domain")
+
+// spring
+include("spring-bom")
+include("spring-event")
+include("spring-cache")
+include("spring-es")
+include("spring-pulsar")
+include("spring-mybatis")
+include("spring-kafka")
+include("spring-hbase")
+include("spring-graphql")
+include("spring-quartz")
+
+// flink
+include("flink-common")
+include("flink-task")
+

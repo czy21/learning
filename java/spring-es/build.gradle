@@ -1,0 +1,5 @@
+dependencies {
+    api project(":domain")
+    api "com.sunny:sunny-framework-web"
+    implementation "org.springframework.data:spring-data-elasticsearch"
+}

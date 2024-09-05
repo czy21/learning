@@ -1,0 +1,1 @@
+export function a(val: string): string;
